@@ -626,3 +626,732 @@ Exit the interpreter:
 exit()
 ```
 
+Excellent bro! 🔥 Welcome to **Lesson 01 – Python Installation & Fundamentals (Part 2)**.
+
+This part is one of the **most important** sections because almost every Python project you'll build (AI, ML, Web APIs, Automation) depends on these concepts.
+
+---
+
+# 📖 Lesson 01 – Python Installation & Fundamentals (Part 2)
+
+---
+
+# 07. PATH
+
+## What is PATH?
+
+PATH is an **environment variable** used by the operating system to locate executable programs.
+
+Instead of typing
+
+```text
+C:\Users\Janusha\AppData\Local\Programs\Python\Python312\python.exe
+```
+
+every time,
+
+you simply type
+
+```bash
+python
+```
+
+because Windows searches the directories listed in the PATH variable.
+
+---
+
+## Why is PATH Important?
+
+Imagine you install Python but don't add it to PATH.
+
+Then if you type
+
+```bash
+python --version
+```
+
+Windows won't know where Python is.
+
+You'll get
+
+```text
+'python' is not recognized as an internal or external command.
+```
+
+---
+
+## How PATH Works
+
+```text
+User Types
+
+python
+
+↓
+
+Windows Checks PATH
+
+↓
+
+Finds Python.exe
+
+↓
+
+Runs Python
+```
+
+---
+
+## View PATH
+
+Windows
+
+```cmd
+echo %PATH%
+```
+
+PowerShell
+
+```powershell
+$env:Path
+```
+
+Linux/macOS
+
+```bash
+echo $PATH
+```
+
+---
+
+## Check Python Location
+
+Windows
+
+```cmd
+where python
+```
+
+Linux/macOS
+
+```bash
+which python3
+```
+
+---
+
+## PATH Best Practices
+
+✅ Add Python during installation.
+
+✅ Avoid manually editing PATH unless necessary.
+
+---
+
+# 08. pip
+
+## What is pip?
+
+pip stands for
+
+**Pip Installs Packages**
+
+It is Python's official package manager.
+
+Think of it like:
+
+| Platform | Package Manager |
+| -------- | --------------- |
+| Python   | pip             |
+| Node.js  | npm             |
+| Java     | Maven / Gradle  |
+| Ubuntu   | apt             |
+| macOS    | Homebrew        |
+
+---
+
+## Why Do We Need pip?
+
+Python alone is powerful.
+
+But AI needs external libraries.
+
+Example
+
+```python
+import tensorflow
+```
+
+TensorFlow isn't part of Python.
+
+You install it using
+
+```bash
+pip install tensorflow
+```
+
+---
+
+## Common pip Commands
+
+Check version
+
+```bash
+pip --version
+```
+
+Install package
+
+```bash
+pip install numpy
+```
+
+Upgrade package
+
+```bash
+pip install --upgrade numpy
+```
+
+Install multiple packages
+
+```bash
+pip install pandas matplotlib scikit-learn
+```
+
+List packages
+
+```bash
+pip list
+```
+
+Show package details
+
+```bash
+pip show numpy
+```
+
+Uninstall
+
+```bash
+pip uninstall numpy
+```
+
+Export packages
+
+```bash
+pip freeze > requirements.txt
+```
+
+Install from requirements
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Why requirements.txt?
+
+Imagine another developer downloads your project.
+
+Instead of installing packages one by one,
+
+they simply run
+
+```bash
+pip install -r requirements.txt
+```
+
+Everything installs automatically.
+
+This is standard practice in software engineering.
+
+---
+
+# 09. IDLE
+
+## What is IDLE?
+
+IDLE stands for
+
+**Integrated Development and Learning Environment**
+
+It comes with Python.
+
+It provides
+
+* Code Editor
+* Python Interpreter
+* Syntax Highlighting
+* Simple Debugging
+
+---
+
+## Should AI Engineers Use IDLE?
+
+Short answer
+
+❌ No.
+
+Professional developers use
+
+* VS Code
+* PyCharm
+* Jupyter Notebook
+
+IDLE is useful only for beginners learning Python syntax.
+
+---
+
+## Open IDLE
+
+Windows
+
+Start
+
+↓
+
+Search
+
+```text
+IDLE
+```
+
+---
+
+## Example
+
+```python
+print("Hello AI Engineer")
+```
+
+Press
+
+F5
+
+---
+
+# 10. Python Interpreter
+
+## What is an Interpreter?
+
+An interpreter reads your code,
+
+translates it,
+
+and executes it.
+
+Unlike C++,
+
+Python executes code line by line.
+
+---
+
+## Workflow
+
+```text
+Python File
+
+↓
+
+Python Interpreter
+
+↓
+
+Bytecode
+
+↓
+
+Python Virtual Machine
+
+↓
+
+Output
+```
+
+---
+
+## Start Interpreter
+
+```bash
+python
+```
+
+You'll see
+
+```text
+>>>
+```
+
+---
+
+## Example
+
+```python
+5 + 10
+```
+
+Output
+
+```text
+15
+```
+
+---
+
+Variables
+
+```python
+name = "Janusha"
+
+print(name)
+```
+
+Output
+
+```text
+Janusha
+```
+
+---
+
+Exit
+
+```python
+exit()
+```
+
+---
+
+## Why Use the Interpreter?
+
+Great for
+
+* Quick testing
+* Learning
+* Trying small code snippets
+* Debugging simple logic
+
+---
+
+# 11. Virtual Environment
+
+One of the MOST IMPORTANT topics.
+
+---
+
+## The Problem
+
+Project A
+
+Needs
+
+```text
+TensorFlow 2.15
+```
+
+Project B
+
+Needs
+
+```text
+TensorFlow 2.18
+```
+
+If both are installed globally,
+
+you'll eventually have dependency conflicts.
+
+---
+
+## Solution
+
+Every project gets its own isolated environment.
+
+---
+
+## Example
+
+```text
+Project A
+
+↓
+
+Python
+
+↓
+
+TensorFlow 2.15
+
+↓
+
+NumPy 1.x
+```
+
+---
+
+```text
+Project B
+
+↓
+
+Python
+
+↓
+
+TensorFlow 2.18
+
+↓
+
+NumPy 2.x
+```
+
+They don't interfere with each other.
+
+---
+
+## Create Environment
+
+```bash
+python -m venv .venv
+```
+
+---
+
+## Activate
+
+Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+PowerShell
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+Linux/macOS
+
+```bash
+source .venv/bin/activate
+```
+
+---
+
+Prompt changes
+
+```text
+(.venv)
+```
+
+---
+
+Deactivate
+
+```bash
+deactivate
+```
+
+---
+
+## Why Every Project Should Have a Virtual Environment
+
+* Keeps dependencies isolated.
+* Prevents version conflicts.
+* Makes projects reproducible.
+* Simplifies deployment.
+
+---
+
+# 12. Package Management
+
+Package management is the process of installing,
+
+upgrading,
+
+removing,
+
+and tracking Python libraries.
+
+---
+
+## Example
+
+AI Project
+
+Needs
+
+* NumPy
+* Pandas
+* TensorFlow
+* OpenCV
+* Matplotlib
+
+Instead of manually copying files,
+
+pip installs them automatically.
+
+---
+
+## Workflow
+
+```text
+Need Library
+
+↓
+
+pip install
+
+↓
+
+Library Downloaded
+
+↓
+
+Installed into Environment
+
+↓
+
+Import in Python
+```
+
+---
+
+## Best Practice
+
+Never install packages globally.
+
+Always activate your virtual environment first.
+
+Then
+
+```bash
+pip install package_name
+```
+
+---
+
+## Freeze Packages
+
+```bash
+pip freeze > requirements.txt
+```
+
+---
+
+## Install Everything Later
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 13. Python Architecture
+
+Understanding Python's architecture helps explain how your code actually runs.
+
+---
+
+## Architecture Diagram
+
+```text
+                Python Architecture
+
++----------------------------------------------+
+|              Python Source Code (.py)        |
++----------------------------------------------+
+                    │
+                    ▼
++----------------------------------------------+
+|            Python Compiler                   |
+|  Converts source code to Bytecode (.pyc)     |
++----------------------------------------------+
+                    │
+                    ▼
++----------------------------------------------+
+|          Python Virtual Machine (PVM)        |
+| Executes the Bytecode                        |
++----------------------------------------------+
+                    │
+                    ▼
++----------------------------------------------+
+|        Operating System (Windows/Linux)      |
++----------------------------------------------+
+                    │
+                    ▼
++----------------------------------------------+
+|                  Hardware                    |
++----------------------------------------------+
+```
+
+---
+
+## Components
+
+### Python Source Code
+
+The code you write.
+
+Example
+
+```python
+print("Hello")
+```
+
+---
+
+### Python Compiler
+
+Compiles your source code into
+
+```text
+.pyc
+```
+
+(Bytecode)
+
+---
+
+### Bytecode
+
+A platform-independent intermediate representation.
+
+---
+
+### Python Virtual Machine (PVM)
+
+Executes the bytecode.
+
+This is why Python is portable across operating systems.
+
+---
+
+### Operating System
+
+Handles file access,
+
+memory,
+
+keyboard,
+
+network,
+
+and other system services.
+
+---
+
+### Hardware
+
+The CPU,
+
+RAM,
+
+Storage,
+
+GPU.
+
+---
+
