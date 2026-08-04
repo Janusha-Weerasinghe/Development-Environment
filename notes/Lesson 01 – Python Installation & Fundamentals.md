@@ -1600,39 +1600,495 @@ git push origin main
 
 ---
 
+Excellent bro! 🔥 This completes **Lesson 01 – Python Installation & Fundamentals**.
+
+After this lesson, you'll have your **first professional GitHub repository**, understand how to document your work, and be ready to move to **VS Code (Lesson 02)**.
 
 ---
 
-### Starter Code
+# 📖 Lesson 01 – Python Installation & Fundamentals (Part 4)
 
-```python
-import os
-import platform
-import subprocess
-import sys
+---
 
-print("=" * 40)
-print("Python Environment Checker")
-print("=" * 40)
+# 20. GitHub
 
-print(f"Python Version : {sys.version.split()[0]}")
-print(f"Operating System : {platform.system()}")
-print(f"Current Directory : {os.getcwd()}")
+## What is GitHub?
 
-try:
-    subprocess.run(
-        ["python", "-m", "pip", "--version"],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    print("pip : Installed")
-except Exception:
-    print("pip : Not Found")
+GitHub is a **cloud-based platform** used to host Git repositories. It enables developers to:
 
-print("\nStatus : Environment Ready")
-print("Welcome to AI Engineer Academy!")
+* Store source code
+* Track changes
+* Collaborate with teams
+* Review code
+* Manage issues
+* Deploy applications
+* Build portfolios
+
+Think of it as a **professional portfolio** for software engineers.
+
+---
+
+## Why AI Engineers Use GitHub
+
+* Version control
+* Portfolio for recruiters
+* Collaboration with teams
+* Open-source contributions
+* CI/CD integration
+* Backup of projects
+
+Companies like **WSO2, IFS, Sysco LABS, Microsoft, Google, Amazon, and OpenAI** expect engineers to be comfortable with Git and GitHub.
+
+---
+
+## Create Your First Repository
+
+Repository Name
+
+```text
+Python-Fundamentals
 ```
+
+Visibility
+
+```text
+Public
+```
+
+Initialize with
+
+```
+README
+
+✓
+
+.gitignore (Python)
+
+✓
+
+LICENSE (MIT)
+```
+
+---
+
+## Clone Repository
+
+```bash
+git clone https://github.com/Janusha-Weerasinghe/Python-Fundamentals.git
+```
+
+---
+
+## Open Project
+
+```bash
+cd Python-Fundamentals
+```
+
+---
+
+## Check Status
+
+```bash
+git status
+```
+
+---
+
+## Add Files
+
+```bash
+git add .
+```
+
+---
+
+## Commit
+
+```bash
+git commit -m "Complete Lesson 01 - Python Installation & Fundamentals"
+```
+
+---
+
+## Push
+
+```bash
+git push origin main
+```
+
+---
+
+## Professional Commit Messages
+
+❌ Bad
+
+```text
+Update
+```
+
+```text
+Final
+```
+
+```text
+Test
+```
+
+---
+
+✅ Good
+
+```text
+Complete Lesson 01 - Python Installation & Environment Setup
+```
+
+```text
+Add virtual environment documentation
+```
+
+```text
+Create Python environment checker project
+```
+
+---
+
+# Professional Git Workflow
+
+```text
+Write Code
+      │
+      ▼
+git status
+      │
+      ▼
+git add .
+      │
+      ▼
+git commit
+      │
+      ▼
+git push
+      │
+      ▼
+GitHub Repository Updated
+```
+
+---
+
+# Repository Structure
+
+```text
+Python-Fundamentals
+
+│
+
+├── README.md
+
+├── LICENSE
+
+├── .gitignore
+
+├── requirements.txt
+
+│
+
+├── src
+
+├── notes
+
+├── exercises
+
+├── assignments
+
+├── mini-project
+
+├── images
+
+└── resources
+```
+
+---
+
+# 21. README
+
+## What is README?
+
+A **README.md** is the first document people see when they visit your GitHub repository.
+
+It explains:
+
+* What the project is
+* Why it exists
+* How to install it
+* How to use it
+* Technologies used
+* Project structure
+* Future improvements
+
+A good README can make a project much more understandable to recruiters and collaborators.
+
+---
+
+# Professional README Example
+
+```markdown
+# Python Fundamentals
+
+## Overview
+
+This repository contains my practical work for Lesson 01 of the AI Engineer Academy.
+
+The objective is to learn Python installation, virtual environments, package management, and professional project organization.
+
+---
+
+## Learning Objectives
+
+- Install Python
+
+- Configure PATH
+
+- Learn pip
+
+- Create Virtual Environments
+
+- Build Professional Folder Structure
+
+- Use Git & GitHub
+
+---
+
+## Technologies
+
+- Python 3.x
+
+- Git
+
+- GitHub
+
+- VS Code
+
+---
+
+## Project Structure
+
+Python-Fundamentals
+
+├── src
+
+├── notes
+
+├── exercises
+
+├── assignments
+
+├── mini-project
+
+└── images
+
+---
+
+## Mini Project
+
+Python Environment Checker
+
+---
+
+## Author
+
+Janusha Weerasinghe
+
+AI Engineer Bootcamp
+```
+
+---
+
+# README Best Practices
+
+Include:
+
+* Project title
+* Description
+* Features
+* Installation
+* Usage
+* Folder structure
+* Technologies
+* Screenshots
+* Author
+* License
+
+---
+
+
+---
+
+# 23. Best Practices
+
+Professional developers follow standards.
+
+---
+
+## 1
+
+One project
+
+↓
+
+One repository
+
+---
+
+## 2
+
+Always include
+
+```text
+README.md
+```
+
+---
+
+## 3
+
+Use
+
+```text
+.gitignore
+```
+
+---
+
+## 4
+
+Meaningful Commit Messages
+
+---
+
+## 5
+
+Push frequently
+
+Avoid keeping weeks of uncommitted work.
+
+---
+
+## 6
+
+Never commit
+
+```text
+.venv
+
+__pycache__
+
+.env
+
+API Keys
+
+Passwords
+
+Large datasets
+```
+
+---
+
+## 7
+
+Use Professional Folder Structure
+
+---
+
+## 8
+
+Keep Code Clean
+
+---
+
+## 9
+
+Document Your Work
+
+---
+
+## 10
+
+Update README after every lesson
+
+---
+
+# 24. Common Mistakes
+
+## Mistake 1
+
+No README
+
+❌
+
+---
+
+## Mistake 2
+
+Committing
+
+```text
+.venv
+```
+
+---
+
+## Mistake 3
+
+Uploading passwords
+
+---
+
+## Mistake 4
+
+Using
+
+```text
+Update
+```
+
+as commit message
+
+---
+
+## Mistake 5
+
+No project structure
+
+---
+
+## Mistake 6
+
+No documentation
+
+---
+
+## Mistake 7
+
+Not using Git regularly
+
+---
+
+## Mistake 8
+
+Uploading unnecessary files
+
+---
+
+## Mistake 9
+
+Keeping everything on the Desktop instead of organized repositories
+
+---
+
+## Mistake 10
+
+Ignoring `.gitignore`
 
 ---
 

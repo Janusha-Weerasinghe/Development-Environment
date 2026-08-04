@@ -1232,3 +1232,146 @@ Example:
 
 ---
 
+# 22. Interview Questions
+
+## Beginner
+
+### 1
+
+What is GitHub?
+
+---
+
+### 2
+
+What is Git?
+
+---
+
+### 3
+
+Difference between Git and GitHub?
+
+---
+
+### 4
+
+Why do developers use GitHub?
+
+---
+
+### 5
+
+What is a repository?
+
+---
+
+### 6
+
+What is README?
+
+---
+
+### 7
+
+Why is README important?
+
+---
+
+### 8
+
+What is .gitignore?
+
+---
+
+### 9
+
+Why should repositories have a license?
+
+---
+
+### 10
+
+Difference between Public and Private repositories?
+
+---
+
+## Intermediate
+
+### 11
+
+Explain Git Workflow.
+
+---
+
+### 12
+
+Difference between Clone and Fork.
+
+---
+
+### 13
+
+What is Version Control?
+
+---
+
+### 14
+
+What happens after
+
+```bash
+git add .
+```
+
+---
+
+### 15
+
+What happens after
+
+```bash
+git commit
+```
+
+---
+
+### 16
+
+Why do companies use Git?
+
+---
+
+### 17
+
+Why are meaningful commit messages important?
+
+---
+
+### 18
+
+How would you collaborate with another developer using GitHub?
+
+---
+
+### 19
+
+What files should not be committed to Git?
+
+---
+
+### 20
+
+Why is GitHub important for your career?
+
+---
+
+# Sample Interview Answer
+
+### Q
+
+Why is GitHub important?
+
+**Answer**
+
+GitHub is a cloud-based platform for hosting Git repositories. It provides version control, collaboration tools, code review, issue tracking, and CI/CD integrations. It also serves as a professional portfolio where recruiters can evaluate a developer's coding practices and project quality.
