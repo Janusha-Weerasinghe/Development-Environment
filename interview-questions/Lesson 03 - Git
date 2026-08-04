@@ -1274,3 +1274,682 @@ A strong answer is:
 5. Push the commit to the remote repository when appropriate using `git push`.
 
 This shows that you understand **why the staging area exists** and how to create clean, focused commits—an important habit in professional software development.
+
+---
+
+# Part 03
+
+# 🎤 1. What is a Git branch, and why is it important in collaborative development?
+
+## Definition
+
+A **Git branch** is an independent line of development that allows developers to work on new features, bug fixes, or experiments without affecting the main project.
+
+Every Git repository starts with a default branch, usually called `main`.
+
+---
+
+## Purpose
+
+Branches allow developers to:
+
+* Develop features independently.
+* Fix bugs safely.
+* Experiment without affecting production code.
+* Enable multiple developers to work simultaneously.
+
+---
+
+## How It Works
+
+```text
+                  main
+                    │
+      ┌─────────────┴─────────────┐
+      │                           │
+ feature-login            feature-payment
+      │                           │
+      └─────────────┬─────────────┘
+                    │
+                  Merge
+                    │
+                  main
+```
+
+Each developer works on their own branch.
+
+---
+
+## Example
+
+Create a branch:
+
+```bash
+git checkout -b feature-login
+```
+
+Develop the feature.
+
+Commit:
+
+```bash
+git commit -m "Implement login page"
+```
+
+Merge later into `main`.
+
+---
+
+## Real-World Usage
+
+Imagine 20 developers working on the same application.
+
+Without branches:
+
+Everyone edits the same files.
+
+↓
+
+Frequent conflicts.
+
+↓
+
+Broken application.
+
+With branches:
+
+Everyone develops independently.
+
+↓
+
+Features are reviewed.
+
+↓
+
+Merged after approval.
+
+---
+
+## Interview Answer
+
+> A Git branch is an independent line of development that allows developers to work on features or bug fixes without affecting the main branch. Branches improve collaboration, isolate changes, reduce risk, and enable multiple developers to work on different tasks simultaneously.
+
+---
+
+# 🎤 2. What is the difference between a merge and a rebase?
+
+## Merge
+
+### Definition
+
+Merge combines the histories of two branches while preserving both branch histories.
+
+---
+
+### Example
+
+Before
+
+```text
+main
+
+A──B
+
+      \
+       C──D
+```
+
+Merge
+
+```bash
+git merge feature-login
+```
+
+After
+
+```text
+A──B────────M
+
+      \     /
+
+       C──D
+```
+
+Git creates a **merge commit (M)**.
+
+---
+
+## Rebase
+
+### Definition
+
+Rebase moves commits from one branch onto another, creating a cleaner, linear history.
+
+---
+
+### Example
+
+Before
+
+```text
+main
+
+A──B
+
+      \
+       C──D
+```
+
+Rebase
+
+```bash
+git rebase main
+```
+
+After
+
+```text
+A──B──C──D
+```
+
+No merge commit is created.
+
+---
+
+## Comparison
+
+| Merge                    | Rebase                          |
+| ------------------------ | ------------------------------- |
+| Preserves branch history | Rewrites commit history         |
+| Creates merge commit     | No merge commit                 |
+| Easier for beginners     | Cleaner project history         |
+| Safe for shared branches | Best for local/private branches |
+
+---
+
+## Real-World Usage
+
+Many teams use **merge** for shared branches because it preserves history.
+
+Rebase is often used before opening a Pull Request to keep commit history clean.
+
+---
+
+## Interview Answer
+
+> Merge combines two branches while preserving their history and usually creates a merge commit. Rebase reapplies commits onto another branch, creating a cleaner, linear history without a merge commit. Merge is generally preferred for shared branches, while rebase is useful for maintaining a tidy commit history before integration.
+
+---
+
+# 🎤 3. What causes a merge conflict, and how do you resolve it?
+
+## Definition
+
+A **merge conflict** occurs when Git cannot automatically combine changes because two branches have modified the same part of the same file.
+
+---
+
+## Example
+
+Branch A
+
+```python
+print("Hello")
+```
+
+Branch B
+
+```python
+print("Hello AI")
+```
+
+Git cannot determine which version should remain.
+
+---
+
+## Conflict Markers
+
+```python
+<<<<<<< HEAD
+print("Hello")
+=======
+print("Hello AI")
+>>>>>>> feature-login
+```
+
+---
+
+## Resolution Steps
+
+### Step 1
+
+Review the conflicting code.
+
+---
+
+### Step 2
+
+Edit the file.
+
+Example
+
+```python
+print("Hello AI")
+```
+
+or combine both changes if appropriate.
+
+---
+
+### Step 3
+
+Stage the resolved file.
+
+```bash
+git add app.py
+```
+
+---
+
+### Step 4
+
+Complete the merge.
+
+```bash
+git commit
+```
+
+---
+
+## Real-World Usage
+
+Merge conflicts are common in collaborative projects and are resolved through careful review and discussion when necessary.
+
+---
+
+## Interview Answer
+
+> A merge conflict occurs when Git cannot automatically combine changes because multiple branches modify the same section of a file. To resolve it, I review the conflict markers, decide which changes should remain, edit the file, stage the resolved version, and complete the merge with a commit.
+
+---
+
+# 🎤 4. What is the difference between `git clone` and a GitHub fork?
+
+## Git Clone
+
+### Definition
+
+`git clone` creates a complete local copy of an existing Git repository.
+
+---
+
+### Example
+
+```bash
+git clone https://github.com/company/project.git
+```
+
+Result:
+
+```text
+GitHub Repository
+        │
+        ▼
+Local Computer
+```
+
+---
+
+## GitHub Fork
+
+### Definition
+
+A fork creates a new copy of another user's repository under **your GitHub account**.
+
+It happens on GitHub before cloning.
+
+---
+
+## Workflow
+
+```text
+Original Repository
+        │
+      Fork
+        ▼
+Your GitHub Repository
+        │
+      Clone
+        ▼
+Your Computer
+```
+
+---
+
+## Comparison
+
+| Clone                                  | Fork                                    |
+| -------------------------------------- | --------------------------------------- |
+| Local copy                             | GitHub copy                             |
+| Doesn't create a new GitHub repository | Creates a repository under your account |
+| Used by team members                   | Used by external contributors           |
+
+---
+
+## Real-World Usage
+
+* Company employees usually **clone** repositories they have access to.
+* Open-source contributors typically **fork**, then clone their fork.
+
+---
+
+## Interview Answer
+
+> `git clone` creates a local copy of a repository on my computer, while a GitHub fork creates a separate copy of someone else's repository under my GitHub account. Forking is commonly used when contributing to projects without direct write access.
+
+---
+
+# 🎤 5. What is the purpose of a Pull Request, and why is it important in team workflows?
+
+## Definition
+
+A **Pull Request (PR)** is a request to merge changes from one branch into another after review.
+
+---
+
+## Purpose
+
+It allows:
+
+* Code review.
+* Team discussion.
+* Automated testing.
+* Quality assurance.
+
+---
+
+## Workflow
+
+```text
+Feature Branch
+       │
+Commit Changes
+       │
+Push Branch
+       │
+Open Pull Request
+       │
+Code Review
+       │
+Merge into main
+```
+
+---
+
+## Why Is It Important?
+
+Pull Requests:
+
+* Improve code quality.
+* Catch bugs early.
+* Encourage knowledge sharing.
+* Maintain coding standards.
+
+---
+
+## Real-World Usage
+
+Most professional teams require at least one reviewer to approve a Pull Request before it can be merged.
+
+---
+
+## Interview Answer
+
+> A Pull Request is a request to merge changes from one branch into another after review. It enables code reviews, discussions, automated testing, and approval workflows, helping teams maintain high code quality and collaboration standards.
+
+---
+
+# 🎤 6. What is the difference between `git fetch` and `git pull`?
+
+## `git fetch`
+
+### Definition
+
+Downloads changes from the remote repository without modifying the current branch.
+
+---
+
+### Example
+
+```bash
+git fetch
+```
+
+Result:
+
+Remote updates are available locally, but your working branch is unchanged.
+
+---
+
+## `git pull`
+
+### Definition
+
+Downloads changes and immediately merges them into the current branch.
+
+---
+
+### Example
+
+```bash
+git pull
+```
+
+---
+
+## Comparison
+
+| git fetch           | git pull                           |
+| ------------------- | ---------------------------------- |
+| Downloads changes   | Downloads and merges               |
+| Safe for inspection | Updates current branch immediately |
+| No automatic merge  | Automatic merge                    |
+
+---
+
+## Real-World Usage
+
+Many developers use `git fetch` first to inspect incoming changes before deciding when and how to merge them.
+
+---
+
+## Interview Answer
+
+> `git fetch` downloads changes from the remote repository without modifying the current branch, allowing me to inspect updates first. `git pull` combines fetching with an immediate merge into the current branch, making it convenient when I want to synchronize my branch directly.
+
+---
+
+# 🎤 7. What are Git tags, and when would you use them?
+
+## Definition
+
+A **Git tag** is a named reference to a specific commit.
+
+Tags are commonly used to identify releases or important milestones.
+
+---
+
+## Purpose
+
+Tags help developers mark:
+
+* Version 1.0
+* Version 2.0
+* Beta releases
+* Production releases
+
+---
+
+## Example
+
+Create a tag:
+
+```bash
+git tag v1.0
+```
+
+List tags:
+
+```bash
+git tag
+```
+
+Push a tag:
+
+```bash
+git push origin v1.0
+```
+
+---
+
+## Timeline
+
+```text
+Commit 1
+
+Commit 2
+
+Commit 3
+
+v1.0
+
+Commit 4
+
+Commit 5
+
+v2.0
+```
+
+---
+
+## Real-World Usage
+
+When releasing version **1.0.0** of an AI API, teams tag the release so they can easily reference or redeploy that exact version in the future.
+
+---
+
+## Interview Answer
+
+> Git tags are named references to specific commits, typically used to mark releases or important milestones. They make it easy to identify, reference, and deploy stable versions of a project.
+
+---
+
+# 🎤 8. Why do professional teams prefer feature branches instead of committing directly to the `main` branch?
+
+## Definition
+
+A **feature branch** is a separate branch dedicated to a single feature, bug fix, or enhancement.
+
+---
+
+## Why Not Commit Directly to `main`?
+
+Direct commits can:
+
+* Introduce bugs.
+* Break production code.
+* Make code reviews difficult.
+* Affect other developers immediately.
+
+---
+
+## Feature Branch Workflow
+
+```text
+main
+ │
+ ├──── feature-login
+ │
+ ├──── feature-payment
+ │
+ └──── feature-report
+```
+
+Each feature is developed independently.
+
+---
+
+## Advantages
+
+* Safer development.
+* Easier code reviews.
+* Better collaboration.
+* Simpler testing.
+* Cleaner history.
+
+---
+
+## Real-World Usage
+
+In many organizations, developers do not have permission to push directly to `main`. They must create a feature branch, open a Pull Request, and receive approval before merging.
+
+---
+
+## Interview Answer
+
+> Professional teams use feature branches to isolate work, protect the stability of the `main` branch, and enable code reviews and testing before integration. This reduces risk, improves collaboration, and helps maintain a reliable codebase.
+
+---
+
+# ⭐ Senior-Level Follow-up Questions
+
+### Q1. Why shouldn't you rebase a shared branch?
+
+**Answer:** Rebasing rewrites commit history. If other developers are already working from that history, rebasing can cause synchronization problems and make collaboration more difficult.
+
+---
+
+### Q2. When would you choose `git fetch` over `git pull`?
+
+**Answer:** I would use `git fetch` when I want to review incoming changes before merging them into my current branch, especially in shared or critical projects.
+
+---
+
+### Q3. Why are Pull Requests valuable beyond code reviews?
+
+**Answer:** Pull Requests provide a structured place for technical discussions, automated test results, documentation of design decisions, and approval workflows before changes reach the main branch.
+
+---
+
+### Q4. Why are merge conflicts considered normal?
+
+**Answer:** Merge conflicts are a natural result of multiple developers modifying the same code. They indicate overlapping work and are resolved by reviewing and choosing the correct final version.
+
+---
+
+### Q5. Why are Git tags preferable to creating a branch for a release?
+
+**Answer:** Tags are immutable references intended to mark specific releases or milestones. Unlike branches, they are not meant for ongoing development, making them ideal for identifying stable versions.
+
+---
+
+# 🎯 AI Engineer Interview Tip
+
+A common practical interview question is:
+
+> **"You're developing a new machine learning feature with three teammates. Describe the Git workflow you would follow."**
+
+A strong answer would be:
+
+1. Create a dedicated **feature branch** from `main`.
+2. Implement the feature and commit changes regularly with meaningful commit messages.
+3. Push the feature branch to the remote repository.
+4. Open a **Pull Request** for code review.
+5. Address review feedback and update the branch if needed.
+6. Merge the Pull Request after approval.
+7. Delete the feature branch once the work is complete.
+8. Tag the release if the merged feature is part of a production version.
+
+This answer demonstrates that you understand **professional Git collaboration workflows**, not just individual Git commands.
+
+

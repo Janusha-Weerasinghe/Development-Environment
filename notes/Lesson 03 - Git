@@ -1213,4 +1213,586 @@ Local Repository
 Remote Repository (GitHub)
 ```
 
+# Part 3 – Git Collaboration
+
+---
+
+# 19. Branches
+
+## What is a Branch?
+
+A **branch** is an independent line of development that allows developers to work on new features, bug fixes, or experiments without affecting the main project.
+
+Think of a branch as a copy of the project where you can safely make changes.
+
+---
+
+## Why Use Branches?
+
+Without branches:
+
+* Everyone edits the same code.
+* Bugs can affect production.
+* Collaboration becomes difficult.
+
+With branches:
+
+* Developers work independently.
+* Features are isolated.
+* The main branch remains stable.
+
+---
+
+## Branch Structure
+
+```text
+                main
+                  │
+      ┌───────────┴───────────┐
+      │                       │
+feature-login          feature-payment
+      │                       │
+      └───────────┬───────────┘
+                  │
+                Merge
+                  │
+                main
+```
+
+---
+
+## Common Commands
+
+Create a branch:
+
+```bash
+git branch feature-login
+```
+
+Switch to a branch:
+
+```bash
+git checkout feature-login
+```
+
+Create and switch:
+
+```bash
+git checkout -b feature-login
+```
+
+List branches:
+
+```bash
+git branch
+```
+
+Delete a branch:
+
+```bash
+git branch -d feature-login
+```
+
+---
+
+## Best Practice
+
+Use meaningful branch names:
+
+✅ Good
+
+```text
+feature-login
+feature-payment
+bugfix-authentication
+hotfix-api
+```
+
+❌ Bad
+
+```text
+branch1
+test
+abc
+```
+
+---
+
+# 20. Merge
+
+## What is Merge?
+
+Merging combines changes from one branch into another.
+
+Usually:
+
+```text
+feature-login
+        │
+        ▼
+      main
+```
+
+---
+
+## Example
+
+```bash
+git checkout main
+
+git merge feature-login
+```
+
+---
+
+## Merge Workflow
+
+```text
+main
+ │
+ ├────── feature-login
+ │           │
+ │       Add Login
+ │           │
+ └────────Merge
+```
+
+---
+
+## Types of Merge
+
+### Fast-Forward Merge
+
+Occurs when no additional commits exist on the target branch.
+
+```text
+main
+
+A──B
+
+      \
+       C
+```
+
+↓
+
+```text
+A──B──C
+```
+
+---
+
+### Three-Way Merge
+
+Occurs when both branches have new commits.
+
+```text
+A──B────D
+
+ \
+
+  C
+```
+
+Git creates a merge commit.
+
+---
+
+# 21. Merge Conflicts
+
+## What is a Merge Conflict?
+
+A merge conflict occurs when Git cannot automatically combine changes because two branches modified the same part of the same file.
+
+---
+
+## Example
+
+Branch A
+
+```python
+print("Hello")
+```
+
+Branch B
+
+```python
+print("Hello AI")
+```
+
+Git doesn't know which version to keep.
+
+---
+
+## Conflict Markers
+
+```python
+<<<<<<< HEAD
+print("Hello")
+=======
+print("Hello AI")
+>>>>>>> feature
+```
+
+---
+
+## Resolve Conflict
+
+Choose the correct version:
+
+```python
+print("Hello AI")
+```
+
+Then:
+
+```bash
+git add app.py
+
+git commit
+```
+
+---
+
+## Real-World Usage
+
+Merge conflicts are common in team projects. Developers resolve them by reviewing the changes and deciding which version (or combination of versions) should remain.
+
+---
+
+# 22. Clone
+
+## What is Clone?
+
+`git clone` creates a complete local copy of a remote repository.
+
+---
+
+## Command
+
+```bash
+git clone https://github.com/username/project.git
+```
+
+---
+
+## Result
+
+```text
+GitHub Repository
+        │
+        ▼
+Local Repository
+```
+
+---
+
+## Why Clone?
+
+* Join an existing project.
+* Download open-source projects.
+* Contribute to repositories.
+
+---
+
+# 23. Fork
+
+## What is Fork?
+
+A **fork** creates your own copy of another user's repository on GitHub.
+
+Unlike cloning, a fork is created **on GitHub**, not on your computer.
+
+---
+
+## Workflow
+
+```text
+Original Repository
+        │
+      Fork
+        ▼
+Your GitHub Repository
+        │
+      Clone
+        ▼
+Your Computer
+```
+
+---
+
+## Why Fork?
+
+Used when you do **not** have direct write access to a repository.
+
+Common in open-source projects.
+
+---
+
+## Clone vs Fork
+
+| Clone                              | Fork                                        |
+| ---------------------------------- | ------------------------------------------- |
+| Creates a local copy               | Creates a GitHub copy                       |
+| Used by team members               | Used by external contributors               |
+| Doesn't create another GitHub repo | Creates a new repository under your account |
+
+---
+
+# 24. Pull Request (PR)
+
+## What is a Pull Request?
+
+A Pull Request is a request to merge changes from one branch into another after they have been reviewed.
+
+---
+
+## Workflow
+
+```text
+Create Branch
+      │
+Develop Feature
+      │
+Commit
+      │
+Push
+      │
+Open Pull Request
+      │
+Code Review
+      │
+Merge
+```
+
+---
+
+## Why Use Pull Requests?
+
+* Code review.
+* Team discussion.
+* Automated testing.
+* Quality assurance.
+
+---
+
+## Real-World Usage
+
+Before code reaches the `main` branch, it is usually reviewed through a Pull Request.
+
+---
+
+# 25. Fetch vs Pull
+
+## `git fetch`
+
+Downloads changes from the remote repository but does **not** merge them into your current branch.
+
+```bash
+git fetch
+```
+
+---
+
+## `git pull`
+
+Downloads changes **and** merges them into your current branch.
+
+```bash
+git pull
+```
+
+---
+
+## Comparison
+
+| git fetch         | git pull                         |
+| ----------------- | -------------------------------- |
+| Downloads changes | Downloads and merges changes     |
+| Safe to inspect   | Immediately updates local branch |
+| No merge          | Automatic merge                  |
+
+---
+
+## Workflow
+
+```text
+Remote Repository
+        │
+   git fetch
+        ▼
+Local Repository
+
+Remote Repository
+        │
+    git pull
+        ▼
+Local Branch Updated
+```
+
+---
+
+# 26. Rebase
+
+## What is Rebase?
+
+Rebase moves or reapplies commits from one branch onto another, creating a **linear project history**.
+
+---
+
+## Example
+
+Before:
+
+```text
+main
+
+A──B
+
+      \
+       C──D
+```
+
+After:
+
+```text
+A──B──C──D
+```
+
+---
+
+## Command
+
+```bash
+git checkout feature
+
+git rebase main
+```
+
+---
+
+## Merge vs Rebase
+
+| Merge                    | Rebase                 |
+| ------------------------ | ---------------------- |
+| Creates merge commit     | No merge commit        |
+| Preserves branch history | Creates linear history |
+| Easier for beginners     | Cleaner history        |
+
+---
+
+## Best Practice
+
+Avoid rebasing branches that have already been shared with others unless your team specifically follows a rebase-based workflow.
+
+---
+
+# 27. Tags
+
+## What is a Tag?
+
+A tag is a named reference to a specific commit.
+
+Tags are commonly used to mark releases.
+
+Examples:
+
+```text
+v1.0
+
+v1.1
+
+v2.0
+```
+
+---
+
+## Create a Tag
+
+```bash
+git tag v1.0
+```
+
+---
+
+## List Tags
+
+```bash
+git tag
+```
+
+---
+
+## Push Tags
+
+```bash
+git push origin v1.0
+```
+
+Push all tags:
+
+```bash
+git push origin --tags
+```
+
+---
+
+## Why Use Tags?
+
+Tags identify important milestones such as:
+
+* Initial Release
+* Beta Version
+* Stable Release
+* Production Release
+
+---
+
+## Example
+
+```text
+Commit 1
+
+Commit 2
+
+Commit 3
+
+v1.0
+
+Commit 4
+
+Commit 5
+
+v2.0
+```
+
+---
+
+
+## 💡 Mentor's Advice
+
+Most Git interview questions are not about memorizing commands—they're about understanding **team collaboration**.
+
+Remember this professional workflow:
+
+```text
+Create Feature Branch
+        │
+Develop Feature
+        │
+Commit Changes
+        │
+Push Branch
+        │
+Open Pull Request
+        │
+Code Review
+        │
+Merge into main
+        │
+Release (Tag)
+```
+
+This is the workflow used by many professional software teams. Understanding **why** each step exists will prepare you for both technical interviews and real-world development.
+
 
