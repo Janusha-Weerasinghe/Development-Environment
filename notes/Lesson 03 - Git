@@ -573,3 +573,644 @@ git
 ```
 
 ---
+
+# Part 02
+Excellent bro! 🔥 Welcome to **Part 2**, where you'll actually start using Git. This is the foundation of daily software development. By the end of this section, you'll understand how code moves from your computer to GitHub.
+
+---
+
+# Part 2 – Git Basics
+
+---
+
+# 09. Git Configuration
+
+## What is Git Configuration?
+
+Git Configuration is the process of setting your identity and preferences. Every commit stores information about **who made the change**, so Git needs to know your name and email.
+
+---
+
+## Types of Configuration
+
+### System Configuration
+
+Applies to all users on the computer.
+
+```bash
+git config --system
+```
+
+---
+
+### Global Configuration ⭐ (Most Common)
+
+Applies to your user account.
+
+```bash
+git config --global
+```
+
+---
+
+### Local Configuration
+
+Applies only to one repository.
+
+```bash
+git config
+```
+
+---
+
+## Configure Your Identity
+
+Set your name:
+
+```bash
+git config --global user.name "Janusha Weerasinghe"
+```
+
+Set your email:
+
+```bash
+git config --global user.email "your_email@example.com"
+```
+
+---
+
+## Verify Configuration
+
+```bash
+git config --list
+```
+
+Example:
+
+```text
+user.name=Janusha Weerasinghe
+user.email=your_email@example.com
+```
+
+---
+
+## Configure VS Code as the Default Editor
+
+```bash
+git config --global core.editor "code --wait"
+```
+
+---
+
+## Why is Configuration Important?
+
+Without your name and email, Git cannot properly identify the author of each commit.
+
+---
+
+# 10. Repository
+
+## What is a Repository?
+
+A **repository (repo)** is a directory that Git uses to store your project, its history, and metadata.
+
+Think of it as the project's **database**.
+
+---
+
+## Types of Repositories
+
+### Local Repository
+
+Stored on your computer.
+
+```text
+MyProject/
+```
+
+---
+
+### Remote Repository
+
+Stored online.
+
+Examples:
+
+* GitHub
+* GitLab
+* Bitbucket
+
+---
+
+## Create a Repository
+
+```bash
+mkdir AI-Bootcamp
+cd AI-Bootcamp
+
+git init
+```
+
+Output:
+
+```text
+Initialized empty Git repository...
+```
+
+---
+
+## Repository Structure
+
+```text
+AI-Bootcamp/
+│
+├── .git/
+├── README.md
+├── app.py
+└── requirements.txt
+```
+
+`.git/` is the hidden directory where Git stores all version control information.
+
+---
+
+# 11. Working Directory
+
+## What is the Working Directory?
+
+The **Working Directory** is where you create, edit, and delete files. It reflects the current state of your project before changes are staged or committed.
+
+---
+
+## Example
+
+```text
+AI-Bootcamp/
+│
+├── app.py
+├── README.md
+└── data.csv
+```
+
+When you modify `app.py`, Git detects that the file has changed.
+
+---
+
+## Check the Status
+
+```bash
+git status
+```
+
+Example:
+
+```text
+modified: app.py
+```
+
+---
+
+## Real-World Usage
+
+This is where developers spend most of their time writing code.
+
+---
+
+# 12. Staging Area
+
+## What is the Staging Area?
+
+The **Staging Area** (also called the **Index**) is a temporary area where you prepare changes before creating a commit.
+
+It lets you choose exactly what should be included in the next snapshot.
+
+---
+
+## Workflow
+
+```text
+Working Directory
+        │
+git add
+        ▼
+Staging Area
+```
+
+---
+
+## Stage One File
+
+```bash
+git add app.py
+```
+
+---
+
+## Stage All Files
+
+```bash
+git add .
+```
+
+---
+
+## Why Stage Changes?
+
+Imagine you edited five files but only want to commit two of them. The staging area lets you select only those two files.
+
+---
+
+# 13. Local Repository
+
+## What is the Local Repository?
+
+The **Local Repository** is where Git permanently stores committed snapshots on your computer.
+
+---
+
+## Commit Changes
+
+```bash
+git commit -m "Add login feature"
+```
+
+---
+
+## Workflow
+
+```text
+Working Directory
+        │
+git add
+        ▼
+Staging Area
+        │
+git commit
+        ▼
+Local Repository
+```
+
+---
+
+## Why Commit?
+
+A commit acts as a checkpoint. You can always return to it later if needed.
+
+---
+
+## Best Practice
+
+Write clear commit messages.
+
+Good:
+
+```text
+Add user authentication
+```
+
+Bad:
+
+```text
+Update
+```
+
+---
+
+# 14. Remote Repository
+
+## What is a Remote Repository?
+
+A **Remote Repository** is a copy of your project hosted on a server, allowing collaboration and backup.
+
+Common platforms include:
+
+* GitHub
+* GitLab
+* Bitbucket
+
+---
+
+## Add a Remote
+
+```bash
+git remote add origin https://github.com/username/project.git
+```
+
+---
+
+## View Remotes
+
+```bash
+git remote -v
+```
+
+---
+
+## Push Changes
+
+```bash
+git push origin main
+```
+
+---
+
+## Pull Changes
+
+```bash
+git pull origin main
+```
+
+---
+
+## Why Use a Remote?
+
+It enables collaboration, backup, code reviews, and deployment.
+
+---
+
+# 15. Git Workflow
+
+The standard Git workflow is:
+
+```text
+Create / Modify Files
+        │
+        ▼
+Working Directory
+        │
+git add
+        ▼
+Staging Area
+        │
+git commit
+        ▼
+Local Repository
+        │
+git push
+        ▼
+Remote Repository
+```
+
+---
+
+## Typical Example
+
+```bash
+git status
+git add .
+git commit -m "Complete Lesson 03 Part 2"
+git push origin main
+```
+
+---
+
+# 16. Git Commands
+
+## Repository Commands
+
+Initialize a repository:
+
+```bash
+git init
+```
+
+Clone a repository:
+
+```bash
+git clone <repository-url>
+```
+
+---
+
+## Status
+
+```bash
+git status
+```
+
+Shows:
+
+* Modified files
+* Staged files
+* Untracked files
+
+---
+
+## Staging
+
+Stage one file:
+
+```bash
+git add app.py
+```
+
+Stage all files:
+
+```bash
+git add .
+```
+
+---
+
+## Commit
+
+```bash
+git commit -m "Initial commit"
+```
+
+---
+
+## View History
+
+```bash
+git log
+```
+
+---
+
+## Push
+
+```bash
+git push
+```
+
+---
+
+## Pull
+
+```bash
+git pull
+```
+
+---
+
+## View Remotes
+
+```bash
+git remote -v
+```
+
+---
+
+## Clone
+
+```bash
+git clone https://github.com/username/project.git
+```
+
+---
+
+## Check Version
+
+```bash
+git --version
+```
+
+---
+
+# 17. .gitignore
+
+## What is `.gitignore`?
+
+A `.gitignore` file tells Git which files and folders should **not** be tracked.
+
+---
+
+## Why Do We Need It?
+
+Some files should never be committed, such as:
+
+* Virtual environments
+* Cache files
+* Temporary files
+* Build outputs
+* IDE settings
+* Secrets
+
+---
+
+## Example
+
+```text
+.venv/
+__pycache__/
+*.pyc
+.env
+.vscode/
+```
+
+---
+
+## Python `.gitignore`
+
+```text
+# Virtual Environment
+.venv/
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Environment Variables
+.env
+
+# VS Code Settings
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+```
+
+---
+
+## Real-World Usage
+
+Every professional repository should include an appropriate `.gitignore` file.
+
+---
+
+# 18. Git Log
+
+## What is `git log`?
+
+`git log` displays the commit history of the repository.
+
+---
+
+## Basic Command
+
+```bash
+git log
+```
+
+Example:
+
+```text
+commit a1b2c3d4...
+Author: Janusha Weerasinghe
+Date: ...
+
+    Complete Lesson 03 Part 2
+```
+
+---
+
+## One-Line Format
+
+```bash
+git log --oneline
+```
+
+Example:
+
+```text
+a1b2c3d Complete Lesson 03 Part 2
+8f7e6d5 Add README
+5c4b3a2 Initial commit
+```
+
+---
+
+## Show Last 5 Commits
+
+```bash
+git log -5
+```
+
+---
+
+## Why is `git log` Useful?
+
+It helps you:
+
+* Review project history.
+* Find previous versions.
+* Identify who made changes.
+* Understand the evolution of the project.
+
+---
+
+
+## 💡 Mentor's Advice
+
+One of the biggest mistakes beginners make is memorizing commands without understanding **where their code is**.
+
+Always think of your changes moving through four stages:
+
+```text
+Working Directory
+        │
+     git add
+        ▼
+Staging Area
+        │
+   git commit
+        ▼
+Local Repository
+        │
+    git push
+        ▼
+Remote Repository (GitHub)
+```
+
+

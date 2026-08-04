@@ -704,3 +704,573 @@ A strong answer would be:
 6. If working on a shared project, open a pull request for code review before merging.
 
 This demonstrates that you understand the **complete Git workflow**, not just individual commands.
+
+---
+
+# Part 02
+
+# 🎤 1. What is the purpose of Git configuration, and what information should be configured first?
+
+## Definition
+
+Git configuration is the process of setting up Git with your identity and preferences. It tells Git who you are so that every commit can be associated with the correct author.
+
+---
+
+## Purpose
+
+Git configuration allows Git to:
+
+* Identify the author of each commit.
+* Apply user-specific settings.
+* Customize Git behavior.
+
+---
+
+## Information to Configure First
+
+The first two settings are:
+
+1. **User Name**
+
+```bash
+git config --global user.name "Janusha Weerasinghe"
+```
+
+2. **Email Address**
+
+```bash
+git config --global user.email "your_email@example.com"
+```
+
+---
+
+## Other Common Configurations
+
+Configure VS Code as the default editor:
+
+```bash
+git config --global core.editor "code --wait"
+```
+
+List all configuration settings:
+
+```bash
+git config --list
+```
+
+---
+
+## Real-World Usage
+
+Every commit stores metadata such as:
+
+* Author name
+* Email
+* Date
+* Time
+* Commit message
+
+This helps teams identify who made each change.
+
+---
+
+## Interview Answer
+
+> Git configuration is used to set up a developer's identity and preferences. The first settings that should be configured are the user name and email address because every commit records this information, ensuring proper authorship and accountability.
+
+---
+
+# 🎤 2. What is the difference between a local repository and a remote repository?
+
+## Definition
+
+A **local repository** is stored on your computer, while a **remote repository** is hosted on a server such as GitHub, GitLab, or Bitbucket.
+
+---
+
+## Local Repository
+
+* Stored on your machine.
+* Contains the complete project history.
+* Allows offline commits.
+
+Example:
+
+```text
+MyProject/
+```
+
+---
+
+## Remote Repository
+
+* Hosted online.
+* Used for collaboration.
+* Acts as a shared backup.
+
+Example:
+
+```text
+https://github.com/company/project
+```
+
+---
+
+## Workflow
+
+```text
+Local Repository
+        │
+   git push
+        ▼
+Remote Repository
+```
+
+---
+
+## Real-World Usage
+
+Developers commit changes locally throughout the day and push them to the remote repository when they are ready to share their work.
+
+---
+
+## Comparison
+
+| Local Repository   | Remote Repository    |
+| ------------------ | -------------------- |
+| On your computer   | Online server        |
+| Offline access     | Internet required    |
+| Personal workspace | Shared collaboration |
+| Fast operations    | Team synchronization |
+
+---
+
+## Interview Answer
+
+> A local repository is stored on a developer's computer and allows offline work, while a remote repository is hosted on platforms such as GitHub for collaboration and backup. Developers commit locally and use `git push` to synchronize changes with the remote repository.
+
+---
+
+# 🎤 3. Explain the roles of the Working Directory, Staging Area, and Local Repository.
+
+## Git Workflow
+
+```text
+Working Directory
+        │
+    git add
+        ▼
+Staging Area
+        │
+  git commit
+        ▼
+Local Repository
+```
+
+---
+
+## Working Directory
+
+This is where files are created, edited, and deleted.
+
+Example:
+
+```python
+print("Hello Git")
+```
+
+---
+
+## Staging Area
+
+A temporary area where selected changes are prepared before committing.
+
+Command:
+
+```bash
+git add app.py
+```
+
+---
+
+## Local Repository
+
+Stores permanent snapshots (commits) on your computer.
+
+Command:
+
+```bash
+git commit -m "Add greeting"
+```
+
+---
+
+## Real-World Usage
+
+A developer edits several files, stages only the completed ones, and commits them as a logical unit.
+
+---
+
+## Interview Answer
+
+> The Working Directory is where files are modified, the Staging Area is where selected changes are prepared for the next commit, and the Local Repository stores committed snapshots permanently on the developer's computer.
+
+---
+
+# 🎤 4. Why does Git use a staging area instead of committing changes directly?
+
+## Definition
+
+The staging area acts as an intermediate step between editing files and creating a commit.
+
+---
+
+## Purpose
+
+It allows developers to:
+
+* Select specific changes.
+* Organize commits logically.
+* Review changes before saving them permanently.
+
+---
+
+## Example
+
+Suppose you modified:
+
+```text
+login.py
+README.md
+config.py
+```
+
+Only `login.py` is complete.
+
+You stage only that file:
+
+```bash
+git add login.py
+```
+
+Then commit:
+
+```bash
+git commit -m "Implement login validation"
+```
+
+The other files remain uncommitted.
+
+---
+
+## Real-World Usage
+
+Developers often work on multiple tasks simultaneously. The staging area helps create clean, focused commits that are easier to review and understand.
+
+---
+
+## Interview Answer
+
+> Git uses a staging area so developers can review and select specific changes before creating a commit. This makes commits more organized, meaningful, and easier to review, especially in collaborative projects.
+
+---
+
+# 🎤 5. What does the `git init` command do?
+
+## Definition
+
+`git init` initializes a new Git repository in the current directory.
+
+---
+
+## Purpose
+
+It creates the hidden `.git` directory, which stores:
+
+* Commit history
+* Branches
+* Configuration
+* Repository metadata
+
+---
+
+## Example
+
+```bash
+mkdir AI-Bootcamp
+
+cd AI-Bootcamp
+
+git init
+```
+
+Output:
+
+```text
+Initialized empty Git repository...
+```
+
+---
+
+## Folder Structure
+
+```text
+AI-Bootcamp/
+│
+├── .git/
+├── README.md
+└── app.py
+```
+
+---
+
+## Real-World Usage
+
+Developers use `git init` when starting a brand-new project that is not yet under version control.
+
+---
+
+## Interview Answer
+
+> The `git init` command creates a new Git repository by initializing a hidden `.git` directory that stores the project's version history, configuration, and metadata. After running this command, Git begins tracking the project.
+
+---
+
+# 🎤 6. What is the difference between `git add`, `git commit`, and `git push`?
+
+## `git add`
+
+### Purpose
+
+Moves changes from the Working Directory to the Staging Area.
+
+Example:
+
+```bash
+git add app.py
+```
+
+---
+
+## `git commit`
+
+### Purpose
+
+Creates a permanent snapshot of the staged changes in the Local Repository.
+
+Example:
+
+```bash
+git commit -m "Add login feature"
+```
+
+---
+
+## `git push`
+
+### Purpose
+
+Uploads local commits to the Remote Repository.
+
+Example:
+
+```bash
+git push origin main
+```
+
+---
+
+## Workflow
+
+```text
+Working Directory
+        │
+    git add
+        ▼
+Staging Area
+        │
+  git commit
+        ▼
+Local Repository
+        │
+   git push
+        ▼
+GitHub
+```
+
+---
+
+## Interview Answer
+
+> `git add` stages changes, `git commit` saves those staged changes in the local repository as a new snapshot, and `git push` uploads local commits to a remote repository such as GitHub.
+
+---
+
+# 🎤 7. Why is a `.gitignore` file important, and what kinds of files should it typically exclude?
+
+## Definition
+
+A `.gitignore` file tells Git which files and directories should not be tracked.
+
+---
+
+## Purpose
+
+It prevents unnecessary or sensitive files from being committed.
+
+---
+
+## Common Files to Exclude
+
+```text
+.venv/
+__pycache__/
+*.pyc
+.env
+.vscode/
+.ipynb_checkpoints/
+```
+
+---
+
+## Why Exclude Them?
+
+* Virtual environments can be recreated.
+* Cache files are generated automatically.
+* Environment files may contain secrets.
+* IDE settings are often user-specific.
+
+---
+
+## Real-World Usage
+
+Most Python projects include a `.gitignore` file before the first commit to keep the repository clean and secure.
+
+---
+
+## Interview Answer
+
+> A `.gitignore` file prevents Git from tracking files that should not be version-controlled, such as virtual environments, cache files, environment variables, IDE settings, and temporary files. This keeps the repository clean, secure, and easier to maintain.
+
+---
+
+# 🎤 8. What information does `git log` provide, and how can `git log --oneline` be useful?
+
+## Definition
+
+`git log` displays the commit history of a repository.
+
+---
+
+## Information Displayed
+
+* Commit hash
+* Author
+* Email
+* Date
+* Commit message
+
+---
+
+## Example
+
+```bash
+git log
+```
+
+Output:
+
+```text
+commit a1b2c3...
+Author: Janusha Weerasinghe
+Date: Tue Aug 4
+
+Complete Lesson 03 Part 2
+```
+
+---
+
+## One-Line View
+
+```bash
+git log --oneline
+```
+
+Example:
+
+```text
+a1b2c3 Complete Lesson 03 Part 2
+f4e5d6 Add README
+789abc Initial commit
+```
+
+---
+
+## Advantages of `--oneline`
+
+* Compact history.
+* Easier navigation.
+* Better overview of commits.
+
+---
+
+## Real-World Usage
+
+Developers often use `git log --oneline` to quickly review recent commits before switching branches, reverting changes, or preparing a release.
+
+---
+
+## Interview Answer
+
+> `git log` displays the complete commit history, including the commit hash, author, date, and message. The `git log --oneline` option provides a concise summary of commits, making it easier to browse project history efficiently.
+
+---
+
+# ⭐ Senior-Level Follow-up Questions
+
+### Q1. Why are commit messages important?
+
+**Answer:** Commit messages document the purpose of each change. Clear messages make it easier for teams to understand project history, review changes, troubleshoot issues, and identify when features or fixes were introduced.
+
+---
+
+### Q2. What happens if you forget to use `.gitignore` before your first commit?
+
+**Answer:** Git may begin tracking unnecessary files such as virtual environments or cache directories. Even if you later add them to `.gitignore`, already tracked files remain in the repository until they are explicitly removed from Git's index.
+
+---
+
+### Q3. Why doesn't `git add` immediately save changes permanently?
+
+**Answer:** `git add` only stages changes. This intermediate step allows developers to review, organize, and selectively include changes before creating a permanent commit.
+
+---
+
+### Q4. Can you commit without using `git add`?
+
+**Answer:** Normally, no. Changes must be staged first. One exception is using commands such as `git commit -a`, which automatically stages modifications to already tracked files, but it does not include new untracked files.
+
+---
+
+### Q5. Why is `git log` important during debugging?
+
+**Answer:** `git log` helps developers identify when changes were introduced, locate the commits responsible for bugs, review project history, and determine which version should be restored if necessary.
+
+---
+
+# 🎯 AI Engineer Interview Tip
+
+A common practical interview question is:
+
+> **"You modified three Python files, but only one is complete. What would you do?"**
+
+A strong answer is:
+
+1. Check the current status with `git status`.
+2. Stage only the completed file using `git add <filename>`.
+3. Create a meaningful commit with `git commit -m "..."`.
+4. Leave the unfinished files in the Working Directory for later.
+5. Push the commit to the remote repository when appropriate using `git push`.
+
+This shows that you understand **why the staging area exists** and how to create clean, focused commits—an important habit in professional software development.
