@@ -1873,3 +1873,312 @@ For example:
 * Use **Virtual Environment Integration** to keep dependencies isolated.
 * Use **Jupyter** for experimentation and analysis.
 * Use **Git Integration** to track and collaborate on code professionally.
+---
+
+Perfect, bro. 🔥 This completes **Lesson 02 – Visual Studio Code**. We'll finish it with the same professional structure as Lesson 01.
+
+---
+
+# 📖 Lesson 02 – Visual Studio Code (VS Code)
+
+# 21. Folder Structure
+
+A professional AI/ML Engineer keeps learning materials and projects organized. For this lesson, use the following structure:
+
+```text
+Phase-01-Development-Environment/
+│
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── .gitignore
+│
+├── images/
+│   ├── vscode-home.png
+│   ├── vscode-terminal.png
+│   ├── vscode-extensions.png
+│   ├── vscode-workspace.png
+│   └── vscode-debugger.png
+│
+├── notes/
+│   └── Lesson-02-VSCode.md
+│
+├── exercises/
+│   └── Exercise-02.md
+│
+├── assignments/
+│   └── Assignment-02.md
+│
+├── mini-project/
+│   └── VSCode-Python-Workspace/
+│
+├── interview-questions/
+│   └── Lesson-02-Interview.md
+│
+├── quiz/
+│   └── Lesson-02-Quiz.md
+│
+└── resources/
+```
+
+---
+
+# 22. VS Code Shortcuts
+
+## General
+
+| Shortcut           | Description         |
+| ------------------ | ------------------- |
+| `Ctrl + Shift + P` | Command Palette     |
+| `Ctrl + P`         | Quick Open File     |
+| `Ctrl + ,`         | Settings            |
+| `Ctrl + Shift + X` | Extensions          |
+| `Ctrl + Shift + G` | Source Control      |
+| `Ctrl + Shift + E` | Explorer            |
+| `Ctrl + Shift + F` | Search              |
+| `Ctrl + ``         | Integrated Terminal |
+| `Ctrl + B`         | Toggle Sidebar      |
+| `Ctrl + J`         | Toggle Panel        |
+
+---
+
+## Editing
+
+| Shortcut           | Description            |
+| ------------------ | ---------------------- |
+| `Ctrl + /`         | Comment Line           |
+| `Alt + ↑ / ↓`      | Move Line              |
+| `Shift + Alt + ↓`  | Duplicate Line         |
+| `Ctrl + D`         | Select Next Occurrence |
+| `Ctrl + Space`     | Trigger IntelliSense   |
+| `Ctrl + Shift + K` | Delete Line            |
+
+---
+
+## Debugging
+
+| Shortcut      | Description       |
+| ------------- | ----------------- |
+| `F5`          | Start Debugging   |
+| `F9`          | Toggle Breakpoint |
+| `F10`         | Step Over         |
+| `F11`         | Step Into         |
+| `Shift + F11` | Step Out          |
+
+---
+
+## Terminal
+
+| Shortcut           | Description   |
+| ------------------ | ------------- |
+| `Ctrl + ``         | Open Terminal |
+| `Ctrl + Shift + `` | New Terminal  |
+
+---
+
+# 23. Practical
+
+## Objective
+
+Configure VS Code for professional Python development.
+
+---
+
+### Step 1
+
+Create a folder:
+
+```text
+VSCode-Practice
+```
+
+---
+
+### Step 2
+
+Open the folder using:
+
+```text
+File → Open Folder
+```
+
+---
+
+### Step 3
+
+Open the integrated terminal.
+
+---
+
+### Step 4
+
+Create a virtual environment.
+
+```bash
+python -m venv .venv
+```
+
+---
+
+### Step 5
+
+Activate it.
+
+Git Bash
+
+```bash
+source .venv/Scripts/activate
+```
+
+PowerShell
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+---
+
+### Step 6
+
+Install Python Extension.
+
+---
+
+### Step 7
+
+Select Interpreter
+
+```
+Python: Select Interpreter
+```
+
+Choose
+
+```
+.venv
+```
+
+---
+
+### Step 8
+
+Create
+
+```python
+hello.py
+```
+
+```python
+print("VS Code Ready!")
+```
+
+Run it.
+
+---
+
+### Step 9
+
+Set a breakpoint.
+
+Press
+
+```
+F5
+```
+
+Observe the debugger.
+
+---
+
+### Step 10
+
+Commit everything to GitHub.
+
+---
+
+
+
+
+## Deliverables
+
+* Project folder
+* Screenshots
+* GitHub repository
+* README
+
+---
+
+
+# 27. GitHub
+
+Repository name:
+
+```text
+Phase-01-Development-Environment
+```
+
+Commit message:
+
+```bash
+git add .
+
+git commit -m "Complete Lesson 02 - Visual Studio Code"
+
+git push
+```
+
+---
+
+# 30. Best Practices
+
+* Open the project folder, not individual files.
+* Use a virtual environment for every project.
+* Select the correct Python interpreter.
+* Install only the extensions you need.
+* Keep VS Code updated.
+* Use Git from the beginning of a project.
+* Enable Format on Save.
+* Organize files into clear folders.
+* Use meaningful file and folder names.
+* Learn keyboard shortcuts to improve productivity.
+
+---
+
+# 31. Common Mistakes
+
+❌ Opening a single file instead of the project folder.
+
+❌ Forgetting to activate the virtual environment.
+
+❌ Using the wrong Python interpreter.
+
+❌ Installing unnecessary extensions.
+
+❌ Running code from the wrong directory.
+
+❌ Ignoring linting or formatting issues.
+
+❌ Not committing changes regularly.
+
+❌ Working directly on the `main` branch for experimental features in collaborative projects.
+
+---
+
+# 32. Summary
+
+In this lesson, you learned:
+
+* What VS Code is and why it is widely used.
+* The history and advantages of VS Code.
+* How to navigate the user interface.
+* How to work with workspaces and the file explorer.
+* How to use the integrated terminal and Command Palette.
+* How to configure settings and install extensions.
+* How to use the Python Extension and IntelliSense.
+* How to debug Python applications.
+* How to run Python programs.
+* How to integrate virtual environments, Jupyter Notebooks, and Git.
+* Best practices for organizing and managing Python projects in VS Code.
+
+---
+

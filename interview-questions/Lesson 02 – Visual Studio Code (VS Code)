@@ -1728,3 +1728,34 @@ In professional teams, developers frequently use the Source Control panel to rev
 
 ---
 
+# Part 03
+
+### Beginner
+
+1. What is VS Code?
+2. What is IntelliSense?
+3. What is the Command Palette?
+4. What is a Workspace?
+5. What is Pylance?
+
+---
+
+### Intermediate
+
+6. Why should every project have its own virtual environment?
+7. Explain debugging in VS Code.
+8. Why should you open the project folder instead of a single file?
+9. What are the advantages of Git integration?
+10. Explain how VS Code communicates with Python.
+
+---
+
+### Advanced
+
+11. How does the Python Extension work internally?
+12. What is the role of the Language Server?
+13. How does IntelliSense provide code suggestions?
+14. Why is Pylance faster than traditional analysis?
+15. How would you configure VS Code for a large AI project?
+
+---
