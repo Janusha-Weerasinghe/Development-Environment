@@ -1,0 +1,706 @@
+# Part 01
+
+# 🎤 1. What is Git, and why is it considered a Distributed Version Control System (DVCS)?
+
+## Definition
+
+Git is a **Distributed Version Control System (DVCS)** that tracks changes in files and enables multiple developers to collaborate on the same project efficiently.
+
+Unlike centralized systems, every developer has a complete copy of the repository, including its entire history.
+
+---
+
+## Purpose
+
+Git is used to:
+
+* Track code changes
+* Collaborate with teams
+* Restore previous versions
+* Manage multiple features simultaneously
+* Protect project history
+
+---
+
+## How It Works
+
+Each developer clones the repository:
+
+```text
+Developer A
+    │
+Developer B
+    │
+Developer C
+```
+
+Every developer has:
+
+* Working Directory
+* Staging Area
+* Local Repository
+
+They can commit changes locally without an internet connection.
+
+Later:
+
+```text
+Local Repository
+        │
+git push
+        │
+        ▼
+Remote Repository (GitHub)
+```
+
+---
+
+## Example
+
+Developer A
+
+```bash
+git clone https://github.com/company/project.git
+```
+
+Works offline
+
+```bash
+git add .
+
+git commit -m "Add login feature"
+```
+
+Later
+
+```bash
+git push
+```
+
+---
+
+## Real-World Usage
+
+An AI Engineer developing a machine learning model can:
+
+* Commit code locally while traveling.
+* Synchronize changes with GitHub once internet access is available.
+
+---
+
+## Interview Answer
+
+> Git is a Distributed Version Control System because every developer has a complete local copy of the repository and its history. This allows developers to work independently, commit changes offline, and synchronize with remote repositories when needed. Compared with centralized systems, Git provides better reliability, flexibility, and collaboration.
+
+---
+
+# 🎤 2. Why did Linus Torvalds create Git?
+
+## Definition
+
+Git was created by **Linus Torvalds**, the creator of Linux.
+
+---
+
+## Purpose
+
+In 2005, Linux kernel developers were using a proprietary version control system called **BitKeeper**.
+
+When licensing restrictions changed, they required a new solution.
+
+Linus designed Git to provide:
+
+* Speed
+* Distributed collaboration
+* Strong data integrity
+* Efficient branching
+* Efficient merging
+
+---
+
+## Example
+
+Linux Kernel
+
+↓
+
+Thousands of developers
+
+↓
+
+Millions of lines of code
+
+↓
+
+Needed a fast and reliable version control system.
+
+---
+
+## Real-World Usage
+
+Git was initially built for Linux kernel development but quickly became the standard version control system for software engineering worldwide.
+
+---
+
+## Interview Answer
+
+> Linus Torvalds created Git in 2005 after licensing changes affected the Linux kernel's existing version control system. His goal was to develop a fast, distributed, and reliable system capable of supporting large-scale collaborative software development.
+
+---
+
+# 🎤 3. What problems does Git solve in software development?
+
+## Definition
+
+Git addresses common challenges related to version management and team collaboration.
+
+---
+
+## Problem 1
+
+Losing Code
+
+Without Git
+
+```text
+Project_Final
+
+Project_Final_Final
+
+Project_Final_V3
+```
+
+Confusing.
+
+Git
+
+↓
+
+Stores complete history.
+
+---
+
+## Problem 2
+
+Team Collaboration
+
+Without Git
+
+Developer A
+
+↓
+
+Overwrites
+
+↓
+
+Developer B
+
+Git
+
+↓
+
+Merge changes safely.
+
+---
+
+## Problem 3
+
+Experimentation
+
+Developers can create branches without affecting the main project.
+
+---
+
+## Problem 4
+
+Rollback
+
+If a bug appears,
+
+Git allows developers to return to a previous working version.
+
+---
+
+## Problem 5
+
+Audit Trail
+
+Git records:
+
+* Author
+* Date
+* Time
+* Commit message
+
+---
+
+## Real-World Usage
+
+AI engineers experiment with different preprocessing techniques and model architectures. Git allows them to switch between approaches safely without losing previous work.
+
+---
+
+## Interview Answer
+
+> Git solves problems such as code loss, version confusion, collaboration conflicts, and difficult rollbacks. It also provides a complete history of changes, making software development more organized, reliable, and collaborative.
+
+---
+
+# 🎤 4. What is a Version Control System (VCS), and why is it important?
+
+## Definition
+
+A Version Control System (VCS) records changes made to files over time.
+
+---
+
+## Purpose
+
+It enables developers to:
+
+* Track history.
+* Restore previous versions.
+* Compare changes.
+* Collaborate with teams.
+* Audit modifications.
+
+---
+
+## Example
+
+Version 1
+
+```python
+print("Hello")
+```
+
+Version 2
+
+```python
+print("Hello AI")
+```
+
+Git stores both versions.
+
+---
+
+## Advantages
+
+* History tracking.
+* Backup.
+* Collaboration.
+* Rollback.
+* Accountability.
+
+---
+
+## Real-World Usage
+
+Large software companies maintain thousands of code changes daily. A VCS ensures those changes are tracked, reviewed, and recoverable.
+
+---
+
+## Interview Answer
+
+> A Version Control System records changes to files over time, enabling developers to track history, restore previous versions, collaborate with others, and manage software development more effectively.
+
+---
+
+# 🎤 5. What are the differences between Local, Centralized, and Distributed Version Control Systems?
+
+## Local Version Control
+
+### Definition
+
+Everything is stored on one computer.
+
+```text
+Developer
+
+Version 1
+
+Version 2
+
+Version 3
+```
+
+Advantages
+
+* Simple.
+
+Disadvantages
+
+* No collaboration.
+* High risk if the computer fails.
+
+---
+
+## Centralized Version Control
+
+### Definition
+
+One central server stores the repository.
+
+```text
+Developer A
+       │
+Developer B
+       │
+Developer C
+       │
+Central Server
+```
+
+Advantages
+
+* Central management.
+
+Disadvantages
+
+* If the server fails, work is interrupted.
+
+Examples
+
+* SVN
+* CVS
+
+---
+
+## Distributed Version Control
+
+### Definition
+
+Every developer has a complete copy of the repository.
+
+```text
+Developer A
+
+Repository
+
+Developer B
+
+Repository
+
+Developer C
+
+Repository
+```
+
+Advantages
+
+* Offline commits.
+* Faster operations.
+* Better reliability.
+* Full history available locally.
+
+Examples
+
+* Git
+* Mercurial
+
+---
+
+## Comparison
+
+| Feature          | Local      | Centralized | Distributed (Git) |
+| ---------------- | ---------- | ----------- | ----------------- |
+| Collaboration    | No         | Yes         | Yes               |
+| Offline Work     | Yes        | Limited     | Yes               |
+| Complete History | Local only | Server      | Every Developer   |
+| Reliability      | Low        | Medium      | High              |
+| Examples         | RCS        | SVN         | Git               |
+
+---
+
+## Interview Answer
+
+> Local version control stores changes on a single machine, centralized systems rely on one shared server, and distributed systems like Git provide every developer with a complete copy of the repository. This makes Git more reliable, flexible, and suitable for collaborative development.
+
+---
+
+# 🎤 6. Explain Git's architecture, including the Working Directory, Staging Area, Local Repository, and Remote Repository.
+
+## Architecture
+
+```text
+Working Directory
+        │
+git add
+        ▼
+Staging Area
+        │
+git commit
+        ▼
+Local Repository
+        │
+git push
+        ▼
+Remote Repository
+```
+
+---
+
+## Working Directory
+
+Where developers create and edit files.
+
+---
+
+## Staging Area
+
+Temporary area where selected changes are prepared for the next commit.
+
+---
+
+## Local Repository
+
+Stores committed changes on your computer.
+
+---
+
+## Remote Repository
+
+Stores the project online.
+
+Examples:
+
+* GitHub
+* GitLab
+* Bitbucket
+
+---
+
+## Example
+
+```bash
+git add main.py
+```
+
+↓
+
+Moves the file to the staging area.
+
+---
+
+```bash
+git commit -m "Add authentication"
+```
+
+↓
+
+Stores the change in the local repository.
+
+---
+
+```bash
+git push
+```
+
+↓
+
+Uploads commits to GitHub.
+
+---
+
+## Real-World Usage
+
+Professional developers follow this workflow for every feature or bug fix before sharing their work.
+
+---
+
+## Interview Answer
+
+> Git's architecture consists of four main components: the Working Directory, where files are edited; the Staging Area, where changes are prepared; the Local Repository, where commits are stored; and the Remote Repository, where code is shared with others. Changes typically move through this sequence using `git add`, `git commit`, and `git push`.
+
+---
+
+# 🎤 7. Why is Git widely used by companies such as WSO2, IFS, Sysco LABS, LSEG, Microsoft, and Google?
+
+## Definition
+
+Git is the industry-standard version control system for modern software development.
+
+---
+
+## Reasons
+
+### Collaboration
+
+Allows multiple developers to work simultaneously.
+
+---
+
+### Version History
+
+Every change is recorded.
+
+---
+
+### Branching
+
+Supports parallel feature development.
+
+---
+
+### CI/CD
+
+Integrates with:
+
+* GitHub Actions
+* Azure DevOps
+* Jenkins
+* GitLab CI
+
+---
+
+### Reliability
+
+Every developer has a complete copy of the project.
+
+---
+
+### Performance
+
+Optimized for very large repositories.
+
+---
+
+## Real-World Usage
+
+An AI engineering team may:
+
+* Train models.
+* Improve APIs.
+* Review code.
+* Merge features.
+* Deploy through CI/CD.
+
+Git manages the entire workflow.
+
+---
+
+## Interview Answer
+
+> Companies use Git because it provides reliable version control, efficient collaboration, powerful branching, integration with CI/CD pipelines, and a complete history of project changes. It has become the standard tool for modern software engineering.
+
+---
+
+# 🎤 8. How do you verify that Git has been installed correctly?
+
+## Definition
+
+Verification confirms that Git is installed correctly and accessible from the command line.
+
+---
+
+## Command
+
+```bash
+git --version
+```
+
+---
+
+## Example Output
+
+```text
+git version 2.50.1.windows.1
+```
+
+---
+
+## Additional Commands
+
+Display help
+
+```bash
+git --help
+```
+
+---
+
+View configuration
+
+```bash
+git config --list
+```
+
+---
+
+Locate executable
+
+Windows
+
+```bash
+where git
+```
+
+Linux/macOS
+
+```bash
+which git
+```
+
+---
+
+## Real-World Usage
+
+Before cloning repositories or configuring Git, developers verify the installation to ensure the correct version is available and the executable is accessible through the system `PATH`.
+
+---
+
+## Interview Answer
+
+> I verify Git by running `git --version`, which displays the installed version. I may also use `git --help` to confirm that Git commands are available and `git config --list` to review the current configuration.
+
+---
+
+# ⭐ Senior-Level Follow-up Questions
+
+### Q1. Why is Git faster than many older version control systems?
+
+**Answer:** Git stores project snapshots efficiently, uses local repositories for most operations, and performs commits, branching, and history lookups locally without requiring a network connection.
+
+---
+
+### Q2. Why is Git called a content-addressable filesystem?
+
+**Answer:** Git identifies objects using SHA-based hashes derived from their content rather than their filenames or locations. This ensures data integrity and makes duplicate content storage more efficient.
+
+---
+
+### Q3. What is the difference between Git and GitHub?
+
+**Answer:** Git is a distributed version control system used to track changes locally, while GitHub is a cloud-based hosting platform for Git repositories that adds collaboration features such as pull requests, code reviews, and issue tracking.
+
+---
+
+### Q4. Why are commits stored locally first?
+
+**Answer:** Local commits allow developers to work independently and offline, create logical checkpoints, and review changes before sharing them with a remote repository.
+
+---
+
+### Q5. Why does Git use hashes?
+
+**Answer:** Git uses cryptographic hashes to uniquely identify objects and verify their integrity. If an object's content changes, its hash changes, helping detect corruption or unintended modifications.
+
+---
+
+# 🎯 AI Engineer Interview Tip
+
+A common interview question is:
+
+> **"Walk me through what happens after you modify a Python file and want to share your changes with your team."**
+
+A strong answer would be:
+
+1. Modify the file in the **Working Directory**.
+2. Review changes using `git status` or `git diff`.
+3. Stage the required files with `git add`.
+4. Create a descriptive commit using `git commit`.
+5. Synchronize with the remote repository using `git push`.
+6. If working on a shared project, open a pull request for code review before merging.
+
+This demonstrates that you understand the **complete Git workflow**, not just individual commands.
