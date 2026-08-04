@@ -140,3 +140,105 @@ This lesson will also follow our standard structure.
 31 Common Mistakes
 32 Summary
 33 Quiz
+
+---
+
+# Lesson 03 – Git
+
+## Part 1 – Git Fundamentals
+01 Introduction
+02 History
+03 Why Git?
+04 Industry Usage
+05 Version Control System (VCS)
+06 Types of Version Control
+07 Git Architecture
+08 Git Installation
+
+## Part 2 – Git Basics
+09 Git Configuration
+10 Repository
+11 Working Directory
+12 Staging Area
+13 Local Repository
+14 Remote Repository
+15 Git Workflow
+16 Git Commands
+17 .gitignore
+18 Git Log
+
+## Part 3 – Git Collaboration
+19 Branches
+20 Merge
+21 Merge Conflicts
+22 Clone
+23 Fork
+24 Pull Request
+25 Fetch vs Pull
+26 Rebase
+27 Tags
+
+## Part 4 – Professional Git
+28 GitHub Integration
+29 Git Best Practices
+30 Practical
+31 Exercises
+32 Assignment
+33 Mini Project
+34 README
+35 Interview Questions
+36 Common Mistakes
+37 Summary
+38 Quiz
+
+---
+
+# Lesson 04 – GitHub
+
+## Part 1 – GitHub Fundamentals
+01 Introduction
+02 History
+03 Why GitHub?
+04 Industry Usage
+05 Git vs GitHub
+06 GitHub Architecture
+07 GitHub Account
+08 Repository Creation
+
+## Part 2 – GitHub Essentials
+09 Repository Structure
+10 README
+11 LICENSE
+12 Issues
+13 Discussions
+14 Projects
+15 Wiki
+16 Releases
+17 GitHub Pages
+18 GitHub Profile
+
+## Part 3 – GitHub Collaboration
+19 Clone
+20 Fork
+21 Pull Request
+22 Code Review
+23 Branch Protection
+24 Collaborators
+25 Organizations
+26 GitHub Actions
+27 Security
+
+## Part 4 – Professional GitHub
+28 Portfolio Development
+29 GitHub Best Practices
+30 Practical
+31 Exercises
+32 Assignment
+33 Mini Project
+34 README
+35 Interview Questions
+36 Common Mistakes
+37 Summary
+38 Quiz
+
+---
