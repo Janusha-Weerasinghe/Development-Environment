@@ -508,3 +508,634 @@ From this lesson onward, try to answer interview questions using this structure:
 6. **Concise Interview Answer** – Summarize everything in 2–4 clear sentences.
 
 This approach demonstrates both technical understanding and the ability to communicate clearly—two qualities that interviewers consistently value.
+
+---
+# Part 02
+
+As always, we'll use our **Golden Interview Formula**:
+
+> **Definition → Purpose → Features → Example → Real-World Usage → Interview Answer**
+
+---
+
+# 🎤 1. What are the main sections of the VS Code interface?
+
+## Definition
+
+The VS Code interface is divided into several sections that help developers write, debug, and manage projects efficiently.
+
+---
+
+## Main Sections
+
+### 1. Menu Bar
+
+Contains:
+
+* File
+* Edit
+* View
+* Go
+* Run
+* Terminal
+* Help
+
+---
+
+### 2. Activity Bar
+
+Located on the left side.
+
+Contains:
+
+* Explorer
+* Search
+* Source Control
+* Run & Debug
+* Extensions
+
+---
+
+### 3. Side Bar
+
+Displays the selected Activity.
+
+Example:
+
+Explorer
+
+```text
+src
+README.md
+requirements.txt
+```
+
+---
+
+### 4. Editor Area
+
+The main coding area.
+
+Multiple files can be opened as tabs.
+
+---
+
+### 5. Panel
+
+Contains:
+
+* Terminal
+* Output
+* Problems
+* Debug Console
+
+---
+
+### 6. Status Bar
+
+Shows:
+
+* Python Interpreter
+* Git Branch
+* Line Number
+* Errors
+* Encoding
+
+---
+
+## Diagram
+
+```text
++--------------------------------------------------------+
+| Menu Bar                                               |
++--------------------------------------------------------+
+| Activity | Explorer                                    |
+| Bar      |----------------------------                 |
+|          |         Editor Area                         |
+|          |                                             |
+|          |----------------------------                 |
+|          | Terminal / Output / Problems                |
++--------------------------------------------------------+
+| Status Bar                                             |
++--------------------------------------------------------+
+```
+
+---
+
+## Real-World Usage
+
+A Python developer may:
+
+* Browse project files in Explorer.
+* Write code in the Editor.
+* Execute commands in the Terminal.
+* Commit code using Source Control.
+* Monitor the active Python interpreter in the Status Bar.
+
+---
+
+## Interview Answer
+
+> The main sections of the VS Code interface include the Menu Bar, Activity Bar, Side Bar, Editor Area, Panel, and Status Bar. Together, they provide access to project files, code editing, debugging, Git integration, terminal operations, and development settings.
+
+---
+
+# 🎤 2. What is a workspace, and why is it useful?
+
+## Definition
+
+A workspace is the complete development environment for one or more projects.
+
+It stores:
+
+* Project folders
+* Workspace settings
+* Open files
+* Editor layout
+
+---
+
+## Purpose
+
+A workspace helps organize related projects and provides project-specific configurations.
+
+---
+
+## Example
+
+Single Project
+
+```text
+AI-Bootcamp/
+```
+
+Multiple Projects
+
+```text
+Workspace
+
+AI-Bootcamp
+
+FastAPI
+
+React
+
+Database
+```
+
+---
+
+## Advantages
+
+* Better organization.
+* Project-specific settings.
+* Easier navigation.
+* Supports multi-root projects.
+
+---
+
+## Real-World Usage
+
+An AI Engineer might work on:
+
+* FastAPI backend
+* React frontend
+* Machine Learning model
+
+inside one workspace.
+
+---
+
+## Interview Answer
+
+> A workspace represents the complete development environment for one or more projects. It stores folders, settings, and layouts, making it easier to manage related projects and maintain project-specific configurations.
+
+---
+
+# 🎤 3. Why should you open the project folder instead of a single file?
+
+## Definition
+
+VS Code understands projects based on folders rather than individual files.
+
+---
+
+## Example
+
+Bad
+
+```text
+Open
+
+main.py
+```
+
+Good
+
+```text
+Open
+
+AI-Bootcamp/
+```
+
+---
+
+## Benefits
+
+VS Code can:
+
+* Detect virtual environments.
+* Load project settings.
+* Enable Git integration.
+* Recognize imports.
+* Support debugging.
+* Build the project structure.
+
+---
+
+## Real-World Usage
+
+Opening the project folder allows tools like Git, Docker, and Python extensions to work correctly across the entire project instead of a single file.
+
+---
+
+## Interview Answer
+
+> Opening the project folder gives VS Code access to the complete project structure, allowing features such as Git integration, debugging, virtual environment detection, and project-wide IntelliSense to work correctly.
+
+---
+
+# 🎤 4. What are the advantages of the integrated terminal?
+
+## Definition
+
+The integrated terminal is a command-line interface built directly into VS Code.
+
+---
+
+## Purpose
+
+It enables developers to execute commands without leaving the editor.
+
+---
+
+## Example
+
+Run Python
+
+```bash
+python main.py
+```
+
+Install packages
+
+```bash
+pip install pandas
+```
+
+Git
+
+```bash
+git status
+```
+
+Docker
+
+```bash
+docker compose up
+```
+
+---
+
+## Advantages
+
+* Faster workflow.
+* No need to switch windows.
+* Better productivity.
+* Supports multiple shells.
+* Works with Git, Docker, Python, and more.
+
+---
+
+## Real-World Usage
+
+AI engineers use the terminal to:
+
+* Train models.
+* Install dependencies.
+* Run APIs.
+* Manage Git.
+* Execute Docker commands.
+
+---
+
+## Interview Answer
+
+> The integrated terminal allows developers to execute Python, Git, Docker, and system commands directly within VS Code. It improves productivity by reducing context switching and keeping development tasks in one environment.
+
+---
+
+# 🎤 5. What is the Command Palette, and when would you use it?
+
+## Definition
+
+The Command Palette is a searchable interface that provides quick access to almost every command available in VS Code.
+
+Shortcut
+
+```text
+Ctrl + Shift + P
+```
+
+---
+
+## Purpose
+
+Instead of searching through menus,
+
+simply type the command name.
+
+---
+
+## Examples
+
+Search
+
+```text
+Python: Select Interpreter
+```
+
+---
+
+Search
+
+```text
+Git: Clone
+```
+
+---
+
+Search
+
+```text
+Reload Window
+```
+
+---
+
+Search
+
+```text
+Format Document
+```
+
+---
+
+## Advantages
+
+* Saves time.
+* Easy to remember.
+* Accesses hidden commands.
+* Improves productivity.
+
+---
+
+## Real-World Usage
+
+Developers frequently use the Command Palette to change Python interpreters, reload the editor, run Git commands, or access extension features without navigating menus.
+
+---
+
+## Interview Answer
+
+> The Command Palette is a searchable interface that provides quick access to VS Code commands. It is useful for executing tasks such as selecting a Python interpreter, formatting code, reloading the editor, and accessing extension features.
+
+---
+
+# 🎤 6. Which VS Code settings are important for Python development?
+
+## Recommended Settings
+
+### Theme
+
+Dark Theme
+
+---
+
+### Font Size
+
+```text
+16
+```
+
+---
+
+### Auto Save
+
+```text
+After Delay
+```
+
+---
+
+### Format on Save
+
+Enabled
+
+---
+
+### Tab Size
+
+```text
+4
+```
+
+Python uses four spaces for indentation.
+
+---
+
+### Python Interpreter
+
+Always select the correct virtual environment.
+
+---
+
+### Word Wrap
+
+Enable if preferred for long lines.
+
+---
+
+### Settings Sync
+
+Sync extensions and preferences across devices.
+
+---
+
+## Real-World Usage
+
+These settings improve code consistency, reduce formatting issues, and ensure the correct Python environment is used for each project.
+
+---
+
+## Interview Answer
+
+> Important VS Code settings for Python development include selecting the correct Python interpreter, enabling Format on Save, using a four-space tab size, configuring Auto Save if appropriate, and synchronizing settings across devices.
+
+---
+
+# 🎤 7. Which extensions would you install first for AI and Machine Learning projects, and why?
+
+## Essential Extensions
+
+### Python
+
+Provides:
+
+* Python language support
+* Debugging
+* IntelliSense
+
+---
+
+### Pylance
+
+Provides:
+
+* Fast code completion
+* Type checking
+
+---
+
+### Jupyter
+
+Allows notebook execution.
+
+---
+
+### Docker
+
+Manage containers.
+
+---
+
+### GitLens
+
+Enhanced Git features.
+
+---
+
+### Black Formatter
+
+Automatic code formatting.
+
+---
+
+### isort
+
+Automatically sorts imports.
+
+---
+
+### Error Lens
+
+Shows errors inline.
+
+---
+
+### Markdown All in One
+
+For documentation.
+
+---
+
+### Material Icon Theme
+
+Improves project navigation.
+
+---
+
+## Why These Extensions?
+
+Together they provide:
+
+* Better productivity.
+* Better debugging.
+* Cleaner code.
+* Improved documentation.
+* Faster AI development.
+
+---
+
+## Real-World Usage
+
+A professional AI engineer typically installs:
+
+* Python
+* Pylance
+* Jupyter
+* Docker
+* GitLens
+* Black Formatter
+* isort
+
+These extensions cover the majority of day-to-day development tasks.
+
+---
+
+## Interview Answer
+
+> For AI and Machine Learning development, I would first install the Python, Pylance, Jupyter, Docker, GitLens, Black Formatter, and isort extensions. They provide language support, intelligent code completion, notebook integration, container management, version control enhancements, automatic formatting, and import organization, making development more efficient and maintainable.
+
+---
+
+# ⭐ Bonus Follow-up Questions (Senior-Level)
+
+### Q1. Why do professional developers prefer opening folders instead of files?
+
+**Answer:** Because VS Code can detect the complete project structure, apply workspace settings, identify the virtual environment, enable Git integration, and provide project-wide IntelliSense and debugging.
+
+---
+
+### Q2. What is IntelliSense?
+
+**Answer:** IntelliSense is VS Code's intelligent code completion system. It suggests variables, functions, classes, parameters, and documentation based on the current coding context, improving speed and reducing errors.
+
+---
+
+### Q3. What is the purpose of the Status Bar?
+
+**Answer:** The Status Bar provides quick information such as the selected Python interpreter, current Git branch, line and column position, file encoding, and notifications, allowing developers to monitor important project details at a glance.
+
+---
+
+### Q4. Why are extensions important?
+
+**Answer:** Extensions allow VS Code to support additional programming languages, frameworks, debugging tools, cloud services, and development workflows. This modular design lets developers install only the tools they need.
+
+---
+
+### Q5. Why is the integrated terminal preferred over an external terminal?
+
+**Answer:** The integrated terminal keeps coding and command-line tasks in a single application, reducing context switching and making it easier to run Python scripts, Git commands, Docker containers, and package management commands.
+
+---
+
+# 🎯 AI Engineer Interview Tip
+
+At companies like **WSO2, IFS, Sysco LABS, LSEG, or Microsoft**, interviewers may not ask *"How do you install VS Code?"* Instead, they'll ask questions that reveal **how you actually work**.
+
+For example:
+
+> **Interviewer:** *"You cloned a Python project from GitHub. Walk me through what you do in VS Code before writing any code."*
+
+A strong answer would be:
+
+1. Open the **project folder** in VS Code.
+2. Ensure the **correct virtual environment** is selected.
+3. Open the **integrated terminal**.
+4. Install dependencies using `pip install -r requirements.txt`.
+5. Verify the Python interpreter.
+6. Check the Git branch and repository status.
+7. Run the project to confirm everything works before making changes.
+
