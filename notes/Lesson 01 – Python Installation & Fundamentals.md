@@ -1355,3 +1355,587 @@ GPU.
 
 ---
 
+
+# 📖 Lesson 01 – Python Installation & Fundamentals (Part 3)
+
+---
+
+# 14. Professional Folder Structure
+
+One of the biggest differences between beginners and professional developers is **project organization**.
+
+Professional companies like **WSO2, IFS, Sysco LABS, Microsoft, Google, and OpenAI** organize their projects clearly so that every developer can understand the codebase.
+
+---
+
+## Beginner Project ❌
+
+```text
+Python Project
+
+main.py
+
+test.py
+
+new.py
+
+new1.py
+
+abc.py
+
+xyz.py
+
+test2.py
+```
+
+Problems:
+
+* No organization
+* Hard to maintain
+* Difficult for team members
+
+---
+
+## Professional Project ✅
+
+```text
+Python-Fundamentals
+│
+├── README.md
+├── LICENSE
+├── .gitignore
+├── requirements.txt
+│
+├── src
+│   ├── hello.py
+│   ├── calculator.py
+│   └── variables.py
+│
+├── notes
+│   └── Lesson-01-Python.md
+│
+├── exercises
+│   ├── Exercise-01.py
+│   ├── Exercise-02.py
+│   └── Exercise-03.py
+│
+├── assignments
+│   └── Assignment-01.py
+│
+├── mini-project
+│   └── Student_Grade_System.py
+│
+├── images
+│
+└── resources
+```
+
+---
+
+## Purpose of Each Folder
+
+| Folder         | Purpose                       |
+| -------------- | ----------------------------- |
+| `src`          | Main source code              |
+| `notes`        | Theory and documentation      |
+| `exercises`    | Practice programs             |
+| `assignments`  | Homework-style tasks          |
+| `mini-project` | Small project for the lesson  |
+| `images`       | Screenshots and diagrams      |
+| `resources`    | Additional learning materials |
+
+---
+
+# 15. Commands
+
+These are commands every Python developer should know.
+
+---
+
+## Check Python Version
+
+```bash
+python --version
+```
+
+---
+
+## Check pip
+
+```bash
+pip --version
+```
+
+---
+
+## List Installed Packages
+
+```bash
+pip list
+```
+
+---
+
+## Install Package
+
+```bash
+pip install numpy
+```
+
+---
+
+## Upgrade Package
+
+```bash
+pip install --upgrade numpy
+```
+
+---
+
+## Create Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+---
+
+## Activate Virtual Environment
+
+Git Bash
+
+```bash
+source .venv/Scripts/activate
+```
+
+Command Prompt
+
+```cmd
+.venv\Scripts\activate
+```
+
+PowerShell
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+---
+
+## Deactivate
+
+```bash
+deactivate
+```
+
+---
+
+## Save Installed Packages
+
+```bash
+pip freeze > requirements.txt
+```
+
+---
+
+## Install Packages from File
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Open Python Interpreter
+
+```bash
+python
+```
+
+---
+
+## Exit Interpreter
+
+```python
+exit()
+```
+
+---
+
+## Create Folder
+
+```bash
+mkdir src
+```
+
+---
+
+## Create File
+
+Git Bash
+
+```bash
+touch hello.py
+```
+
+Windows Command Prompt
+
+```cmd
+type nul > hello.py
+```
+
+---
+
+## Git Commands
+
+```bash
+git status
+
+git add .
+
+git commit -m "Complete Lesson 01"
+
+git push origin main
+```
+
+---
+
+# 16. Practical
+
+## Practical 1
+
+Open Python Interpreter
+
+```bash
+python
+```
+
+Write
+
+```python
+print("Hello AI Engineer")
+```
+
+Output
+
+```text
+Hello AI Engineer
+```
+
+---
+
+## Practical 2
+
+Create
+
+```text
+hello.py
+```
+
+Write
+
+```python
+print("Welcome to AI Engineer Academy")
+```
+
+Run
+
+```bash
+python hello.py
+```
+
+---
+
+## Practical 3
+
+Install NumPy
+
+```bash
+pip install numpy
+```
+
+Check
+
+```bash
+pip show numpy
+```
+
+---
+
+## Practical 4
+
+Create Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+Activate it
+
+Install
+
+```bash
+pip install pandas
+```
+
+Freeze
+
+```bash
+pip freeze > requirements.txt
+```
+
+---
+
+## Practical 5
+
+Create Folder Structure
+
+```text
+Python-Fundamentals
+│
+├── src
+├── notes
+├── exercises
+├── assignments
+├── mini-project
+└── images
+```
+
+---
+
+# 17. Exercises
+
+## Exercise 1
+
+Check
+
+* Python Version
+* pip Version
+
+---
+
+## Exercise 2
+
+Install
+
+```text
+numpy
+```
+
+---
+
+## Exercise 3
+
+Install
+
+```text
+pandas
+```
+
+---
+
+## Exercise 4
+
+List all installed packages.
+
+---
+
+## Exercise 5
+
+Create a virtual environment.
+
+---
+
+## Exercise 6
+
+Activate the environment.
+
+---
+
+## Exercise 7
+
+Deactivate it.
+
+---
+
+## Exercise 8
+
+Generate
+
+```text
+requirements.txt
+```
+
+---
+
+## Exercise 9
+
+Create the professional folder structure.
+
+---
+
+## Exercise 10
+
+Write
+
+```python
+print("My AI Engineer Journey Starts Today")
+```
+
+---
+
+# 18. Assignment
+
+## Assignment Title
+
+Professional Python Environment Setup
+
+---
+
+### Task
+
+Create a professional repository named
+
+```text
+Python-Fundamentals
+```
+
+The repository should include:
+
+* README.md
+* LICENSE
+* .gitignore
+* requirements.txt
+* src/
+* notes/
+* exercises/
+* assignments/
+* mini-project/
+* images/
+
+---
+
+Inside
+
+```text
+src
+```
+
+Create
+
+```text
+hello.py
+```
+
+Program
+
+```python
+print("Hello, I am Janusha Weerasinghe.")
+print("Welcome to my AI Engineer Bootcamp.")
+```
+
+Commit
+
+```bash
+git add .
+
+git commit -m "Complete Python Fundamentals Setup"
+
+git push
+```
+
+---
+
+# 19. Mini Project
+
+## Project Title
+
+**Python Environment Verification Tool**
+
+---
+
+## Objective
+
+Create a Python program that verifies whether your Python development environment is correctly configured.
+
+---
+
+## Folder
+
+```text
+mini-project/
+│
+└── environment_checker.py
+```
+
+---
+
+## Requirements
+
+Your program should:
+
+1. Display the installed Python version.
+2. Display the operating system.
+3. Check whether `pip` is available.
+4. Display the current working directory.
+5. Print a welcome message.
+
+---
+
+### Example Output
+
+```text
+===================================
+Python Environment Checker
+===================================
+
+Python Version : 3.12.10
+
+Operating System : Windows
+
+Current Directory :
+C:\Users\Janusha\Desktop\Python-Fundamentals
+
+pip : Installed
+
+Status :
+Environment Ready
+
+Welcome to AI Engineer Academy!
+```
+
+---
+
+### Starter Code
+
+```python
+import os
+import platform
+import subprocess
+import sys
+
+print("=" * 40)
+print("Python Environment Checker")
+print("=" * 40)
+
+print(f"Python Version : {sys.version.split()[0]}")
+print(f"Operating System : {platform.system()}")
+print(f"Current Directory : {os.getcwd()}")
+
+try:
+    subprocess.run(
+        ["python", "-m", "pip", "--version"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    print("pip : Installed")
+except Exception:
+    print("pip : Not Found")
+
+print("\nStatus : Environment Ready")
+print("Welcome to AI Engineer Academy!")
+```
+
+---
+
