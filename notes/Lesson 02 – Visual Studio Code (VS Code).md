@@ -1179,3 +1179,697 @@ Useful for:
 | Prettier            | Web development formatting |
 
 ---
+
+
+# 📖 Lesson 02 – Visual Studio Code
+
+# Part 3
+
+* 14 Python Extension
+* 15 IntelliSense
+* 16 Debugging
+* 17 Running Python Programs
+* 18 Virtual Environment Integration
+* 19 Jupyter Notebook Integration
+* 20 Git Integration
+
+---
+
+# 14. Python Extension
+
+## What is the Python Extension?
+
+The **Python Extension** is an official extension developed by **Microsoft** that enables Python development in VS Code.
+
+Without this extension, VS Code is simply a text editor. Installing it transforms VS Code into a powerful Python development environment.
+
+---
+
+## Why Do We Need It?
+
+The Python Extension provides:
+
+* Syntax Highlighting
+* IntelliSense
+* Code Navigation
+* Linting
+* Debugging
+* Testing Support
+* Jupyter Notebook Support
+* Python Interpreter Selection
+
+---
+
+## Installation
+
+Open Extensions
+
+```text
+Ctrl + Shift + X
+```
+
+Search:
+
+```text
+Python
+```
+
+Publisher:
+
+```text
+Microsoft
+```
+
+Click
+
+```text
+Install
+```
+
+---
+
+## Features
+
+### Python Interpreter
+
+Automatically detects installed Python versions.
+
+---
+
+### IntelliSense
+
+Provides code suggestions.
+
+---
+
+### Debugger
+
+Allows step-by-step debugging.
+
+---
+
+### Code Formatting
+
+Supports:
+
+* Black
+* autopep8
+* Ruff Formatter
+
+---
+
+### Testing
+
+Supports:
+
+* unittest
+* pytest
+
+---
+
+### Jupyter
+
+Integrated Notebook Support
+
+---
+
+## Example
+
+Without Extension
+
+```python
+import pandas as pd
+```
+
+No suggestions.
+
+---
+
+With Extension
+
+```python
+import pandas as pd
+
+pd.
+```
+
+Immediately suggests:
+
+* read_csv()
+* DataFrame()
+* concat()
+
+---
+
+## Real-World Usage
+
+Every professional Python developer installs the Python Extension first.
+
+---
+
+# 15. IntelliSense
+
+## What is IntelliSense?
+
+IntelliSense is VS Code's intelligent code completion system.
+
+It provides:
+
+* Auto-completion
+* Function suggestions
+* Parameter hints
+* Documentation
+* Error detection
+
+---
+
+## Example
+
+Type
+
+```python
+import math
+
+math.
+```
+
+Suggestions appear:
+
+```text
+sqrt()
+
+pow()
+
+sin()
+
+cos()
+
+factorial()
+```
+
+---
+
+## Function Parameters
+
+```python
+print(
+```
+
+VS Code immediately displays
+
+```text
+print(*objects, sep=' ', end='\n')
+```
+
+---
+
+## Advantages
+
+* Faster coding
+* Fewer syntax errors
+* Better productivity
+* Easier learning
+
+---
+
+## Real-World Usage
+
+AI engineers rely on IntelliSense when working with large libraries such as:
+
+* TensorFlow
+* PyTorch
+* Pandas
+* NumPy
+
+---
+
+# 16. Debugging
+
+## What is Debugging?
+
+Debugging is the process of finding and fixing errors in a program.
+
+---
+
+## Types of Errors
+
+### Syntax Error
+
+```python
+print("Hello"
+```
+
+---
+
+### Runtime Error
+
+```python
+10 / 0
+```
+
+---
+
+### Logical Error
+
+```python
+print(2 + 2)
+
+# Expected 5 (incorrect expectation)
+```
+
+The program runs, but the logic or expected result is wrong.
+
+---
+
+## Debugging Tools
+
+VS Code provides:
+
+* Breakpoints
+* Step Over
+* Step Into
+* Step Out
+* Variables
+* Watch Window
+* Call Stack
+
+---
+
+## Breakpoint
+
+Click beside the line number.
+
+A red dot appears.
+
+```python
+name = "Janusha"
+
+print(name)
+```
+
+Execution pauses before the breakpoint.
+
+---
+
+## Start Debugging
+
+Shortcut
+
+```text
+F5
+```
+
+---
+
+## Debug Toolbar
+
+```text
+Continue
+
+Step Over
+
+Step Into
+
+Step Out
+
+Restart
+
+Stop
+```
+
+---
+
+## Real-World Usage
+
+Professional developers debug:
+
+* Machine Learning pipelines
+* APIs
+* Database operations
+* Data preprocessing
+
+instead of using many `print()` statements.
+
+---
+
+# 17. Running Python Programs
+
+There are multiple ways to run Python code.
+
+---
+
+## Method 1
+
+Integrated Terminal
+
+```bash
+python main.py
+```
+
+---
+
+## Method 2
+
+Run Button
+
+Top-right corner
+
+▶
+
+---
+
+## Method 3
+
+Right-click
+
+```text
+Run Python File in Terminal
+```
+
+---
+
+## Method 4
+
+Command Palette
+
+```text
+Python: Run Python File
+```
+
+---
+
+## Method 5
+
+Debugger
+
+```text
+F5
+```
+
+---
+
+## Example
+
+```python
+print("Hello AI Engineer!")
+```
+
+Run
+
+```bash
+python hello.py
+```
+
+Output
+
+```text
+Hello AI Engineer!
+```
+
+---
+
+# 18. Virtual Environment Integration
+
+One of the most important features.
+
+---
+
+## Why?
+
+Each project should use its own virtual environment.
+
+---
+
+## Create Environment
+
+```bash
+python -m venv .venv
+```
+
+---
+
+## Activate
+
+Git Bash
+
+```bash
+source .venv/Scripts/activate
+```
+
+PowerShell
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+---
+
+## Select Interpreter
+
+Press
+
+```text
+Ctrl + Shift + P
+```
+
+Search
+
+```text
+Python: Select Interpreter
+```
+
+Choose
+
+```text
+.venv
+```
+
+---
+
+## Status Bar
+
+Bottom left
+
+```text
+Python 3.12 (.venv)
+```
+
+This indicates VS Code is using the correct environment.
+
+---
+
+## Why Important?
+
+Ensures:
+
+* Correct packages
+* Correct Python version
+* Project isolation
+
+---
+
+## Real-World Usage
+
+Every AI project should have its own virtual environment.
+
+---
+
+# 19. Jupyter Notebook Integration
+
+## What is Jupyter?
+
+Jupyter Notebook is an interactive environment used for:
+
+* Data Science
+* Machine Learning
+* AI Research
+
+---
+
+## Install Extension
+
+Search
+
+```text
+Jupyter
+```
+
+Publisher
+
+Microsoft
+
+---
+
+## Create Notebook
+
+```text
+New File
+
+↓
+
+example.ipynb
+```
+
+---
+
+## Example
+
+Cell 1
+
+```python
+print("Hello")
+```
+
+---
+
+Cell 2
+
+```python
+2 + 3
+```
+
+Output
+
+```text
+5
+```
+
+---
+
+## Advantages
+
+* Interactive execution
+* Visualizations
+* Markdown documentation
+* Data analysis
+
+---
+
+## Real-World Usage
+
+Data scientists use Jupyter to:
+
+* Explore datasets
+* Train models
+* Visualize results
+* Experiment with algorithms
+
+---
+
+# 20. Git Integration
+
+VS Code has built-in Git support.
+
+---
+
+## Features
+
+* Clone Repository
+* Commit
+* Push
+* Pull
+* Branch Management
+* Merge Conflict Resolution
+
+---
+
+## Source Control
+
+Click
+
+```text
+Source Control
+```
+
+or
+
+```text
+Ctrl + Shift + G
+```
+
+---
+
+## Example Workflow
+
+```text
+Modify File
+       │
+       ▼
+Source Control
+       │
+       ▼
+Stage Changes
+       │
+       ▼
+Commit
+       │
+       ▼
+Push
+       │
+       ▼
+GitHub
+```
+
+---
+
+## Common Git Commands
+
+```bash
+git status
+```
+
+---
+
+```bash
+git add .
+```
+
+---
+
+```bash
+git commit -m "Add Lesson 02"
+```
+
+---
+
+```bash
+git push
+```
+
+---
+
+## Advantages
+
+* Visual Git interface
+* Easy commits
+* Branch management
+* File comparison
+* History tracking
+
+---
+
+## Real-World Usage
+
+Every software company uses Git to:
+
+* Track changes
+* Collaborate with teams
+* Review code
+* Deploy applications
+
+VS Code allows these tasks to be performed without leaving the editor.
+
+---
+
+# Advice
+
+By the end of this lesson, don't just know **how** to click buttons—understand **why** each feature exists.
+
+For example:
+
+* Use the **Python Extension** because it provides language intelligence and debugging.
+* Use **IntelliSense** to reduce errors and improve productivity.
+* Use the **Debugger** to inspect program state instead of relying only on `print()` statements.
+* Use **Virtual Environment Integration** to keep dependencies isolated.
+* Use **Jupyter** for experimentation and analysis.
+* Use **Git Integration** to track and collaborate on code professionally.
