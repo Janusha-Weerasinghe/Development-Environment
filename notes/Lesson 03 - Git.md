@@ -1,0 +1,2180 @@
+# 📖 Lesson 03 – Git
+
+# Part 1 – Git Fundamentals
+
+---
+
+# 01. Introduction
+
+## What is Git?
+
+Git is a **distributed Version Control System (VCS)** used to track changes in files, manage source code, and enable collaboration among multiple developers.
+
+Git records the history of a project so developers can review changes, restore previous versions, create independent branches for new features, and merge completed work safely.
+
+It was designed to be:
+
+* Fast
+* Reliable
+* Distributed
+* Secure
+* Scalable
+
+Git is not limited to software development. It can track changes in any type of text-based file, such as:
+
+* Source code
+* Configuration files
+* Documentation
+* Markdown files
+* Infrastructure-as-Code (IaC)
+
+---
+
+## What Can Git Do?
+
+Git enables developers to:
+
+* Track file changes over time.
+* Revert to previous versions.
+* Create branches for new features.
+* Merge completed work.
+* Collaborate with team members.
+* Resolve conflicting changes.
+* Synchronize projects with remote repositories such as GitHub.
+
+---
+
+## Why is Git Important?
+
+Without Git, developers often create multiple copies of the same project.
+
+Example:
+
+```text
+Project/
+Project_Final/
+Project_Final_New/
+Project_Final_V2/
+Project_Final_V2_Final/
+Project_Final_V2_Final_Latest/
+```
+
+This approach quickly becomes difficult to manage.
+
+Git replaces this with structured version history.
+
+```text
+Project
+│
+├── Commit 1
+├── Commit 2
+├── Commit 3
+└── Commit 4
+```
+
+Every change is recorded with:
+
+* Author
+* Date
+* Time
+* Description
+
+---
+
+# 02. History
+
+## Who Created Git?
+
+Git was created by **Linus Torvalds**, the creator of the Linux operating system.
+
+---
+
+## Why Was Git Created?
+
+In 2005, Linux kernel developers were using a proprietary version control system called **BitKeeper**.
+
+When the licensing arrangement changed, the Linux community needed an alternative.
+
+Linus Torvalds designed Git with the following goals:
+
+* High performance
+* Distributed architecture
+* Strong data integrity
+* Efficient branching and merging
+
+The first version of Git was released in **2005**.
+
+---
+
+## Evolution
+
+### 2005
+
+Initial release by Linus Torvalds.
+
+### 2006–2010
+
+Rapid adoption in open-source projects.
+
+### 2011–Present
+
+Git became the de facto standard for version control in software engineering.
+
+---
+
+# 03. Why Git?
+
+Git solves many common software development problems.
+
+---
+
+## Problem 1 – Losing Code
+
+Without version control:
+
+* Deleted files may be lost permanently.
+* Accidental changes are difficult to recover.
+
+With Git:
+
+Every change is recorded and can be restored.
+
+---
+
+## Problem 2 – Team Collaboration
+
+Without Git:
+
+Two developers editing the same file may overwrite each other's work.
+
+With Git:
+
+Developers work independently on branches and merge changes later.
+
+---
+
+## Problem 3 – Experimentation
+
+Without Git:
+
+Trying new ideas may risk breaking the main project.
+
+With Git:
+
+Developers create feature branches and merge them only after testing.
+
+---
+
+## Advantages of Git
+
+* Distributed architecture.
+* Fast operations.
+* Offline access.
+* Strong integrity using SHA hashing.
+* Efficient branching and merging.
+* Wide industry adoption.
+
+---
+
+# 04. Industry Usage
+
+Git is used in nearly every modern software company.
+
+---
+
+## Microsoft
+
+* Azure
+* Visual Studio Code
+* .NET
+* AI services
+
+---
+
+## Google
+
+* Backend services
+* Cloud platforms
+* AI research
+
+---
+
+## Amazon
+
+* AWS services
+* Backend development
+* Infrastructure automation
+
+---
+
+## OpenAI
+
+Git is used to manage:
+
+* AI models
+* APIs
+* Documentation
+* Internal tooling
+
+---
+
+## WSO2
+
+Common uses:
+
+* Java services
+* APIs
+* Kubernetes configurations
+* Python utilities
+
+---
+
+## IFS
+
+Git supports:
+
+* Enterprise software
+* AI integrations
+* Backend services
+
+---
+
+## Sysco LABS
+
+Git is used for:
+
+* Machine Learning projects
+* Backend services
+* React applications
+* CI/CD pipelines
+
+---
+
+## AI Engineer Workflow
+
+```text
+Write Code
+     │
+     ▼
+Commit Changes
+     │
+     ▼
+Push to GitHub
+     │
+     ▼
+Code Review
+     │
+     ▼
+Merge
+     │
+     ▼
+Deploy
+```
+
+Git is the foundation of this workflow.
+
+---
+
+# 05. Version Control System (VCS)
+
+## What is a Version Control System?
+
+A Version Control System (VCS) is software that records changes made to files over time.
+
+It allows developers to:
+
+* Track history.
+* Restore previous versions.
+* Compare changes.
+* Collaborate with others.
+* Audit who made each change.
+
+---
+
+## Example
+
+Version 1
+
+```python
+print("Hello")
+```
+
+Version 2
+
+```python
+print("Hello AI")
+```
+
+Instead of replacing the file, Git stores the differences between versions.
+
+---
+
+## Benefits
+
+* History tracking.
+* Backup.
+* Collaboration.
+* Change comparison.
+* Rollback capability.
+
+---
+
+# 06. Types of Version Control
+
+There are three main types.
+
+---
+
+## 1. Local Version Control System
+
+Everything is stored on one computer.
+
+```text
+Developer PC
+│
+├── Version 1
+├── Version 2
+└── Version 3
+```
+
+Advantages:
+
+* Simple.
+
+Disadvantages:
+
+* No collaboration.
+* Risk of data loss if the computer fails.
+
+---
+
+## 2. Centralized Version Control System (CVCS)
+
+All developers connect to a single central server.
+
+```text
+Developer A
+        │
+Developer B
+        │
+Developer C
+        │
+     Central Server
+```
+
+Examples:
+
+* SVN (Subversion)
+* CVS
+
+Advantages:
+
+* Centralized management.
+
+Disadvantages:
+
+* If the server is unavailable, collaboration stops.
+
+---
+
+## 3. Distributed Version Control System (DVCS)
+
+Each developer has a complete copy of the repository.
+
+```text
+Developer A
+      │
+Developer B
+      │
+Developer C
+      │
+ Remote Repository
+```
+
+Examples:
+
+* Git
+* Mercurial
+
+Advantages:
+
+* Offline work.
+* Full project history on every machine.
+* Faster operations.
+* Better reliability.
+
+---
+
+## Why Git Uses DVCS
+
+Git's distributed model allows developers to:
+
+* Commit offline.
+* Branch locally.
+* Recover history even if the remote server is unavailable.
+
+---
+
+# 07. Git Architecture
+
+Git is organized into four main areas.
+
+```text
+Working Directory
+        │
+        ▼
+Staging Area
+        │
+        ▼
+Local Repository
+        │
+        ▼
+Remote Repository (GitHub)
+```
+
+---
+
+## 1. Working Directory
+
+This is where you create and edit files.
+
+Example:
+
+```text
+main.py
+README.md
+```
+
+---
+
+## 2. Staging Area
+
+The staging area acts as a preparation area.
+
+Files are added here before creating a commit.
+
+```bash
+git add main.py
+```
+
+---
+
+## 3. Local Repository
+
+Commits are stored in your local Git repository.
+
+```bash
+git commit -m "Add login feature"
+```
+
+---
+
+## 4. Remote Repository
+
+The remote repository stores your project online.
+
+Examples:
+
+* GitHub
+* GitLab
+* Bitbucket
+
+Upload commits using:
+
+```bash
+git push
+```
+
+---
+
+## Complete Workflow
+
+```text
+Edit File
+     │
+     ▼
+git add
+     │
+     ▼
+Staging Area
+     │
+     ▼
+git commit
+     │
+     ▼
+Local Repository
+     │
+     ▼
+git push
+     │
+     ▼
+GitHub
+```
+
+---
+
+# 08. Git Installation
+
+## Step 1
+
+Download Git from the official website:
+
+[https://git-scm.com](https://git-scm.com)
+
+---
+
+## Step 2
+
+Install Git.
+
+Recommended options:
+
+* Use Git from the command line.
+* Use the default editor (or configure VS Code later).
+* Enable Git Credential Manager.
+* Enable symbolic links (if supported).
+
+---
+
+## Step 3
+
+Verify the installation.
+
+Open a terminal and run:
+
+```bash
+git --version
+```
+
+Example output:
+
+```text
+git version 2.50.1.windows.1
+```
+
+---
+
+## Step 4
+
+Check Git help.
+
+```bash
+git --help
+```
+
+---
+
+## Step 5
+
+View all available Git commands.
+
+```bash
+git
+```
+
+---
+# Part 2 – Git Basics
+
+---
+
+# 09. Git Configuration
+
+## What is Git Configuration?
+
+Git Configuration is the process of setting your identity and preferences. Every commit stores information about **who made the change**, so Git needs to know your name and email.
+
+---
+
+## Types of Configuration
+
+### System Configuration
+
+Applies to all users on the computer.
+
+```bash
+git config --system
+```
+
+---
+
+### Global Configuration ⭐ (Most Common)
+
+Applies to your user account.
+
+```bash
+git config --global
+```
+
+---
+
+### Local Configuration
+
+Applies only to one repository.
+
+```bash
+git config
+```
+
+---
+
+## Configure Your Identity
+
+Set your name:
+
+```bash
+git config --global user.name "Janusha Weerasinghe"
+```
+
+Set your email:
+
+```bash
+git config --global user.email "your_email@example.com"
+```
+
+---
+
+## Verify Configuration
+
+```bash
+git config --list
+```
+
+Example:
+
+```text
+user.name=Janusha Weerasinghe
+user.email=your_email@example.com
+```
+
+---
+
+## Configure VS Code as the Default Editor
+
+```bash
+git config --global core.editor "code --wait"
+```
+
+---
+
+## Why is Configuration Important?
+
+Without your name and email, Git cannot properly identify the author of each commit.
+
+---
+
+# 10. Repository
+
+## What is a Repository?
+
+A **repository (repo)** is a directory that Git uses to store your project, its history, and metadata.
+
+Think of it as the project's **database**.
+
+---
+
+## Types of Repositories
+
+### Local Repository
+
+Stored on your computer.
+
+```text
+MyProject/
+```
+
+---
+
+### Remote Repository
+
+Stored online.
+
+Examples:
+
+* GitHub
+* GitLab
+* Bitbucket
+
+---
+
+## Create a Repository
+
+```bash
+mkdir AI-Bootcamp
+cd AI-Bootcamp
+
+git init
+```
+
+Output:
+
+```text
+Initialized empty Git repository...
+```
+
+---
+
+## Repository Structure
+
+```text
+AI-Bootcamp/
+│
+├── .git/
+├── README.md
+├── app.py
+└── requirements.txt
+```
+
+`.git/` is the hidden directory where Git stores all version control information.
+
+---
+
+# 11. Working Directory
+
+## What is the Working Directory?
+
+The **Working Directory** is where you create, edit, and delete files. It reflects the current state of your project before changes are staged or committed.
+
+---
+
+## Example
+
+```text
+AI-Bootcamp/
+│
+├── app.py
+├── README.md
+└── data.csv
+```
+
+When you modify `app.py`, Git detects that the file has changed.
+
+---
+
+## Check the Status
+
+```bash
+git status
+```
+
+Example:
+
+```text
+modified: app.py
+```
+
+---
+
+## Real-World Usage
+
+This is where developers spend most of their time writing code.
+
+---
+
+# 12. Staging Area
+
+## What is the Staging Area?
+
+The **Staging Area** (also called the **Index**) is a temporary area where you prepare changes before creating a commit.
+
+It lets you choose exactly what should be included in the next snapshot.
+
+---
+
+## Workflow
+
+```text
+Working Directory
+        │
+git add
+        ▼
+Staging Area
+```
+
+---
+
+## Stage One File
+
+```bash
+git add app.py
+```
+
+---
+
+## Stage All Files
+
+```bash
+git add .
+```
+
+---
+
+## Why Stage Changes?
+
+Imagine you edited five files but only want to commit two of them. The staging area lets you select only those two files.
+
+---
+
+# 13. Local Repository
+
+## What is the Local Repository?
+
+The **Local Repository** is where Git permanently stores committed snapshots on your computer.
+
+---
+
+## Commit Changes
+
+```bash
+git commit -m "Add login feature"
+```
+
+---
+
+## Workflow
+
+```text
+Working Directory
+        │
+git add
+        ▼
+Staging Area
+        │
+git commit
+        ▼
+Local Repository
+```
+
+---
+
+## Why Commit?
+
+A commit acts as a checkpoint. You can always return to it later if needed.
+
+---
+
+## Best Practice
+
+Write clear commit messages.
+
+Good:
+
+```text
+Add user authentication
+```
+
+Bad:
+
+```text
+Update
+```
+
+---
+
+# 14. Remote Repository
+
+## What is a Remote Repository?
+
+A **Remote Repository** is a copy of your project hosted on a server, allowing collaboration and backup.
+
+Common platforms include:
+
+* GitHub
+* GitLab
+* Bitbucket
+
+---
+
+## Add a Remote
+
+```bash
+git remote add origin https://github.com/username/project.git
+```
+
+---
+
+## View Remotes
+
+```bash
+git remote -v
+```
+
+---
+
+## Push Changes
+
+```bash
+git push origin main
+```
+
+---
+
+## Pull Changes
+
+```bash
+git pull origin main
+```
+
+---
+
+## Why Use a Remote?
+
+It enables collaboration, backup, code reviews, and deployment.
+
+---
+
+# 15. Git Workflow
+
+The standard Git workflow is:
+
+```text
+Create / Modify Files
+        │
+        ▼
+Working Directory
+        │
+git add
+        ▼
+Staging Area
+        │
+git commit
+        ▼
+Local Repository
+        │
+git push
+        ▼
+Remote Repository
+```
+
+---
+
+## Typical Example
+
+```bash
+git status
+git add .
+git commit -m "Complete Lesson 03 Part 2"
+git push origin main
+```
+
+---
+
+# 16. Git Commands
+
+## Repository Commands
+
+Initialize a repository:
+
+```bash
+git init
+```
+
+Clone a repository:
+
+```bash
+git clone <repository-url>
+```
+
+---
+
+## Status
+
+```bash
+git status
+```
+
+Shows:
+
+* Modified files
+* Staged files
+* Untracked files
+
+---
+
+## Staging
+
+Stage one file:
+
+```bash
+git add app.py
+```
+
+Stage all files:
+
+```bash
+git add .
+```
+
+---
+
+## Commit
+
+```bash
+git commit -m "Initial commit"
+```
+
+---
+
+## View History
+
+```bash
+git log
+```
+
+---
+
+## Push
+
+```bash
+git push
+```
+
+---
+
+## Pull
+
+```bash
+git pull
+```
+
+---
+
+## View Remotes
+
+```bash
+git remote -v
+```
+
+---
+
+## Clone
+
+```bash
+git clone https://github.com/username/project.git
+```
+
+---
+
+## Check Version
+
+```bash
+git --version
+```
+
+---
+
+# 17. .gitignore
+
+## What is `.gitignore`?
+
+A `.gitignore` file tells Git which files and folders should **not** be tracked.
+
+---
+
+## Why Do We Need It?
+
+Some files should never be committed, such as:
+
+* Virtual environments
+* Cache files
+* Temporary files
+* Build outputs
+* IDE settings
+* Secrets
+
+---
+
+## Example
+
+```text
+.venv/
+__pycache__/
+*.pyc
+.env
+.vscode/
+```
+
+---
+
+## Python `.gitignore`
+
+```text
+# Virtual Environment
+.venv/
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Environment Variables
+.env
+
+# VS Code Settings
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+```
+
+---
+
+## Real-World Usage
+
+Every professional repository should include an appropriate `.gitignore` file.
+
+---
+
+# 18. Git Log
+
+## What is `git log`?
+
+`git log` displays the commit history of the repository.
+
+---
+
+## Basic Command
+
+```bash
+git log
+```
+
+Example:
+
+```text
+commit a1b2c3d4...
+Author: Janusha Weerasinghe
+Date: ...
+
+    Complete Lesson 03 Part 2
+```
+
+---
+
+## One-Line Format
+
+```bash
+git log --oneline
+```
+
+Example:
+
+```text
+a1b2c3d Complete Lesson 03 Part 2
+8f7e6d5 Add README
+5c4b3a2 Initial commit
+```
+
+---
+
+## Show Last 5 Commits
+
+```bash
+git log -5
+```
+
+---
+
+## Why is `git log` Useful?
+
+It helps you:
+
+* Review project history.
+* Find previous versions.
+* Identify who made changes.
+* Understand the evolution of the project.
+
+---
+
+
+## 💡 Mentor's Advice
+
+One of the biggest mistakes beginners make is memorizing commands without understanding **where their code is**.
+
+Always think of your changes moving through four stages:
+
+```text
+Working Directory
+        │
+     git add
+        ▼
+Staging Area
+        │
+   git commit
+        ▼
+Local Repository
+        │
+    git push
+        ▼
+Remote Repository (GitHub)
+```
+
+# Part 3 – Git Collaboration
+
+---
+
+# 19. Branches
+
+## What is a Branch?
+
+A **branch** is an independent line of development that allows developers to work on new features, bug fixes, or experiments without affecting the main project.
+
+Think of a branch as a copy of the project where you can safely make changes.
+
+---
+
+## Why Use Branches?
+
+Without branches:
+
+* Everyone edits the same code.
+* Bugs can affect production.
+* Collaboration becomes difficult.
+
+With branches:
+
+* Developers work independently.
+* Features are isolated.
+* The main branch remains stable.
+
+---
+
+## Branch Structure
+
+```text
+                main
+                  │
+      ┌───────────┴───────────┐
+      │                       │
+feature-login          feature-payment
+      │                       │
+      └───────────┬───────────┘
+                  │
+                Merge
+                  │
+                main
+```
+
+---
+
+## Common Commands
+
+Create a branch:
+
+```bash
+git branch feature-login
+```
+
+Switch to a branch:
+
+```bash
+git checkout feature-login
+```
+
+Create and switch:
+
+```bash
+git checkout -b feature-login
+```
+
+List branches:
+
+```bash
+git branch
+```
+
+Delete a branch:
+
+```bash
+git branch -d feature-login
+```
+
+---
+
+## Best Practice
+
+Use meaningful branch names:
+
+✅ Good
+
+```text
+feature-login
+feature-payment
+bugfix-authentication
+hotfix-api
+```
+
+❌ Bad
+
+```text
+branch1
+test
+abc
+```
+
+---
+
+# 20. Merge
+
+## What is Merge?
+
+Merging combines changes from one branch into another.
+
+Usually:
+
+```text
+feature-login
+        │
+        ▼
+      main
+```
+
+---
+
+## Example
+
+```bash
+git checkout main
+
+git merge feature-login
+```
+
+---
+
+## Merge Workflow
+
+```text
+main
+ │
+ ├────── feature-login
+ │           │
+ │       Add Login
+ │           │
+ └────────Merge
+```
+
+---
+
+## Types of Merge
+
+### Fast-Forward Merge
+
+Occurs when no additional commits exist on the target branch.
+
+```text
+main
+
+A──B
+
+      \
+       C
+```
+
+↓
+
+```text
+A──B──C
+```
+
+---
+
+### Three-Way Merge
+
+Occurs when both branches have new commits.
+
+```text
+A──B────D
+
+ \
+
+  C
+```
+
+Git creates a merge commit.
+
+---
+
+# 21. Merge Conflicts
+
+## What is a Merge Conflict?
+
+A merge conflict occurs when Git cannot automatically combine changes because two branches modified the same part of the same file.
+
+---
+
+## Example
+
+Branch A
+
+```python
+print("Hello")
+```
+
+Branch B
+
+```python
+print("Hello AI")
+```
+
+Git doesn't know which version to keep.
+
+---
+
+## Conflict Markers
+
+```python
+<<<<<<< HEAD
+print("Hello")
+=======
+print("Hello AI")
+>>>>>>> feature
+```
+
+---
+
+## Resolve Conflict
+
+Choose the correct version:
+
+```python
+print("Hello AI")
+```
+
+Then:
+
+```bash
+git add app.py
+
+git commit
+```
+
+---
+
+## Real-World Usage
+
+Merge conflicts are common in team projects. Developers resolve them by reviewing the changes and deciding which version (or combination of versions) should remain.
+
+---
+
+# 22. Clone
+
+## What is Clone?
+
+`git clone` creates a complete local copy of a remote repository.
+
+---
+
+## Command
+
+```bash
+git clone https://github.com/username/project.git
+```
+
+---
+
+## Result
+
+```text
+GitHub Repository
+        │
+        ▼
+Local Repository
+```
+
+---
+
+## Why Clone?
+
+* Join an existing project.
+* Download open-source projects.
+* Contribute to repositories.
+
+---
+
+# 23. Fork
+
+## What is Fork?
+
+A **fork** creates your own copy of another user's repository on GitHub.
+
+Unlike cloning, a fork is created **on GitHub**, not on your computer.
+
+---
+
+## Workflow
+
+```text
+Original Repository
+        │
+      Fork
+        ▼
+Your GitHub Repository
+        │
+      Clone
+        ▼
+Your Computer
+```
+
+---
+
+## Why Fork?
+
+Used when you do **not** have direct write access to a repository.
+
+Common in open-source projects.
+
+---
+
+## Clone vs Fork
+
+| Clone                              | Fork                                        |
+| ---------------------------------- | ------------------------------------------- |
+| Creates a local copy               | Creates a GitHub copy                       |
+| Used by team members               | Used by external contributors               |
+| Doesn't create another GitHub repo | Creates a new repository under your account |
+
+---
+
+# 24. Pull Request (PR)
+
+## What is a Pull Request?
+
+A Pull Request is a request to merge changes from one branch into another after they have been reviewed.
+
+---
+
+## Workflow
+
+```text
+Create Branch
+      │
+Develop Feature
+      │
+Commit
+      │
+Push
+      │
+Open Pull Request
+      │
+Code Review
+      │
+Merge
+```
+
+---
+
+## Why Use Pull Requests?
+
+* Code review.
+* Team discussion.
+* Automated testing.
+* Quality assurance.
+
+---
+
+## Real-World Usage
+
+Before code reaches the `main` branch, it is usually reviewed through a Pull Request.
+
+---
+
+# 25. Fetch vs Pull
+
+## `git fetch`
+
+Downloads changes from the remote repository but does **not** merge them into your current branch.
+
+```bash
+git fetch
+```
+
+---
+
+## `git pull`
+
+Downloads changes **and** merges them into your current branch.
+
+```bash
+git pull
+```
+
+---
+
+## Comparison
+
+| git fetch         | git pull                         |
+| ----------------- | -------------------------------- |
+| Downloads changes | Downloads and merges changes     |
+| Safe to inspect   | Immediately updates local branch |
+| No merge          | Automatic merge                  |
+
+---
+
+## Workflow
+
+```text
+Remote Repository
+        │
+   git fetch
+        ▼
+Local Repository
+
+Remote Repository
+        │
+    git pull
+        ▼
+Local Branch Updated
+```
+
+---
+
+# 26. Rebase
+
+## What is Rebase?
+
+Rebase moves or reapplies commits from one branch onto another, creating a **linear project history**.
+
+---
+
+## Example
+
+Before:
+
+```text
+main
+
+A──B
+
+      \
+       C──D
+```
+
+After:
+
+```text
+A──B──C──D
+```
+
+---
+
+## Command
+
+```bash
+git checkout feature
+
+git rebase main
+```
+
+---
+
+## Merge vs Rebase
+
+| Merge                    | Rebase                 |
+| ------------------------ | ---------------------- |
+| Creates merge commit     | No merge commit        |
+| Preserves branch history | Creates linear history |
+| Easier for beginners     | Cleaner history        |
+
+---
+
+## Best Practice
+
+Avoid rebasing branches that have already been shared with others unless your team specifically follows a rebase-based workflow.
+
+---
+
+# 27. Tags
+
+## What is a Tag?
+
+A tag is a named reference to a specific commit.
+
+Tags are commonly used to mark releases.
+
+Examples:
+
+```text
+v1.0
+
+v1.1
+
+v2.0
+```
+
+---
+
+## Create a Tag
+
+```bash
+git tag v1.0
+```
+
+---
+
+## List Tags
+
+```bash
+git tag
+```
+
+---
+
+## Push Tags
+
+```bash
+git push origin v1.0
+```
+
+Push all tags:
+
+```bash
+git push origin --tags
+```
+
+---
+
+## Why Use Tags?
+
+Tags identify important milestones such as:
+
+* Initial Release
+* Beta Version
+* Stable Release
+* Production Release
+
+---
+
+## Example
+
+```text
+Commit 1
+
+Commit 2
+
+Commit 3
+
+v1.0
+
+Commit 4
+
+Commit 5
+
+v2.0
+```
+
+---
+
+
+## 💡 Mentor's Advice
+
+Most Git interview questions are not about memorizing commands—they're about understanding **team collaboration**.
+
+Remember this professional workflow:
+
+```text
+Create Feature Branch
+        │
+Develop Feature
+        │
+Commit Changes
+        │
+Push Branch
+        │
+Open Pull Request
+        │
+Code Review
+        │
+Merge into main
+        │
+Release (Tag)
+```
+
+This is the workflow used by many professional software teams. Understanding **why** each step exists will prepare you for both technical interviews and real-world development.
+
+---
+
+# Part 4 – Professional Git
+
+---
+
+# 28. GitHub Integration
+
+## What is GitHub?
+
+GitHub is a **cloud-based platform** that hosts Git repositories and provides collaboration tools such as Pull Requests, Issues, Actions, and Discussions.
+
+> **Important:** Git and GitHub are different.
+>
+> * **Git** is the version control system.
+> * **GitHub** is a hosting platform built around Git.
+
+---
+
+## Why Use GitHub?
+
+GitHub allows developers to:
+
+* Store repositories online.
+* Collaborate with teams.
+* Review code.
+* Track issues.
+* Automate workflows with GitHub Actions.
+* Showcase projects to employers.
+
+---
+
+## GitHub Workflow
+
+```text
+Create Project
+      │
+git init
+      │
+Commit Changes
+      │
+Create GitHub Repository
+      │
+git remote add origin
+      │
+git push
+      │
+GitHub Repository
+```
+
+---
+
+## Connect Local Repository
+
+```bash
+git remote add origin https://github.com/username/project.git
+```
+
+Verify:
+
+```bash
+git remote -v
+```
+
+---
+
+## Push Repository
+
+First push:
+
+```bash
+git push -u origin main
+```
+
+Later pushes:
+
+```bash
+git push
+```
+
+---
+
+## Clone Repository
+
+```bash
+git clone https://github.com/username/project.git
+```
+
+---
+
+## Professional Workflow
+
+```text
+Develop
+     │
+Commit
+     │
+Push
+     │
+GitHub
+     │
+Pull Request
+     │
+Review
+     │
+Merge
+```
+
+---
+
+# 29. Git Best Practices
+
+Professional developers follow these practices consistently.
+
+### Repository Organization
+
+* Use meaningful repository names.
+* Include a `README.md`.
+* Add a `.gitignore`.
+* Choose an appropriate license.
+
+---
+
+### Commit Messages
+
+✅ Good
+
+```text
+Add user authentication
+Fix login validation bug
+Update README documentation
+```
+
+❌ Bad
+
+```text
+Update
+Fix
+Test
+abc
+```
+
+---
+
+### Branching
+
+Create a separate branch for each task.
+
+```text
+feature-login
+feature-payment
+bugfix-api
+hotfix-authentication
+```
+
+Avoid committing directly to `main`.
+
+---
+
+### Commit Frequently
+
+Create small, logical commits instead of one large commit at the end of the day.
+
+---
+
+### Pull Before Push
+
+Always synchronize with the remote repository before pushing:
+
+```bash
+git pull
+```
+
+---
+
+### Review Changes
+
+Before committing:
+
+```bash
+git status
+git diff
+```
+
+---
+
+### Protect Secrets
+
+Never commit:
+
+* Passwords
+* API keys
+* Tokens
+* Database credentials
+
+Store them in environment variables and ignore them using `.gitignore`.
+
+---
+
+# 30. Practical
+
+## Objective
+
+Create your first professional Git repository.
+
+---
+
+### Step 1
+
+Create a project folder:
+
+```text
+Git-Practice
+```
+
+---
+
+### Step 2
+
+Initialize Git:
+
+```bash
+git init
+```
+
+---
+
+### Step 3
+
+Create:
+
+```text
+README.md
+app.py
+.gitignore
+requirements.txt
+```
+
+---
+
+### Step 4
+
+Check status:
+
+```bash
+git status
+```
+
+---
+
+### Step 5
+
+Stage files:
+
+```bash
+git add .
+```
+
+---
+
+### Step 6
+
+Commit:
+
+```bash
+git commit -m "Initial project setup"
+```
+
+---
+
+### Step 7
+
+Create a GitHub repository.
+
+---
+
+### Step 8
+
+Connect:
+
+```bash
+git remote add origin https://github.com/username/Git-Practice.git
+```
+
+---
+
+### Step 9
+
+Push:
+
+```bash
+git push -u origin main
+```
+
+---
+
+# 31. Exercises
+
+## Exercise 1
+
+Initialize a Git repository.
+
+---
+
+## Exercise 2
+
+Create three commits with meaningful messages.
+
+---
+
+## Exercise 3
+
+Create a feature branch.
+
+---
+
+## Exercise 4
+
+Merge the branch into `main`.
+
+---
+
+## Exercise 5
+
+Push the repository to GitHub.
+
+---
+
+## Exercise 6
+
+Add a `.gitignore` file and verify that ignored files are not tracked.
+
+---
+
+# 34. README
+
+Your README should contain:
+
+```markdown
+# Git Portfolio
+
+## Overview
+
+This repository demonstrates professional Git workflows and best practices.
+
+## Features
+
+- Git Fundamentals
+- Branching
+- Merging
+- Pull Requests
+- Tags
+- GitHub Integration
+
+## Technologies
+
+- Git
+- GitHub
+- Markdown
+
+## Skills Demonstrated
+
+- Version Control
+- Collaboration
+- Branch Management
+- Repository Organization
+```
+
+---
+
+# 36. Common Mistakes
+
+❌ Committing directly to `main`.
+
+❌ Writing unclear commit messages such as "Update" or "Fix".
+
+❌ Forgetting to pull before pushing.
+
+❌ Committing secrets such as API keys or passwords.
+
+❌ Ignoring merge conflicts instead of resolving them carefully.
+
+❌ Forgetting to use `.gitignore`.
+
+❌ Making one very large commit instead of several logical commits.
+
+❌ Working without reviewing changes using `git status` or `git diff`.
+
+---
