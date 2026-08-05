@@ -1454,3 +1454,38 @@ pip install -r requirements.txt
 5. Compare package versions with `pip list` or `pip freeze`.
 6. Check the project's `README.md` for any additional setup steps.
 
+---
+
+# Part 04
+
+# 24. Interview Questions
+
+## Beginner
+
+1. What is a virtual environment?
+2. Why should every Python project use one?
+3. What is `requirements.txt`?
+4. What does `pip install -r requirements.txt` do?
+5. Why should `venv` not be committed to GitHub?
+
+---
+
+## Intermediate
+
+6. Explain how virtual environments isolate dependencies.
+7. What happens if the wrong Python interpreter is selected?
+8. How do you recreate a Python environment on another computer?
+9. Why is dependency management important?
+10. How does VS Code detect virtual environments?
+
+---
+
+## Advanced
+
+11. Compare `venv`, `virtualenv`, and Conda.
+12. How would you organize a Python project for a team?
+13. What files are essential when sharing a Python project?
+14. How would you troubleshoot dependency conflicts?
+15. How do virtual environments improve software reliability?
+
+---
