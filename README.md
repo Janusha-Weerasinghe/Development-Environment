@@ -242,3 +242,51 @@ This lesson will also follow our standard structure.
 38 Quiz
 
 ---
+
+# Lesson 04 – GitHub
+
+## Part 1 – GitHub Fundamentals
+01 Introduction
+02 History
+03 Why GitHub?
+04 Industry Usage
+05 Git vs GitHub
+06 GitHub Architecture
+07 GitHub Account
+08 Repository Creation
+
+## Part 2 – GitHub Essentials
+09 Repository Structure
+10 README
+11 LICENSE
+12 Issues
+13 Discussions
+14 Projects
+15 Wiki
+16 Releases
+17 GitHub Pages
+18 GitHub Profile
+
+## Part 3 – GitHub Collaboration
+19 Clone
+20 Fork
+21 Pull Request
+22 Code Review
+23 Branch Protection
+24 Collaborators
+25 Organizations
+26 GitHub Actions
+27 Security
+
+## Part 4 – Professional GitHub
+28 Portfolio Development
+29 GitHub Best Practices
+30 Practical
+31 Exercises
+32 Assignment
+33 Mini Project
+34 README
+35 Interview Questions
+36 Common Mistakes
+37 Summary
+38 Quiz
