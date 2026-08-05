@@ -573,12 +573,6 @@ git
 ```
 
 ---
-
-# Part 02
-Excellent bro! 🔥 Welcome to **Part 2**, where you'll actually start using Git. This is the foundation of daily software development. By the end of this section, you'll understand how code moves from your computer to GitHub.
-
----
-
 # Part 2 – Git Basics
 
 ---
@@ -1795,4 +1789,392 @@ Release (Tag)
 
 This is the workflow used by many professional software teams. Understanding **why** each step exists will prepare you for both technical interviews and real-world development.
 
+---
 
+# Part 4 – Professional Git
+
+---
+
+# 28. GitHub Integration
+
+## What is GitHub?
+
+GitHub is a **cloud-based platform** that hosts Git repositories and provides collaboration tools such as Pull Requests, Issues, Actions, and Discussions.
+
+> **Important:** Git and GitHub are different.
+>
+> * **Git** is the version control system.
+> * **GitHub** is a hosting platform built around Git.
+
+---
+
+## Why Use GitHub?
+
+GitHub allows developers to:
+
+* Store repositories online.
+* Collaborate with teams.
+* Review code.
+* Track issues.
+* Automate workflows with GitHub Actions.
+* Showcase projects to employers.
+
+---
+
+## GitHub Workflow
+
+```text
+Create Project
+      │
+git init
+      │
+Commit Changes
+      │
+Create GitHub Repository
+      │
+git remote add origin
+      │
+git push
+      │
+GitHub Repository
+```
+
+---
+
+## Connect Local Repository
+
+```bash
+git remote add origin https://github.com/username/project.git
+```
+
+Verify:
+
+```bash
+git remote -v
+```
+
+---
+
+## Push Repository
+
+First push:
+
+```bash
+git push -u origin main
+```
+
+Later pushes:
+
+```bash
+git push
+```
+
+---
+
+## Clone Repository
+
+```bash
+git clone https://github.com/username/project.git
+```
+
+---
+
+## Professional Workflow
+
+```text
+Develop
+     │
+Commit
+     │
+Push
+     │
+GitHub
+     │
+Pull Request
+     │
+Review
+     │
+Merge
+```
+
+---
+
+# 29. Git Best Practices
+
+Professional developers follow these practices consistently.
+
+### Repository Organization
+
+* Use meaningful repository names.
+* Include a `README.md`.
+* Add a `.gitignore`.
+* Choose an appropriate license.
+
+---
+
+### Commit Messages
+
+✅ Good
+
+```text
+Add user authentication
+Fix login validation bug
+Update README documentation
+```
+
+❌ Bad
+
+```text
+Update
+Fix
+Test
+abc
+```
+
+---
+
+### Branching
+
+Create a separate branch for each task.
+
+```text
+feature-login
+feature-payment
+bugfix-api
+hotfix-authentication
+```
+
+Avoid committing directly to `main`.
+
+---
+
+### Commit Frequently
+
+Create small, logical commits instead of one large commit at the end of the day.
+
+---
+
+### Pull Before Push
+
+Always synchronize with the remote repository before pushing:
+
+```bash
+git pull
+```
+
+---
+
+### Review Changes
+
+Before committing:
+
+```bash
+git status
+git diff
+```
+
+---
+
+### Protect Secrets
+
+Never commit:
+
+* Passwords
+* API keys
+* Tokens
+* Database credentials
+
+Store them in environment variables and ignore them using `.gitignore`.
+
+---
+
+# 30. Practical
+
+## Objective
+
+Create your first professional Git repository.
+
+---
+
+### Step 1
+
+Create a project folder:
+
+```text
+Git-Practice
+```
+
+---
+
+### Step 2
+
+Initialize Git:
+
+```bash
+git init
+```
+
+---
+
+### Step 3
+
+Create:
+
+```text
+README.md
+app.py
+.gitignore
+requirements.txt
+```
+
+---
+
+### Step 4
+
+Check status:
+
+```bash
+git status
+```
+
+---
+
+### Step 5
+
+Stage files:
+
+```bash
+git add .
+```
+
+---
+
+### Step 6
+
+Commit:
+
+```bash
+git commit -m "Initial project setup"
+```
+
+---
+
+### Step 7
+
+Create a GitHub repository.
+
+---
+
+### Step 8
+
+Connect:
+
+```bash
+git remote add origin https://github.com/username/Git-Practice.git
+```
+
+---
+
+### Step 9
+
+Push:
+
+```bash
+git push -u origin main
+```
+
+---
+
+# 31. Exercises
+
+## Exercise 1
+
+Initialize a Git repository.
+
+---
+
+## Exercise 2
+
+Create three commits with meaningful messages.
+
+---
+
+## Exercise 3
+
+Create a feature branch.
+
+---
+
+## Exercise 4
+
+Merge the branch into `main`.
+
+---
+
+## Exercise 5
+
+Push the repository to GitHub.
+
+---
+
+## Exercise 6
+
+Add a `.gitignore` file and verify that ignored files are not tracked.
+
+---
+
+# 34. README
+
+Your README should contain:
+
+```markdown
+# Git Portfolio
+
+## Overview
+
+This repository demonstrates professional Git workflows and best practices.
+
+## Features
+
+- Git Fundamentals
+- Branching
+- Merging
+- Pull Requests
+- Tags
+- GitHub Integration
+
+## Technologies
+
+- Git
+- GitHub
+- Markdown
+
+## Skills Demonstrated
+
+- Version Control
+- Collaboration
+- Branch Management
+- Repository Organization
+```
+
+---
+
+# 36. Common Mistakes
+
+❌ Committing directly to `main`.
+
+❌ Writing unclear commit messages such as "Update" or "Fix".
+
+❌ Forgetting to pull before pushing.
+
+❌ Committing secrets such as API keys or passwords.
+
+❌ Ignoring merge conflicts instead of resolving them carefully.
+
+❌ Forgetting to use `.gitignore`.
+
+❌ Making one very large commit instead of several logical commits.
+
+❌ Working without reviewing changes using `git status` or `git diff`.
+
+---
