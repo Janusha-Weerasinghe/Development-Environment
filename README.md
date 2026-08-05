@@ -290,3 +290,44 @@ This lesson will also follow our standard structure.
 36 Common Mistakes
 37 Summary
 38 Quiz
+
+---
+
+# Lesson 05 – Virtual Environment
+
+## Part 1 – Fundamentals
+Introduction
+Why Virtual Environments?
+Problems Without Virtual Environments
+How Virtual Environments Work
+venv vs virtualenv vs Conda
+Creating a Virtual Environment
+
+## Part 2 – Working with Virtual Environments
+Activating a Virtual Environment
+Deactivating a Virtual Environment
+Installing Packages (pip install)
+requirements.txt
+Updating Packages
+Removing Packages
+Package Management Best Practices
+
+## Part 3 – Professional Development Workflow
+Project Folder Structure
+VS Code Integration
+Selecting the Python Interpreter
+.gitignore
+Practical
+Exercises
+Assignment
+Mini Project
+
+## Part 4 – Professional Development
+GitHub Integration
+README
+Interview Questions
+Best Practices
+Common Mistakes
+Summary
+Quiz
+
