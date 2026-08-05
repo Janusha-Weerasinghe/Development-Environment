@@ -934,3 +934,523 @@ pip install -r requirements.txt
 6. Verify the correct Python interpreter is selected in the IDE.
 7. Run the application or tests to confirm the environment is set up correctly.
 
+---
+
+# Part 03
+
+
+# 🎤 1. Why should the `venv` folder not be committed to GitHub?
+
+## Definition
+
+The `venv` folder contains the project's virtual environment, including:
+
+* Python executable
+* Installed packages
+* Activation scripts
+* Operating system-specific files
+
+---
+
+## Purpose
+
+The virtual environment is **generated locally** and can be recreated at any time.
+
+Instead of sharing the entire `venv` folder, developers share:
+
+* `requirements.txt`
+* `README.md`
+
+This keeps repositories clean and portable.
+
+---
+
+## Problems if `venv` is Committed
+
+### Large Repository
+
+The `venv` folder can contain thousands of files and hundreds of megabytes of data.
+
+---
+
+### Platform-Specific Files
+
+A Windows virtual environment cannot always be used directly on Linux or macOS because it contains OS-specific executables and paths.
+
+---
+
+### Merge Conflicts
+
+The `venv` folder changes frequently, increasing the chance of unnecessary merge conflicts.
+
+---
+
+### Unnecessary Duplication
+
+All packages can be recreated from `requirements.txt`.
+
+---
+
+## Correct Workflow
+
+```text
+Repository
+│
+├── src/
+├── README.md
+├── requirements.txt
+├── .gitignore
+└── (No venv folder)
+
+↓
+
+Developer clones project
+
+↓
+
+Creates venv
+
+↓
+
+pip install -r requirements.txt
+
+↓
+
+Ready to develop
+```
+
+---
+
+## Example `.gitignore`
+
+```text
+venv/
+__pycache__/
+*.pyc
+.env
+.vscode/
+```
+
+---
+
+## Industry Usage
+
+Professional Python repositories almost always exclude `venv` from version control.
+
+---
+
+## Interview Answer
+
+> The `venv` folder should not be committed to GitHub because it contains generated, platform-specific files that can be recreated using `requirements.txt`. Excluding it keeps the repository smaller, avoids merge conflicts, and makes the project portable across different operating systems.
+
+---
+
+# 🎤 2. How does VS Code detect virtual environments?
+
+## Definition
+
+VS Code detects virtual environments through the **Python extension**, which searches common locations for Python interpreters.
+
+---
+
+## How It Works
+
+When you open a project folder, the Python extension looks for:
+
+```text
+Project/
+│
+├── venv/
+├── .venv/
+├── env/
+└── .env/
+```
+
+It also searches Conda environments and registered Python installations.
+
+---
+
+## Automatic Detection
+
+If a folder named `venv` exists in the project root, VS Code usually selects it automatically.
+
+---
+
+## Manual Selection
+
+If it does not, you can choose the interpreter manually:
+
+```text
+Ctrl + Shift + P
+
+↓
+
+Python: Select Interpreter
+
+↓
+
+Choose venv
+```
+
+---
+
+## Verify
+
+Open the terminal:
+
+```bash
+python --version
+```
+
+or
+
+```bash
+where python
+```
+
+The path should point inside the `venv` directory.
+
+---
+
+## Industry Usage
+
+Developers verify the selected interpreter before installing packages or running the application to avoid using the wrong environment.
+
+---
+
+## Interview Answer
+
+> VS Code detects virtual environments through the Python extension by searching for common environment folders such as `venv` or `.venv`, as well as installed Python interpreters. Developers can also manually select the correct interpreter using the Command Palette.
+
+---
+
+# 🎤 3. Why should the correct Python interpreter be selected?
+
+## Definition
+
+The Python interpreter is the executable that runs your code.
+
+A system may have multiple interpreters installed.
+
+---
+
+## Example
+
+```text
+Computer
+
+Python 3.11
+
+Python 3.12
+
+Conda Environment
+
+Project venv
+```
+
+---
+
+## Problems
+
+If VS Code selects the wrong interpreter:
+
+* Required packages may not be found.
+* The application may fail to run.
+* Different Python versions may produce unexpected behavior.
+
+---
+
+## Correct Workflow
+
+```text
+Open Project
+
+↓
+
+Select Project venv
+
+↓
+
+Run Code
+
+↓
+
+Correct Dependencies Used
+```
+
+---
+
+## Industry Usage
+
+Professional teams standardize on a specific Python version for each project. Selecting the correct interpreter ensures consistent behavior across all development environments.
+
+---
+
+## Interview Answer
+
+> The correct Python interpreter should be selected so that the project uses its intended Python version and installed dependencies. This avoids package errors, version mismatches, and inconsistent behavior between development and production environments.
+
+---
+
+# 🎤 4. How do you share a project with another developer?
+
+## Definition
+
+Professional projects are shared through version control systems such as GitHub.
+
+---
+
+## Files to Share
+
+A Python project should typically include:
+
+```text
+Project/
+│
+├── src/
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── LICENSE
+└── tests/
+```
+
+Do **not** include:
+
+```text
+venv/
+__pycache__/
+.env
+```
+
+---
+
+## Workflow
+
+### Step 1
+
+Push the project to GitHub.
+
+---
+
+### Step 2
+
+The other developer clones it.
+
+```bash
+git clone https://github.com/username/project.git
+```
+
+---
+
+### Step 3
+
+Create a virtual environment.
+
+```bash
+python -m venv venv
+```
+
+---
+
+### Step 4
+
+Activate it.
+
+---
+
+### Step 5
+
+Install dependencies.
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### Step 6
+
+Run the project.
+
+---
+
+## Real-World Usage
+
+This workflow is used in professional software teams to ensure every developer has a consistent and reproducible development environment.
+
+---
+
+## Interview Answer
+
+> I would share the project through GitHub, including the source code, `README.md`, `requirements.txt`, `.gitignore`, and other project files. The other developer would clone the repository, create a virtual environment, install dependencies from `requirements.txt`, and then run the project.
+
+---
+
+# 🎤 5. What files are required to recreate a Python environment?
+
+## Definition
+
+To recreate a Python project on another machine, developers need the project files and dependency information.
+
+---
+
+## Essential Files
+
+### Source Code
+
+```text
+src/
+```
+
+Contains the application logic.
+
+---
+
+### `requirements.txt`
+
+Lists all required Python packages and versions.
+
+---
+
+### `README.md`
+
+Explains how to set up and run the project.
+
+---
+
+### `.gitignore`
+
+Ensures unnecessary or sensitive files are not tracked.
+
+---
+
+### Optional
+
+* `LICENSE`
+* `tests/`
+* `docs/`
+* `data/` (if appropriate)
+
+---
+
+## Files That Should NOT Be Shared
+
+```text
+venv/
+
+__pycache__/
+
+*.pyc
+
+.env
+```
+
+---
+
+## Example Repository
+
+```text
+Python-Environment/
+│
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── LICENSE
+│
+├── src/
+├── tests/
+├── docs/
+└── data/
+```
+
+---
+
+## Recreate Workflow
+
+```text
+Clone Repository
+
+↓
+
+Create Virtual Environment
+
+↓
+
+Activate
+
+↓
+
+pip install -r requirements.txt
+
+↓
+
+Run Project
+```
+
+---
+
+## Industry Usage
+
+Professional repositories include enough information for any developer or CI/CD pipeline to recreate the environment without sharing generated files.
+
+---
+
+## Interview Answer
+
+> To recreate a Python environment, the essential files are the source code, `requirements.txt`, `README.md`, and `.gitignore`. After cloning the repository, a developer creates a virtual environment, activates it, installs the dependencies from `requirements.txt`, and runs the application.
+
+---
+
+# ⭐ Senior-Level Follow-up Questions
+
+### Q1. What happens if `venv` is accidentally committed to GitHub?
+
+**Answer:** The repository becomes much larger, contains platform-specific files, and may introduce unnecessary merge conflicts. The recommended approach is to remove it from version control, add `venv/` to `.gitignore`, and let each developer recreate the environment locally.
+
+---
+
+### Q2. Can two developers use different operating systems on the same Python project?
+
+**Answer:** Yes. As long as they use compatible Python versions and install dependencies from `requirements.txt`, each developer can create their own local virtual environment on Windows, Linux, or macOS.
+
+---
+
+### Q3. Why is `README.md` important when sharing a project?
+
+**Answer:** It provides setup instructions, explains the project's purpose, and documents how to create the virtual environment, install dependencies, and run the application, reducing onboarding time for other developers.
+
+---
+
+### Q4. What if VS Code doesn't detect the virtual environment automatically?
+
+**Answer:** Open the Command Palette (`Ctrl + Shift + P`), select **Python: Select Interpreter**, and manually choose the interpreter located inside the project's `venv` directory.
+
+---
+
+### Q5. Besides `requirements.txt`, are there other dependency management files?
+
+**Answer:** Yes. Depending on the toolchain, projects may use `pyproject.toml` (Poetry or modern packaging), `poetry.lock`, or `Pipfile`/`Pipfile.lock` (Pipenv). However, in this bootcamp we focus on **`requirements.txt`** because it is widely recognized and commonly encountered in AI/ML projects and interviews.
+
+---
+
+# 🎯 AI Engineer Interview Tip
+
+A common scenario-based interview question is:
+
+> **"A teammate says the project works on your machine but not on theirs. How would you troubleshoot it?"**
+
+A strong answer would be:
+
+1. Confirm they are using the correct Python version.
+2. Ensure they created and activated the project's virtual environment.
+3. Verify the correct Python interpreter is selected in VS Code.
+4. Reinstall dependencies using:
+
+```bash
+pip install -r requirements.txt
+```
+
+5. Compare package versions with `pip list` or `pip freeze`.
+6. Check the project's `README.md` for any additional setup steps.
+

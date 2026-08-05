@@ -1057,3 +1057,580 @@ This workflow is followed in AI, backend, data science, and enterprise Python pr
 > Good package management includes using a virtual environment, installing only required packages, maintaining an up-to-date `requirements.txt`, excluding the `venv` directory from version control, pinning dependency versions, and testing updates before sharing them with the team.
 
 ---
+
+# Excellent bro! 🔥 This part focuses on **how professional developers organize and manage Python projects**. By the end of this section, you'll be able to create projects that look like they were developed inside companies such as **WSO2, IFS, Sysco LABS, LSEG, Microsoft, Google, Amazon, OpenAI, and NVIDIA**.
+
+We'll continue with the same **AI Engineer Academy** format:
+
+> **Definition → Purpose → How It Works → Example → Industry Usage → Interview Answer**
+
+---
+
+# Part 3 – Professional Development Workflow
+
+---
+
+# 14. Project Folder Structure
+
+## What is a Project Folder Structure?
+
+A **project folder structure** is the organized layout of files and directories within a software project.
+
+A well-structured project makes development, collaboration, testing, and deployment easier.
+
+---
+
+## Definition
+
+> A project folder structure is the logical organization of project files and folders that improves readability, maintainability, and collaboration.
+
+---
+
+## Why Is It Important?
+
+Without structure:
+
+```text
+MyProject/
+
+main.py
+
+test.py
+
+new.py
+
+abc.py
+
+data.csv
+
+image.png
+```
+
+Problems:
+
+* Difficult to navigate.
+* Hard to maintain.
+* Poor collaboration.
+* Unprofessional.
+
+---
+
+## Professional Structure
+
+```text
+Python-Environment/
+│
+├── README.md
+├── LICENSE
+├── .gitignore
+├── requirements.txt
+│
+├── src/
+│   └── main.py
+│
+├── tests/
+│
+├── docs/
+│
+├── images/
+│
+├── data/
+│
+├── notebooks/
+│
+└── outputs/
+```
+
+---
+
+## Folder Purpose
+
+| Folder     | Purpose                    |
+| ---------- | -------------------------- |
+| src/       | Application source code    |
+| tests/     | Unit and integration tests |
+| docs/      | Documentation              |
+| images/    | Screenshots and diagrams   |
+| data/      | Datasets                   |
+| notebooks/ | Jupyter notebooks          |
+| outputs/   | Generated outputs          |
+
+---
+
+## Industry Usage
+
+Professional software teams use consistent folder structures so every developer knows where code, tests, documentation, and resources belong.
+
+---
+
+## Interview Answer
+
+> A project folder structure organizes source code, documentation, tests, datasets, and other resources into logical directories. It improves maintainability, collaboration, scalability, and makes projects easier for other developers to understand.
+
+---
+
+# 15. VS Code Integration
+
+## What is VS Code Integration?
+
+VS Code integrates with Python to provide a complete development environment.
+
+---
+
+## Features
+
+* Virtual environment detection
+* IntelliSense
+* Debugging
+* Git integration
+* Jupyter Notebook support
+* Extensions
+
+---
+
+## Recommended Extensions
+
+```text
+Python
+
+Pylance
+
+Jupyter
+
+GitLens
+
+Error Lens
+
+Docker (later)
+
+Markdown All in One
+```
+
+---
+
+## Open the Project Correctly
+
+Always open the **project folder**, not individual files.
+
+Correct:
+
+```text
+File
+
+↓
+
+Open Folder
+
+↓
+
+Python-Environment/
+```
+
+---
+
+## Why?
+
+VS Code can then detect:
+
+* Virtual environment
+* Git repository
+* Project settings
+* Extensions
+
+---
+
+## Industry Usage
+
+Professional developers almost always work with the project folder rather than isolated files because it allows the IDE to provide full project context.
+
+---
+
+## Interview Answer
+
+> VS Code integrates with Python through extensions that provide IntelliSense, debugging, Git integration, and virtual environment support. Opening the project folder allows VS Code to recognize the complete development environment.
+
+---
+
+# 16. Selecting the Python Interpreter
+
+## What is the Python Interpreter?
+
+The interpreter is the Python executable used to run your project.
+
+---
+
+## Why Select the Correct Interpreter?
+
+A computer may contain:
+
+```text
+Python 3.11
+
+Python 3.12
+
+Virtual Environment
+
+Conda Environment
+```
+
+If VS Code selects the wrong interpreter:
+
+* Packages may not be found.
+* The project may fail to run.
+* Debugging becomes confusing.
+
+---
+
+## How to Select
+
+1. Open Command Palette.
+
+```
+Ctrl + Shift + P
+```
+
+2. Search:
+
+```text
+Python: Select Interpreter
+```
+
+3. Select:
+
+```text
+Python-Environment
+
+venv
+
+python.exe
+```
+
+---
+
+## Verify
+
+Terminal:
+
+```bash
+python --version
+```
+
+or
+
+```bash
+where python
+```
+
+The path should point inside the `venv` directory.
+
+---
+
+## Industry Usage
+
+Every professional project verifies that the correct interpreter is selected before development begins.
+
+---
+
+## Interview Answer
+
+> Selecting the correct Python interpreter ensures that VS Code uses the project's virtual environment rather than the global Python installation. This guarantees that the correct dependencies and Python version are used during development.
+
+---
+
+# 17. `.gitignore`
+
+## What is `.gitignore`?
+
+A `.gitignore` file tells Git which files and folders should **not** be tracked.
+
+---
+
+## Why Use It?
+
+Some files should never be committed:
+
+* Virtual environments
+* Cache files
+* IDE settings
+* Temporary files
+* Secrets
+
+---
+
+## Example
+
+```text
+venv/
+
+__pycache__/
+
+*.pyc
+
+.env
+
+.vscode/
+```
+
+---
+
+## Why Ignore `venv`?
+
+The virtual environment can be recreated using:
+
+```bash
+pip install -r requirements.txt
+```
+
+Committing it would:
+
+* Increase repository size.
+* Include OS-specific files.
+* Create unnecessary merge conflicts.
+
+---
+
+## Industry Usage
+
+Every professional Python project includes a `.gitignore` file to keep repositories clean and portable.
+
+---
+
+## Interview Answer
+
+> A `.gitignore` file specifies which files and folders Git should ignore. It prevents temporary files, virtual environments, cache directories, and sensitive information from being committed to the repository.
+
+---
+
+# 18. Practical
+
+## Objective
+
+Create a professional Python project from scratch.
+
+---
+
+### Step 1
+
+Create the project folder.
+
+```text
+Python-Environment
+```
+
+---
+
+### Step 2
+
+Create the virtual environment.
+
+```bash
+python -m venv venv
+```
+
+---
+
+### Step 3
+
+Activate it.
+
+```bash
+venv\Scripts\activate
+```
+
+---
+
+### Step 4
+
+Create folders.
+
+```text
+src/
+
+tests/
+
+docs/
+
+images/
+```
+
+---
+
+### Step 5
+
+Install packages.
+
+```bash
+pip install numpy pandas matplotlib
+```
+
+---
+
+### Step 6
+
+Generate:
+
+```bash
+pip freeze > requirements.txt
+```
+
+---
+
+### Step 7
+
+Create `.gitignore`.
+
+---
+
+### Step 8
+
+Run the project.
+
+---
+
+### Step 9
+
+Commit and push to GitHub.
+
+---
+
+# 19. Exercises
+
+### Exercise 1
+
+Create a professional project structure.
+
+---
+
+### Exercise 2
+
+Create and activate a virtual environment.
+
+---
+
+### Exercise 3
+
+Install three packages.
+
+---
+
+### Exercise 4
+
+Generate `requirements.txt`.
+
+---
+
+### Exercise 5
+
+Create a `.gitignore`.
+
+---
+
+### Exercise 6
+
+Verify that VS Code uses the correct Python interpreter.
+
+---
+
+### Exercise 7
+
+Push the project to GitHub.
+
+---
+
+# 20. Assignment
+
+## Title
+
+**Professional Python Project Setup**
+
+---
+
+## Objective
+
+Set up a complete Python development environment following industry standards.
+
+---
+
+## Requirements
+
+* Professional folder structure.
+* Virtual environment.
+* `requirements.txt`.
+* `.gitignore`.
+* README.
+* Git repository.
+* GitHub repository.
+* Proper commit history.
+
+---
+
+## Deliverables
+
+* GitHub repository link.
+* Screenshot of the project structure.
+* Screenshot of the activated virtual environment.
+* Screenshot showing the selected Python interpreter in VS Code.
+
+---
+
+# 21. Mini Project
+
+## Project Title
+
+**Professional Python Starter Template**
+
+---
+
+## Objective
+
+Build a reusable Python project template that you can use for every future AI/ML project.
+
+---
+
+## Folder Structure
+
+```text
+Python-Starter-Template/
+│
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── .gitignore
+│
+├── src/
+│   └── main.py
+│
+├── tests/
+│
+├── docs/
+│
+├── images/
+│
+├── notebooks/
+│
+├── data/
+│
+├── outputs/
+│
+└── venv/      (ignored by Git)
+```
+
+---
+
+## Requirements
+
+* Create and activate a virtual environment.
+* Install at least three packages.
+* Generate `requirements.txt`.
+* Configure `.gitignore`.
+* Select the correct interpreter in VS Code.
+* Create a simple `main.py` that prints:
+
+```python
+print("Professional Python Environment Ready!")
+```
+
+* Push the project to GitHub.
+
+---
+
