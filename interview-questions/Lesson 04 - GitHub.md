@@ -2054,3 +2054,38 @@ A strong answer would be:
 8. Merge approved Pull Requests into the protected `main` branch.
 9. Create a Release (e.g., `v1.0`) when the project reaches a stable milestone.
 
+---
+
+# Part 04
+
+# 35. Interview Questions
+
+### Beginner
+
+1. What is GitHub?
+2. What is a repository?
+3. Why is a README important?
+4. What is a Pull Request?
+5. What is GitHub Pages?
+
+---
+
+### Intermediate
+
+6. Explain the GitHub workflow from repository creation to deployment.
+7. What is the purpose of GitHub Releases?
+8. Why should repositories include a LICENSE?
+9. How does GitHub Actions support CI/CD?
+10. What makes a professional GitHub profile?
+
+---
+
+### Advanced
+
+11. How would you organize repositories for a large AI project?
+12. How would you secure a public GitHub repository?
+13. How would you collaborate with multiple developers using GitHub?
+14. How would you structure an AI engineer portfolio?
+15. How do GitHub best practices improve maintainability?
+
+---

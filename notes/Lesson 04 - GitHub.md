@@ -1907,3 +1907,534 @@ __pycache__/
 Many organizations block merges if security checks fail, helping prevent vulnerabilities from reaching production.
 
 ---
+
+# Part 04
+
+Excellent bro! 🔥 This is the **final part of Lesson 04 – GitHub**. Everything you've learned about Git and GitHub now comes together to build a **professional portfolio** that reflects how engineers work in industry.
+
+This section is designed for the standards expected by **WSO2, IFS, Sysco LABS, LSEG, Microsoft, Google, Amazon, NVIDIA, OpenAI, and other enterprise software companies**.
+
+---
+
+# 📚 AI Engineer Academy
+
+## Volume 1 – Professional Development Environment
+
+### 📍 Phase 01 – Development Environment
+
+# 📖 Lesson 04 – GitHub
+
+# Part 4 – Professional GitHub
+
+---
+
+# 28. Portfolio Development
+
+## What is a Portfolio?
+
+A **developer portfolio** is a professional collection of your projects, skills, experience, and technical achievements.
+
+It provides **evidence** of your abilities rather than simply listing them on a resume.
+
+---
+
+## Why Do We Need a Portfolio?
+
+A portfolio helps you:
+
+* Showcase technical skills.
+* Demonstrate problem-solving ability.
+* Present completed projects.
+* Build credibility with recruiters.
+* Differentiate yourself from other candidates.
+
+---
+
+## Components of a Professional Portfolio
+
+```text id="p1x7af"
+Portfolio
+│
+├── GitHub Profile
+├── Portfolio Website
+├── Resume
+├── LinkedIn
+├── AI Projects
+├── Research
+├── Certifications
+└── Technical Blog (optional)
+```
+
+---
+
+## AI Engineer Portfolio Example
+
+```text id="xqv2rm"
+AI Portfolio
+
+├── Rice Leaf Disease Detection
+├── Customer Churn Prediction
+├── Fraud Detection
+├── Computer Vision
+├── NLP Chatbot
+├── FastAPI AI Backend
+└── MLOps Deployment
+```
+
+---
+
+## Portfolio Checklist
+
+* Professional GitHub profile.
+* Well-documented repositories.
+* Portfolio website.
+* LinkedIn profile.
+* Updated resume.
+* Real-world projects.
+* Consistent contribution history.
+
+---
+
+# 29. GitHub Best Practices
+
+Professional developers follow consistent GitHub practices.
+
+---
+
+## Repository Naming
+
+✅ Good
+
+```text id="rrdhy4"
+Python-for-AI
+
+Machine-Learning
+
+Computer-Vision
+
+FastAPI-Backend
+```
+
+❌ Bad
+
+```text id="by0xyr"
+test
+
+project
+
+abc
+
+newfolder
+```
+
+---
+
+## README
+
+Every public repository should contain:
+
+* Overview.
+* Features.
+* Technologies.
+* Installation.
+* Usage.
+* Folder structure.
+* License.
+
+---
+
+## Commit Messages
+
+✅ Good
+
+```text id="tdgzz6"
+Implement CNN classifier
+
+Add JWT authentication
+
+Fix API validation bug
+```
+
+❌ Bad
+
+```text id="ymkhon"
+Update
+
+Fix
+
+Test
+
+123
+```
+
+---
+
+## Branches
+
+Always create feature branches.
+
+```text id="e6x2yk"
+feature-login
+
+feature-api
+
+feature-ui
+```
+
+Avoid committing directly to `main`.
+
+---
+
+## Documentation
+
+Document:
+
+* Setup instructions.
+* Configuration.
+* Usage examples.
+* API documentation.
+
+---
+
+## Security
+
+Never commit:
+
+* API keys.
+* Passwords.
+* `.env` files.
+* Tokens.
+
+---
+
+## Releases
+
+Tag important milestones:
+
+```text id="6tk1i7"
+v1.0
+
+v1.1
+
+v2.0
+```
+
+---
+
+# 30. Practical
+
+## Objective
+
+Create a professional GitHub repository.
+
+---
+
+### Step 1
+
+Create a repository.
+
+Example:
+
+```text id="2j9l7x"
+AI-Engineer-Bootcamp
+```
+
+---
+
+### Step 2
+
+Add:
+
+```text id="j3uv4u"
+README.md
+
+LICENSE
+
+.gitignore
+
+requirements.txt
+```
+
+---
+
+### Step 3
+
+Create folders.
+
+```text id="x1t4yr"
+src/
+
+docs/
+
+images/
+
+tests/
+```
+
+---
+
+### Step 4
+
+Commit.
+
+```bash id="k4n2yx"
+git add .
+
+git commit -m "Initial project structure"
+```
+
+---
+
+### Step 5
+
+Push.
+
+```bash id="8j7vwy"
+git push origin main
+```
+
+---
+
+### Step 6
+
+Create a feature branch.
+
+```bash id="kkn9z8"
+git checkout -b feature-readme
+```
+
+---
+
+### Step 7
+
+Improve the README.
+
+---
+
+### Step 8
+
+Open a Pull Request.
+
+---
+
+### Step 9
+
+Merge.
+
+---
+
+# 31. Exercises
+
+### Exercise 1
+
+Create a new repository.
+
+---
+
+### Exercise 2
+
+Write a professional README.
+
+---
+
+### Exercise 3
+
+Add a LICENSE.
+
+---
+
+### Exercise 4
+
+Create a feature branch.
+
+---
+
+### Exercise 5
+
+Open and merge a Pull Request.
+
+---
+
+### Exercise 6
+
+Create a Release.
+
+---
+
+### Exercise 7
+
+Enable GitHub Pages (for a suitable repository).
+
+---
+
+# 32. Assignment
+
+## Title
+
+**Professional GitHub Repository**
+
+---
+
+## Objective
+
+Build a GitHub repository that follows professional software engineering practices.
+
+---
+
+## Requirements
+
+* Public repository.
+* Professional folder structure.
+* README.
+* LICENSE.
+* `.gitignore`.
+* `requirements.txt`.
+* Feature branch.
+* Pull Request.
+* Release (`v1.0.0`).
+* Screenshots.
+* Documentation.
+
+---
+
+## Deliverables
+
+* GitHub repository URL.
+* Screenshots.
+* README.
+* Release notes.
+
+---
+
+# 33. Mini Project
+
+## Project Title
+
+**Professional AI Engineer Portfolio Repository**
+
+---
+
+## Objective
+
+Create a portfolio-ready repository that demonstrates professional GitHub usage.
+
+---
+
+## Folder Structure
+
+```text id="h8m3zc"
+AI-Engineer-Portfolio/
+│
+├── README.md
+├── LICENSE
+├── .gitignore
+├── requirements.txt
+│
+├── src/
+├── docs/
+├── images/
+├── notebooks/
+├── tests/
+└── deployment/
+```
+
+---
+
+## Requirements
+
+* Professional README.
+* Repository topics.
+* GitHub Release.
+* Feature branch.
+* Pull Request.
+* Documentation.
+* Images.
+* Clean commit history.
+
+---
+
+# 34. README
+
+Example structure:
+
+````markdown
+# AI Engineer Portfolio
+
+## Overview
+
+Professional portfolio demonstrating AI and Machine Learning projects.
+
+## Projects
+
+- Python Fundamentals
+- Machine Learning
+- Deep Learning
+- NLP
+- Computer Vision
+- FastAPI
+
+## Technologies
+
+- Python
+- TensorFlow
+- PyTorch
+- FastAPI
+- Docker
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+## Author
+
+Janusha Weerasinghe
+````
+
+---
+
+
+
+# 36. Common Mistakes
+
+❌ Poor repository names.
+
+❌ Missing README.
+
+❌ Missing LICENSE.
+
+❌ No `.gitignore`.
+
+❌ Large commits with unclear messages.
+
+❌ Committing directly to `main`.
+
+❌ Uploading secrets or API keys.
+
+❌ No documentation.
+
+❌ Poor folder organization.
+
+❌ Inactive or outdated repositories.
+
+---
+
+# 37. Summary
+
+In Lesson 04, you learned:
+
+* What GitHub is and how it differs from Git.
+* GitHub architecture.
+* Repository creation and organization.
+* README and LICENSE files.
+* Issues, Discussions, Projects, Wikis, Releases, and GitHub Pages.
+* Collaboration through cloning, forking, Pull Requests, and code reviews.
+* Branch protection, collaborators, organizations, GitHub Actions, and security.
+* Portfolio development and professional GitHub practices.
+
+You now understand the GitHub workflow expected in professional software engineering environments.
+
+---
+
+
