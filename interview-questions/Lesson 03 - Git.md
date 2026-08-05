@@ -1953,3 +1953,35 @@ A strong answer would be:
 This answer demonstrates that you understand **professional Git collaboration workflows**, not just individual Git commands.
 
 
+# Part 04
+# 35. Interview Questions
+
+### Beginner
+
+1. What is Git?
+2. What is GitHub?
+3. What is a repository?
+4. What is a commit?
+5. What is a branch?
+
+---
+
+### Intermediate
+
+6. Explain the Git workflow from editing a file to sharing it with a team.
+7. What is the purpose of `.gitignore`?
+8. Why should commit messages be meaningful?
+9. What is the difference between cloning and forking?
+10. Why are Pull Requests important?
+
+---
+
+### Advanced
+
+11. Describe a professional Git branching strategy.
+12. When would you choose `git fetch` instead of `git pull`?
+13. Why should you avoid rewriting shared Git history?
+14. How do Git tags support software releases?
+15. How does Git integrate with CI/CD pipelines?
+
+---
