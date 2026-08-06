@@ -331,3 +331,63 @@ Common Mistakes
 Summary
 Quiz
 
+---
+
+Absolutely bro. Since your goal is **AI/ML Engineer**, we'll optimize every lesson for what is **actually used in industry**. We don't want unnecessary theory that won't help you in interviews or projects.
+
+For **Lesson 06 – Jupyter Notebook**, I'd streamline it like this.
+
+---
+
+# Lesson 06 – Jupyter Notebook
+
+---
+
+## Part 1 – Fundamentals
+
+1. Introduction to Jupyter Notebook
+2. Why Jupyter Notebook?
+3. Industry Usage
+4. Installation & Setup
+5. Creating Your First Notebook
+6. Notebook Interface & Navigation
+
+---
+
+## Part 2 – Working with Jupyter
+
+7. Cells (Code vs Markdown)
+8. Running Cells & Execution Order
+9. Jupyter Kernel (Start, Restart, Interrupt)
+10. Keyboard Shortcuts
+11. Importing Libraries
+12. Saving, Exporting & Converting Notebooks
+13. Notebook Best Practices
+
+---
+
+## Part 3 – AI Development Workflow
+
+14. Working with Datasets (CSV, Excel)
+15. Data Exploration with Pandas
+16. Data Visualization (Matplotlib)
+17. VS Code Integration
+18. Virtual Environment Integration
+19. Practical
+20. Exercises
+21. Assignment
+22. Mini Project
+
+---
+
+## Part 4 – Professional Development
+
+23. GitHub Integration
+24. README
+25. Interview Questions
+26. Best Practices
+27. Common Mistakes
+28. Summary
+29. Quiz
+
+---
