@@ -1089,3 +1089,451 @@ Professional notebooks are easy to follow, reproducible, and well documented so 
 > Good notebook practices include documenting the workflow with Markdown, organizing imports, using descriptive names, restarting the kernel before sharing, and keeping notebooks focused and reproducible.
 
 ---
+
+Excellent bro! 🔥 This is where you'll start using Jupyter Notebook the way AI engineers actually do. Instead of just learning the interface, you'll use it to **load data, explore it, visualize it, and prepare it for machine learning**.
+
+This lesson is designed for **AI/ML Engineer interviews** at companies like **WSO2, IFS, Sysco LABS, LSEG, Microsoft, Google, Amazon, NVIDIA, and OpenAI**.
+
+As always, we'll follow the **AI Engineer Academy** format:
+
+> **Definition → Purpose → How It Works → Example → Industry Usage → Interview Answer**
+
+---
+
+# Part 3 – AI Development Workflow
+
+---
+
+# 14. Working with Datasets (CSV, Excel)
+
+## What is a Dataset?
+
+A **dataset** is a collection of related data organized in rows and columns. In AI and Machine Learning, datasets are the foundation for training, testing, and evaluating models.
+
+---
+
+## Common Dataset Formats
+
+| Format       | Extension       | Common Library      |
+| ------------ | --------------- | ------------------- |
+| CSV          | `.csv`          | Pandas              |
+| Excel        | `.xlsx`, `.xls` | Pandas              |
+| JSON         | `.json`         | Pandas              |
+| SQL Database | -               | SQLAlchemy / Pandas |
+
+---
+
+## Loading a CSV File
+
+```python
+import pandas as pd
+
+df = pd.read_csv("data/students.csv")
+
+df.head()
+```
+
+---
+
+## Loading an Excel File
+
+```python
+import pandas as pd
+
+df = pd.read_excel("data/students.xlsx")
+
+df.head()
+```
+
+---
+
+## Useful Functions
+
+```python
+df.head()
+
+df.tail()
+
+df.shape
+
+df.columns
+
+df.info()
+```
+
+---
+
+## Industry Usage
+
+Almost every AI project starts by loading data from CSV files, Excel sheets, databases, or cloud storage before preprocessing and model training.
+
+---
+
+## Interview Answer
+
+> A dataset is a structured collection of data used for analysis and machine learning. Common formats include CSV and Excel files, which are typically loaded into Python using the Pandas library.
+
+---
+
+# 15. Data Exploration with Pandas
+
+## What is Data Exploration?
+
+Data Exploration, also known as **Exploratory Data Analysis (EDA)**, is the process of understanding the dataset before building a machine learning model.
+
+---
+
+## Objectives
+
+* Understand the structure.
+* Identify missing values.
+* Check data types.
+* Explore distributions.
+* Detect outliers.
+* Find relationships.
+
+---
+
+## Common Pandas Functions
+
+```python
+df.head()
+
+df.tail()
+
+df.info()
+
+df.describe()
+
+df.columns
+
+df.isnull().sum()
+
+df.duplicated().sum()
+
+df.sample(5)
+```
+
+---
+
+## Example
+
+```python
+import pandas as pd
+
+df = pd.read_csv("students.csv")
+
+print(df.info())
+
+print(df.describe())
+```
+
+---
+
+## Why EDA Matters
+
+Skipping EDA can lead to:
+
+* Poor model performance.
+* Incorrect assumptions.
+* Hidden data quality issues.
+
+---
+
+## Industry Usage
+
+EDA is one of the first tasks completed in almost every AI or data science project.
+
+---
+
+## Interview Answer
+
+> Exploratory Data Analysis is the process of understanding a dataset before model development. It includes examining data types, missing values, summary statistics, duplicates, and overall data quality.
+
+---
+
+# 16. Data Visualization (Matplotlib)
+
+## What is Data Visualization?
+
+Data visualization is the graphical representation of data to identify patterns, trends, and relationships.
+
+---
+
+## Why Use Visualization?
+
+Visualizations help developers:
+
+* Detect trends.
+* Identify outliers.
+* Compare categories.
+* Understand distributions.
+* Communicate findings.
+
+---
+
+## Import Matplotlib
+
+```python
+import matplotlib.pyplot as plt
+```
+
+---
+
+## Line Chart
+
+```python
+plt.plot([1, 2, 3], [10, 20, 15])
+
+plt.title("Sample Line Chart")
+
+plt.show()
+```
+
+---
+
+## Bar Chart
+
+```python
+plt.bar(["A", "B", "C"], [10, 15, 8])
+
+plt.show()
+```
+
+---
+
+## Histogram
+
+```python
+plt.hist(df["Age"])
+
+plt.show()
+```
+
+---
+
+## Scatter Plot
+
+```python
+plt.scatter(df["StudyHours"], df["Marks"])
+
+plt.show()
+```
+
+---
+
+## Best Practice
+
+Always include:
+
+* Title
+* Axis labels
+* Appropriate chart type
+
+Example:
+
+```python
+plt.title("Student Marks Distribution")
+
+plt.xlabel("Students")
+
+plt.ylabel("Marks")
+```
+
+---
+
+## Industry Usage
+
+Visualization is used throughout AI projects for EDA, feature analysis, model evaluation, and reporting.
+
+---
+
+## Interview Answer
+
+> Data visualization converts numerical information into graphical representations, making it easier to identify trends, patterns, and anomalies. Matplotlib is one of the most widely used visualization libraries in Python.
+
+---
+
+# 17. VS Code Integration
+
+## Why Use VS Code with Jupyter?
+
+VS Code allows you to work with Jupyter Notebooks without opening the browser interface.
+
+---
+
+## Requirements
+
+Install these extensions:
+
+* Python
+* Jupyter
+
+---
+
+## Creating a Notebook
+
+```
+Ctrl + Shift + P
+
+↓
+
+Create New Jupyter Notebook
+```
+
+---
+
+## Benefits
+
+* Integrated terminal
+* Git support
+* IntelliSense
+* Debugging
+* Version control
+
+---
+
+## Industry Usage
+
+Many development teams use VS Code because it combines notebooks, Python scripts, Git, and debugging in one IDE.
+
+---
+
+## Interview Answer
+
+> VS Code integrates with Jupyter through the Jupyter extension, allowing developers to create, edit, and run notebooks alongside Python scripts within a single development environment.
+
+---
+
+# 18. Virtual Environment Integration
+
+## Why Combine Jupyter with a Virtual Environment?
+
+Each project should use its own isolated environment to avoid dependency conflicts.
+
+---
+
+## Install Jupyter Inside the Environment
+
+```bash
+python -m venv venv
+
+venv\Scripts\activate
+
+pip install notebook
+```
+
+---
+
+## Select the Interpreter
+
+In VS Code:
+
+```
+Ctrl + Shift + P
+
+↓
+
+Python: Select Interpreter
+
+↓
+
+Choose your project's venv
+```
+
+---
+
+## Benefits
+
+* Correct package versions
+* Reproducible environments
+* No conflicts between projects
+
+---
+
+## Industry Usage
+
+Professional AI teams always connect Jupyter to the project's virtual environment to ensure consistent dependencies.
+
+---
+
+## Interview Answer
+
+> Jupyter should be installed and run inside the project's virtual environment. This ensures the notebook uses the correct Python interpreter and dependencies, improving consistency across development and deployment.
+
+---
+
+# 19. Practical
+
+## Objective
+
+Create a notebook that loads and explores a dataset.
+
+---
+
+### Step 1
+
+Create the folder:
+
+```text
+Jupyter-Notebook/
+│
+├── data/
+├── notebooks/
+└── images/
+```
+
+---
+
+### Step 2
+
+Create a notebook:
+
+```
+EDA.ipynb
+```
+
+---
+
+### Step 3
+
+Import libraries.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
+---
+
+### Step 4
+
+Load a CSV dataset.
+
+---
+
+### Step 5
+
+Display:
+
+```python
+df.head()
+
+df.info()
+
+df.describe()
+```
+
+---
+
+### Step 6
+
+Create one bar chart and one histogram.
+
+---
+
+### Step 7
+
+Save and commit to GitHub.
+
+---
