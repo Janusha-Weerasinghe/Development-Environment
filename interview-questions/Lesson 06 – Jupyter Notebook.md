@@ -506,3 +506,471 @@ A strong answer would be:
 7. Document findings with Markdown.
 8. Move the finalized code into Python modules (`.py`).
 9. Deploy the model using a framework such as FastAPI.
+
+---
+
+# Part 02
+
+# 🎤 1. What is the difference between Code cells and Markdown cells?
+
+## Definition
+
+Jupyter Notebook contains two primary cell types:
+
+* **Code Cells** – Used to write and execute Python code.
+* **Markdown Cells** – Used to write documentation, explanations, headings, tables, lists, images, and mathematical equations.
+
+---
+
+## Purpose
+
+Both cell types serve different purposes:
+
+* **Code Cells** perform computations and generate outputs.
+* **Markdown Cells** explain the code and make notebooks easier to understand.
+
+---
+
+## Example
+
+### Code Cell
+
+```python
+import pandas as pd
+
+df = pd.read_csv("students.csv")
+
+df.head()
+```
+
+Output:
+
+```text
+Displays the first five rows of the dataset.
+```
+
+---
+
+### Markdown Cell
+
+```markdown
+# Student Performance Analysis
+
+This section loads the dataset and displays the first five records.
+```
+
+Output:
+
+# Student Performance Analysis
+
+This section loads the dataset and displays the first five records.
+
+---
+
+## Comparison
+
+| Code Cell            | Markdown Cell                                       |
+| -------------------- | --------------------------------------------------- |
+| Executes Python code | Displays formatted text                             |
+| Produces outputs     | Produces documentation                              |
+| Used for analysis    | Used for explanation                                |
+| Can import libraries | Can include headings, tables, images, and equations |
+
+---
+
+## Industry Usage
+
+Professional AI notebooks alternate between Markdown and Code cells so that anyone reviewing the notebook can understand the workflow.
+
+---
+
+## Interview Answer
+
+> Code cells execute Python code and generate outputs, while Markdown cells provide documentation and explanations. Using both together makes notebooks easier to understand, maintain, and reproduce.
+
+---
+
+# 🎤 2. Why is execution order important in Jupyter?
+
+## Definition
+
+Unlike Python scripts, Jupyter Notebook executes cells **only when they are run**.
+
+The execution order determines which variables and functions are available.
+
+---
+
+## Example
+
+Cell 2:
+
+```python
+print(name)
+```
+
+Cell 1:
+
+```python
+name = "Janusha"
+```
+
+If Cell 2 is executed first:
+
+```text
+NameError: name 'name' is not defined
+```
+
+After running Cell 1:
+
+```text
+Janusha
+```
+
+---
+
+## Why?
+
+Variables exist only after the cell defining them has been executed.
+
+Notebook position does **not** determine execution order.
+
+---
+
+## Best Practice
+
+Before sharing or committing a notebook:
+
+1. Restart the kernel.
+2. Run all cells from top to bottom.
+3. Verify that the notebook executes without errors.
+
+---
+
+## Industry Usage
+
+Professional teams expect notebooks to run successfully from the first cell to the last without relying on hidden state from previous executions.
+
+---
+
+## Interview Answer
+
+> Execution order is important because Jupyter executes cells only when they are run. Variables and objects exist only after their defining cells have been executed, so notebooks should be run sequentially to ensure consistent and reproducible results.
+
+---
+
+# 🎤 3. What is the purpose of the Jupyter Kernel?
+
+## Definition
+
+The **Kernel** is the execution engine that runs Python code inside a Jupyter Notebook.
+
+---
+
+## Purpose
+
+The kernel is responsible for:
+
+* Executing code
+* Storing variables
+* Managing memory
+* Returning outputs
+* Maintaining the current session
+
+---
+
+## How It Works
+
+```text
+Notebook
+
+↓
+
+Kernel
+
+↓
+
+Python Interpreter
+
+↓
+
+Output
+```
+
+---
+
+## Example
+
+```python
+x = 100
+```
+
+The kernel stores the value of `x` in memory.
+
+Later:
+
+```python
+print(x)
+```
+
+Output:
+
+```text
+100
+```
+
+---
+
+## What Happens After Restart?
+
+Restarting the kernel clears memory.
+
+Running:
+
+```python
+print(x)
+```
+
+will produce:
+
+```text
+NameError
+```
+
+because `x` no longer exists.
+
+---
+
+## Industry Usage
+
+Developers restart the kernel before sharing notebooks to ensure that all required variables are created by executing the notebook from the beginning.
+
+---
+
+## Interview Answer
+
+> The Jupyter Kernel is the execution engine responsible for running Python code, managing memory, storing variables, and returning outputs. Restarting the kernel clears the current session and removes all stored variables.
+
+---
+
+# 🎤 4. When should you restart the kernel?
+
+## Definition
+
+Restarting the kernel clears all variables, imported libraries, and memory associated with the current notebook session.
+
+---
+
+## When to Restart
+
+* After making significant code changes.
+* Before running the notebook from start to finish.
+* Before committing the notebook to GitHub.
+* When memory usage becomes excessive.
+* When execution results appear inconsistent.
+* After accidentally creating unwanted variables.
+
+---
+
+## Example
+
+Suppose you changed your preprocessing logic.
+
+Instead of relying on previously executed cells, restart the kernel and run all cells again to verify the notebook works from a clean state.
+
+---
+
+## Why Is This Important?
+
+It helps identify:
+
+* Missing imports
+* Undefined variables
+* Hidden dependencies
+* Incorrect execution order
+
+---
+
+## Industry Usage
+
+Restarting the kernel before sharing a notebook is a common practice because it ensures anyone can reproduce the results.
+
+---
+
+## Interview Answer
+
+> The kernel should be restarted before sharing a notebook, after significant changes, or whenever a clean execution is required. Restarting clears memory and helps verify that the notebook runs correctly from top to bottom.
+
+---
+
+# 🎤 5. How do you export a notebook?
+
+## Definition
+
+Jupyter Notebook allows notebooks to be exported into different formats.
+
+---
+
+## Common Export Formats
+
+* Python (`.py`)
+* HTML
+* PDF
+* Markdown
+
+---
+
+## Export Using the Menu
+
+```text
+File
+
+↓
+
+Save and Export As
+
+↓
+
+Python (.py)
+```
+
+---
+
+## Why Export?
+
+Exporting is useful when:
+
+* Moving code into production.
+* Sharing reports.
+* Creating documentation.
+* Deploying machine learning applications.
+
+---
+
+## Professional Workflow
+
+```text
+Experiment
+
+↓
+
+Notebook (.ipynb)
+
+↓
+
+Export / Refactor
+
+↓
+
+Python Script (.py)
+
+↓
+
+FastAPI
+
+↓
+
+Deployment
+```
+
+---
+
+## Industry Usage
+
+AI engineers often prototype in notebooks and then convert the validated logic into Python modules or scripts for production systems.
+
+---
+
+## Interview Answer
+
+> Jupyter notebooks can be exported to formats such as Python scripts, HTML, PDF, and Markdown. Exporting to a Python script is common when transitioning from experimentation to production-ready code.
+
+---
+
+# 🎤 6. What are the most useful keyboard shortcuts?
+
+## Why Learn Shortcuts?
+
+Keyboard shortcuts improve productivity and reduce reliance on the mouse.
+
+---
+
+## Essential Shortcuts
+
+| Shortcut          | Action                                 |
+| ----------------- | -------------------------------------- |
+| **Shift + Enter** | Run current cell and move to next      |
+| **Ctrl + Enter**  | Run current cell and stay on it        |
+| **Alt + Enter**   | Run current cell and insert a new cell |
+| **A**             | Insert a cell above                    |
+| **B**             | Insert a cell below                    |
+| **D D**           | Delete selected cell                   |
+| **M**             | Convert selected cell to Markdown      |
+| **Y**             | Convert selected cell to Code          |
+| **Z**             | Undo deleted cell                      |
+| **H**             | Display all keyboard shortcuts         |
+| **Esc**           | Switch to Command Mode                 |
+| **Enter**         | Switch to Edit Mode                    |
+
+---
+
+## Real-World Usage
+
+Experienced AI engineers use keyboard shortcuts extensively when cleaning data, building models, and documenting notebooks because they significantly improve efficiency.
+
+---
+
+## Interview Answer
+
+> The most useful Jupyter shortcuts include **Shift + Enter** to run a cell, **Ctrl + Enter** to run a cell without moving, **Alt + Enter** to run and create a new cell, **A** and **B** to insert cells, **D D** to delete a cell, and **M** or **Y** to switch between Markdown and Code cells.
+
+---
+
+# ⭐ Senior-Level Follow-up Questions
+
+### Q1. Why do professional notebooks include Markdown instead of only code?
+
+**Answer:** Markdown explains the purpose of each step, documents assumptions, interprets results, and makes notebooks easier for other developers or reviewers to understand.
+
+---
+
+### Q2. What problems can occur if cells are executed out of order?
+
+**Answer:** Variables, functions, or imported libraries may not exist when needed, leading to errors such as `NameError` or inconsistent results that are difficult to reproduce.
+
+---
+
+### Q3. Why should you restart the kernel before committing a notebook?
+
+**Answer:** Restarting the kernel and running all cells verifies that the notebook works from a clean state without relying on previously stored variables or hidden execution history.
+
+---
+
+### Q4. When should you convert a notebook into a Python script?
+
+**Answer:** After experimentation is complete and the solution is stable. Production applications, APIs, automation tools, and reusable modules are generally implemented as Python scripts or packages rather than notebooks.
+
+---
+
+### Q5. Is Jupyter Notebook suitable for production applications?
+
+**Answer:** No. Jupyter Notebook is primarily intended for experimentation, data exploration, visualization, and documentation. Production applications are typically developed as Python modules, packages, or services using frameworks such as FastAPI.
+
+---
+
+# 🎯 AI Engineer Interview Tip
+
+A common interview question is:
+
+> **"You've finished experimenting with a machine learning model in Jupyter Notebook. What would you do next before deploying it?"**
+
+A strong answer would be:
+
+1. Restart the kernel and run all cells to ensure the notebook is reproducible.
+2. Clean and organize the notebook with Markdown documentation.
+3. Refactor reusable logic into Python modules (`.py`).
+4. Export or migrate the code into a structured project.
+5. Build an inference pipeline or API (e.g., using FastAPI).
+6. Add tests and documentation.
+7. Track dependencies with `requirements.txt`.
+8. Commit the project to GitHub and prepare it for deployment.
+

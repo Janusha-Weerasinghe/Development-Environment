@@ -513,3 +513,579 @@ Displays notebooks and files in the current working directory.
 > The Jupyter Notebook interface includes the menu bar, toolbar, notebook cells, kernel status, and file browser. These components allow developers to write, execute, organize, and manage interactive notebooks efficiently.
 
 ---
+Excellent bro! 🔥 This is one of the **most important parts** of Jupyter Notebook. Every AI/ML engineer uses these features daily for data exploration, experimentation, and model development.
+
+This lesson is written to the standard expected by **WSO2, IFS, Sysco LABS, LSEG, Microsoft, Google, Amazon, NVIDIA, and OpenAI**.
+
+As always, we'll follow the **AI Engineer Academy** format:
+
+> **Definition → Purpose → How It Works → Example → Industry Usage → Interview Answer**
+
+---
+
+# Part 2 – Working with Jupyter
+
+---
+
+# 07. Cells (Code vs Markdown)
+
+## What is a Cell?
+
+A **cell** is the basic building block of a Jupyter Notebook. Each notebook is divided into cells, allowing you to organize code, documentation, and results.
+
+---
+
+## Types of Cells
+
+### 1. Code Cell
+
+A **Code Cell** contains executable Python code.
+
+Example:
+
+```python
+print("Hello AI Engineer!")
+```
+
+Output:
+
+```text
+Hello AI Engineer!
+```
+
+---
+
+### 2. Markdown Cell
+
+A **Markdown Cell** is used to write documentation.
+
+Example:
+
+```markdown
+# Student Performance Prediction
+
+This notebook analyzes student exam performance using machine learning.
+```
+
+Output:
+
+# Student Performance Prediction
+
+This notebook analyzes student exam performance using machine learning.
+
+---
+
+## Why Use Markdown?
+
+Markdown allows you to:
+
+* Explain your workflow
+* Add headings
+* Create lists
+* Insert images
+* Write equations
+* Improve readability
+
+---
+
+## Best Practice
+
+A professional notebook should alternate between:
+
+```text
+Markdown
+
+↓
+
+Code
+
+↓
+
+Output
+
+↓
+
+Markdown
+
+↓
+
+Next Code
+```
+
+Never create a notebook containing only code.
+
+---
+
+## Industry Usage
+
+Professional AI notebooks are written like technical reports, combining explanations with executable code.
+
+---
+
+## Interview Answer
+
+> Jupyter Notebook contains two main cell types: Code cells for executing Python code and Markdown cells for documentation. Combining both improves readability, reproducibility, and collaboration.
+
+---
+
+# 08. Running Cells & Execution Order
+
+## Running a Cell
+
+Execute the current cell using:
+
+```text
+Shift + Enter
+```
+
+Other useful shortcuts:
+
+| Shortcut          | Action                                |
+| ----------------- | ------------------------------------- |
+| **Shift + Enter** | Run current cell and move to the next |
+| **Ctrl + Enter**  | Run current cell and stay on it       |
+| **Alt + Enter**   | Run current cell and create a new one |
+
+---
+
+## Execution Order
+
+Jupyter executes cells **only when you run them**.
+
+Execution order is more important than the cell's position.
+
+Example:
+
+Cell 2:
+
+```python
+print(name)
+```
+
+Cell 1:
+
+```python
+name = "Janusha"
+```
+
+If you run Cell 2 first:
+
+```text
+NameError: name 'name' is not defined
+```
+
+After running Cell 1:
+
+```text
+Janusha
+```
+
+---
+
+## Why Does This Happen?
+
+Variables exist only after the cell creating them has been executed.
+
+---
+
+## Best Practice
+
+Execute notebooks from top to bottom after restarting the kernel to ensure all results are reproducible.
+
+---
+
+## Industry Usage
+
+Teams reviewing notebooks expect that running all cells sequentially produces the same results.
+
+---
+
+## Interview Answer
+
+> Jupyter executes code based on execution order rather than notebook position. Variables and objects exist only after the corresponding cells have been executed, so notebooks should be run sequentially to ensure reproducibility.
+
+---
+
+# 09. Jupyter Kernel (Start, Restart, Interrupt)
+
+## What is the Kernel?
+
+The **Kernel** is the computational engine that executes Python code.
+
+Think of it as the notebook's Python interpreter.
+
+---
+
+## Kernel Responsibilities
+
+* Executes code
+* Stores variables
+* Manages memory
+* Maintains program state
+
+---
+
+## Start Kernel
+
+When a notebook opens, the kernel starts automatically.
+
+---
+
+## Restart Kernel
+
+Restarting the kernel:
+
+* Clears all variables
+* Clears memory
+* Stops running code
+* Returns the notebook to a clean state
+
+Menu:
+
+```text
+Kernel
+
+↓
+
+Restart Kernel
+```
+
+---
+
+## Interrupt Kernel
+
+Use **Interrupt Kernel** to stop long-running or infinite loops.
+
+Example:
+
+```python
+while True:
+    print("Running...")
+```
+
+Interrupt the kernel to stop execution.
+
+---
+
+## When Should You Restart?
+
+* After changing important code.
+* Before sharing a notebook.
+* Before running all cells.
+* When memory usage becomes high.
+
+---
+
+## Industry Usage
+
+Before committing notebooks to GitHub, developers restart the kernel and run all cells to verify reproducibility.
+
+---
+
+## Interview Answer
+
+> The Jupyter Kernel executes notebook code and stores variables in memory. Restarting the kernel clears the current session, while interrupting the kernel stops code that is still running.
+
+---
+
+# 10. Keyboard Shortcuts
+
+Using shortcuts significantly improves productivity.
+
+---
+
+## Command Mode vs Edit Mode
+
+| Mode             | Purpose               |
+| ---------------- | --------------------- |
+| **Command Mode** | Manage notebook cells |
+| **Edit Mode**    | Edit cell contents    |
+
+Press:
+
+* **Esc** → Command Mode
+* **Enter** → Edit Mode
+
+---
+
+## Essential Shortcuts
+
+| Shortcut      | Action                  |
+| ------------- | ----------------------- |
+| Shift + Enter | Run cell                |
+| Ctrl + Enter  | Run and stay            |
+| Alt + Enter   | Run and insert new cell |
+| A             | Insert cell above       |
+| B             | Insert cell below       |
+| D D           | Delete selected cell    |
+| M             | Convert to Markdown     |
+| Y             | Convert to Code         |
+| Z             | Undo deleted cell       |
+| H             | Show all shortcuts      |
+
+---
+
+## Industry Usage
+
+Experienced data scientists rely heavily on shortcuts to speed up notebook development.
+
+---
+
+## Interview Answer
+
+> Jupyter provides keyboard shortcuts that improve productivity by allowing developers to run cells, switch between code and Markdown, manage notebook structure, and navigate efficiently without relying on the mouse.
+
+---
+
+# 11. Importing Libraries
+
+## What is a Library?
+
+A library is a collection of reusable code that provides additional functionality.
+
+---
+
+## Common Imports
+
+```python
+import numpy as np
+
+import pandas as pd
+
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+```
+
+---
+
+## Why Use Aliases?
+
+Instead of:
+
+```python
+numpy.array()
+```
+
+Use:
+
+```python
+np.array()
+```
+
+This makes code shorter and follows community conventions.
+
+---
+
+## Verify Installation
+
+```python
+import pandas as pd
+
+print(pd.__version__)
+```
+
+---
+
+## Best Practice
+
+Import all libraries at the beginning of the notebook.
+
+---
+
+## Industry Usage
+
+Professional notebooks keep imports organized and grouped together so dependencies are easy to identify.
+
+---
+
+## Interview Answer
+
+> Libraries extend Python's functionality. They are typically imported at the beginning of a notebook using standard aliases such as `numpy as np` and `pandas as pd`, improving readability and consistency.
+
+---
+
+# 12. Saving, Exporting & Converting Notebooks
+
+## Saving
+
+Save manually:
+
+```text
+Ctrl + S
+```
+
+Jupyter also performs periodic autosaves.
+
+---
+
+## Export Formats
+
+You can export a notebook as:
+
+* HTML
+* PDF
+* Python Script (`.py`)
+* Markdown
+
+---
+
+## Export as Python Script
+
+Menu:
+
+```text
+File
+
+↓
+
+Save and Export As
+
+↓
+
+Python (.py)
+```
+
+---
+
+## Why Export?
+
+Exporting to a `.py` file is useful when moving from experimentation to production code.
+
+---
+
+## Industry Workflow
+
+```text
+Notebook (.ipynb)
+
+↓
+
+Experiment Complete
+
+↓
+
+Export / Refactor
+
+↓
+
+Python Modules (.py)
+
+↓
+
+Production
+```
+
+---
+
+## Interview Answer
+
+> Jupyter notebooks can be saved in `.ipynb` format and exported to formats such as HTML, PDF, Markdown, or Python scripts. Production code is often refactored into `.py` files after experimentation.
+
+---
+
+# 13. Notebook Best Practices
+
+## Best Practices
+
+### ✅ Start with a Markdown introduction.
+
+---
+
+### ✅ Group imports together.
+
+---
+
+### ✅ Use descriptive notebook names.
+
+Good:
+
+```text
+01_EDA.ipynb
+02_Feature_Engineering.ipynb
+03_Model_Training.ipynb
+```
+
+Bad:
+
+```text
+test.ipynb
+
+new.ipynb
+
+final.ipynb
+```
+
+---
+
+### ✅ Keep notebooks focused on one task.
+
+---
+
+### ✅ Restart the kernel and run all cells before sharing.
+
+---
+
+### ✅ Remove unnecessary output before committing to GitHub if the outputs are very large or contain sensitive information.
+
+---
+
+### ✅ Add explanations after charts and important results.
+
+---
+
+### ✅ Use virtual environments.
+
+---
+
+## Professional Notebook Structure
+
+```text
+Title
+
+↓
+
+Introduction
+
+↓
+
+Import Libraries
+
+↓
+
+Load Data
+
+↓
+
+EDA
+
+↓
+
+Visualization
+
+↓
+
+Model
+
+↓
+
+Evaluation
+
+↓
+
+Conclusion
+```
+
+---
+
+## Industry Usage
+
+Professional notebooks are easy to follow, reproducible, and well documented so that teammates can understand and rerun the analysis.
+
+---
+
+## Interview Answer
+
+> Good notebook practices include documenting the workflow with Markdown, organizing imports, using descriptive names, restarting the kernel before sharing, and keeping notebooks focused and reproducible.
+
+---
