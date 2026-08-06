@@ -1537,3 +1537,311 @@ Create one bar chart and one histogram.
 Save and commit to GitHub.
 
 ---
+# Part 04
+
+Excellent bro! 🔥 This is the final part of the Jupyter Notebook lesson. These topics focus on **professional software engineering practices**—the difference between writing notebooks for yourself and creating work that recruiters and engineering teams can understand, review, and maintain.
+
+---
+
+# Part 4 – Professional Development
+
+---
+
+# 23. GitHub Integration
+
+## Introduction
+
+GitHub is where professional developers store, collaborate on, and showcase their projects. A well-organized Jupyter Notebook repository demonstrates not only technical skills but also documentation and project organization.
+
+---
+
+## Why Integrate Jupyter with GitHub?
+
+GitHub allows you to:
+
+* Track notebook versions.
+* Collaborate with others.
+* Showcase AI projects.
+* Share notebooks publicly.
+* Build a professional portfolio.
+
+---
+
+## Recommended Repository Structure
+
+```text
+Jupyter-EDA/
+│
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── .gitignore
+│
+├── data/
+│   └── students.csv
+│
+├── notebooks/
+│   └── Student_EDA.ipynb
+│
+├── images/
+│   ├── histogram.png
+│   ├── bar_chart.png
+│   └── scatter_plot.png
+│
+└── outputs/
+```
+
+---
+
+## Git Workflow
+
+```bash
+git init
+
+git add .
+
+git commit -m "Complete Student EDA project"
+
+git branch -M main
+
+git remote add origin <repository-url>
+
+git push -u origin main
+```
+
+---
+
+## Best Practices
+
+* Keep notebooks inside a `notebooks/` folder.
+* Store datasets separately.
+* Save generated images instead of embedding huge outputs.
+* Remove unnecessary outputs before committing if they are very large.
+* Commit meaningful changes regularly.
+
+---
+
+## Interview Answer
+
+> GitHub integration enables version control, collaboration, and portfolio development. A professional notebook repository should include a clear structure, documentation, dependency files, and meaningful commit history.
+
+---
+
+# 24. README
+
+## Why is README Important?
+
+The README is usually the **first thing a recruiter or developer reads**.
+
+A good README explains:
+
+* What the project is.
+* Why it exists.
+* How to run it.
+* Technologies used.
+* Results.
+* Future improvements.
+
+---
+
+## Professional README Structure
+
+```markdown
+# Student Performance EDA
+
+## Project Overview
+
+This project performs Exploratory Data Analysis (EDA) on a student performance dataset using Python, Pandas, and Matplotlib.
+
+## Objective
+
+Explore the dataset before building Machine Learning models.
+
+## Technologies
+
+- Python
+- Jupyter Notebook
+- Pandas
+- Matplotlib
+
+## Project Structure
+
+(Project Tree)
+
+## Features
+
+- Data Loading
+- Data Exploration
+- Missing Value Analysis
+- Statistical Summary
+- Visualizations
+- Observations
+
+## Results
+
+(Add screenshots of charts)
+
+## Future Improvements
+
+- Feature Engineering
+- Machine Learning Models
+- Dashboard Development
+
+## Author
+
+Janusha Weerasinghe
+```
+
+---
+
+## Interview Answer
+
+> A professional README explains the project's purpose, setup, technologies, usage, results, and future work. It helps recruiters and collaborators understand the project quickly.
+
+---
+
+# 26. Best Practices
+
+## Professional Notebook Guidelines
+
+### ✅ Begin with a clear title and objective.
+
+### ✅ Use Markdown before each major section.
+
+### ✅ Keep all imports at the top.
+
+### ✅ Use descriptive variable names.
+
+Good:
+
+```python
+student_scores
+```
+
+Bad:
+
+```python
+x
+```
+
+---
+
+### ✅ Keep notebooks focused on a single task.
+
+---
+
+### ✅ Restart the kernel and run all cells before committing.
+
+---
+
+### ✅ Save charts into the `images/` folder.
+
+```python
+plt.savefig("../images/histogram.png")
+```
+
+---
+
+### ✅ Store datasets separately.
+
+---
+
+### ✅ Use a virtual environment.
+
+---
+
+### ✅ Track dependencies.
+
+```text
+requirements.txt
+```
+
+---
+
+### ✅ Write meaningful Git commit messages.
+
+Good:
+
+```text
+Add student EDA notebook
+```
+
+Bad:
+
+```text
+Update
+```
+
+---
+
+## Interview Answer
+
+> Professional notebooks should be organized, reproducible, well documented, and easy to understand. They should use Markdown, virtual environments, dependency management, and clean project structures.
+
+---
+
+# 27. Common Mistakes
+
+## ❌ Executing cells out of order
+
+Causes inconsistent results and hidden dependencies.
+
+---
+
+## ❌ Forgetting to restart the kernel
+
+May hide missing imports or undefined variables.
+
+---
+
+## ❌ Writing notebooks without Markdown
+
+Makes them difficult to understand.
+
+---
+
+## ❌ Installing packages globally
+
+Can cause version conflicts across projects.
+
+---
+
+## ❌ Mixing unrelated tasks in one notebook
+
+Keep each notebook focused on a single objective.
+
+---
+
+## ❌ Committing large outputs
+
+Large images or datasets can clutter repositories. Save outputs separately when appropriate.
+
+---
+
+## ❌ Hardcoding file paths
+
+Avoid:
+
+```python
+"C:/Users/John/Desktop/data.csv"
+```
+
+Prefer:
+
+```python
+"../data/students.csv"
+```
+
+---
+
+## ❌ Ignoring `requirements.txt`
+
+Without it, others may struggle to recreate the environment.
+
+---
+
+## Interview Answer
+
+> Common mistakes include running cells out of order, skipping Markdown documentation, installing packages globally, hardcoding file paths, and failing to maintain reproducible environments.
+
+---

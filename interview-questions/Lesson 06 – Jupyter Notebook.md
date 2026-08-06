@@ -1486,3 +1486,65 @@ A strong answer would be:
 10. Build an API (e.g., FastAPI), containerize it if needed, and deploy the application.
 
 ---
+
+# Part 04
+
+# 25. Interview Questions
+
+## Beginner
+
+* What is Jupyter Notebook?
+* Why is Jupyter popular in AI?
+* What is a Notebook cell?
+* What is the Jupyter Kernel?
+* What is Markdown?
+* How do you install Jupyter?
+
+---
+
+## Intermediate
+
+* Explain execution order in Jupyter.
+* Why should notebooks include Markdown?
+* What are the advantages of Jupyter over a Python script during experimentation?
+* Why should notebooks be connected to a virtual environment?
+* How do you export a notebook to a Python script?
+
+---
+
+## Advanced
+
+* Why shouldn't Jupyter Notebooks be used for large production systems?
+* How would you organize a notebook for team collaboration?
+* How do you ensure notebook reproducibility?
+* What challenges do notebooks create for version control?
+* When would you convert notebook code into reusable Python modules?
+
+---
+
+## Senior-Level Follow-up Questions
+
+### Why are notebooks often difficult to review in Git?
+
+**Answer:** Notebook files contain JSON metadata and execution outputs, making Git diffs harder to read than plain Python files.
+
+---
+
+### How do you make notebooks reproducible?
+
+**Answer:**
+
+* Use a virtual environment.
+* Track dependencies in `requirements.txt`.
+* Restart the kernel.
+* Run all cells from top to bottom.
+* Remove hidden dependencies.
+* Keep Markdown explanations up to date.
+
+---
+
+### Why should production code not remain inside notebooks?
+
+**Answer:** Production code is easier to test, maintain, reuse, and deploy when organized into Python modules and packages.
+
+---
