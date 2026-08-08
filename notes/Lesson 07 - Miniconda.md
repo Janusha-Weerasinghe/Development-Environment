@@ -1288,4 +1288,1135 @@ where python
 conda env remove -n ai-engineer
 ```
 
+---
+# Part 03
+
+Absolutely bro 🔥. Now we move to **Lesson 07 – Miniconda, Part 3: Package Management**.
+
+This is where Conda becomes useful for actual AI development. You already know how to create and activate environments; now you'll learn how to **install dependencies, update them, remove them, export the environment, and connect it to Jupyter and VS Code**.
+
+We'll use the same interview framework:
+
+> **Definition → Purpose → Command → Example → Professional Relevance → Interview Answer**
+
+---
+
+# Part 3 – Package Management
+
+---
+
+# 15. Installing Packages
+
+## What is a Package?
+
+A **package** is reusable software that provides functionality you can use in your Python project.
+
+For AI/ML, common packages include:
+
+```text
+NumPy
+Pandas
+Matplotlib
+Scikit-learn
+Jupyter
+TensorFlow
+PyTorch
+OpenCV
+```
+
+---
+
+## First Rule
+
+Before installing packages, make sure the correct environment is active.
+
+```bash
+conda activate ai-engineer
+```
+
+Check:
+
+```bash
+python --version
+```
+
+---
+
+# Installing with Conda
+
+For example:
+
+```bash
+conda install pandas
+```
+
+Multiple packages:
+
+```bash
+conda install numpy pandas matplotlib
+```
+
+Conda resolves dependencies and installs the packages into the **currently active environment**.
+
+---
+
+## Verify
+
+```bash
+conda list
+```
+
+You should see packages such as:
+
+```text
+numpy
+pandas
+matplotlib
+```
+
+---
+
+## Test the Package
+
+```bash
+python
+```
+
+Then:
+
+```python
+import pandas
+
+print(pandas.__version__)
+```
+
+Exit:
+
+```python
+exit()
+```
+
+---
+
+# Installing a Specific Version
+
+You can specify a version:
+
+```bash
+conda install pandas=2.2
+```
+
+The exact version available may depend on your configured Conda channels and platform.
+
+---
+
+## 🎤 Interview Answer
+
+> I install packages inside the active Conda environment using `conda install package-name`. For example, `conda install pandas numpy matplotlib`. I verify the installation with `conda list` or by importing the package in Python.
+
+---
+
+# 16. Updating Packages
+
+Packages receive:
+
+* Bug fixes
+* Security fixes
+* Performance improvements
+* New features
+
+You may need to update them.
+
+---
+
+## Update One Package
+
+```bash
+conda update pandas
+```
+
+---
+
+## Update Multiple Packages
+
+```bash
+conda update pandas numpy
+```
+
+---
+
+## Update All Packages
+
+```bash
+conda update --all
+```
+
+⚠️ **Be careful with this in an existing project.**
+
+Updating everything can introduce compatibility changes.
+
+For a stable project, don't blindly update every package just because an update is available.
+
+---
+
+## Check Package Information
+
+```bash
+conda list pandas
+```
+
+You can also inspect package metadata:
+
+```bash
+conda search pandas
+```
+
+---
+
+## Professional Workflow
+
+Before making significant updates:
+
+```text
+Current Environment
+       ↓
+Check Dependencies
+       ↓
+Update Carefully
+       ↓
+Test Project
+       ↓
+Verify Everything Works
+```
+
+---
+
+## 🎤 Interview Answer
+
+> I can update a specific package using `conda update package-name`. Although `conda update --all` can update the environment broadly, I would use it cautiously because updating multiple dependencies can introduce compatibility issues.
+
+---
+
+# 17. Removing Packages
+
+Sometimes a package is no longer needed.
+
+For example:
+
+```bash
+conda remove matplotlib
+```
+
+Conda will show what it plans to remove and ask for confirmation.
+
+---
+
+## Verify
+
+```bash
+conda list
+```
+
+---
+
+## Test
+
+```bash
+python
+```
+
+Then:
+
+```python
+import matplotlib
+```
+
+If it has been removed from the environment, the import should fail unless another installation of that package is being picked up.
+
+---
+
+## Important Difference
+
+Removing a package:
+
+```bash
+conda remove pandas
+```
+
+does **not** remove the entire environment.
+
+Removing an environment:
+
+```bash
+conda env remove -n ai-engineer
+```
+
+removes the whole environment.
+
+---
+
+## 🎤 Interview Answer
+
+> I can remove an individual package using `conda remove package-name`. This removes the package from the active environment without deleting the entire environment.
+
+---
+
+# 18. Conda vs pip
+
+This is one of the **most important interview topics** in this lesson.
+
+Both can install Python packages, but they are different tools.
+
+---
+
+# pip
+
+`pip` is Python's standard package installer.
+
+Example:
+
+```bash
+pip install pandas
+```
+
+Or:
+
+```bash
+python -m pip install pandas
+```
+
+---
+
+# Conda
+
+Conda is both:
+
+> **Environment manager + package manager**
+
+Example:
+
+```bash
+conda install pandas
+```
+
+---
+
+## Comparison
+
+| Feature                        | Conda  | pip                       |
+| ------------------------------ | ------ | ------------------------- |
+| Package installation           | ✅      | ✅                         |
+| Environment management         | ✅      | ❌                         |
+| Python version management      | ✅      | ❌                         |
+| Python packages                | ✅      | ✅                         |
+| Broader dependency management  | Strong | Primarily Python packages |
+| Works inside Conda environment | ✅      | ✅                         |
+
+---
+
+# When Should You Use Conda?
+
+If the package is available through your configured Conda channels:
+
+```bash
+conda install pandas
+```
+
+This is often a good choice in a Conda-managed environment.
+
+---
+
+# When Should You Use pip?
+
+If a package isn't available through the Conda channels you're using, pip may be appropriate:
+
+```bash
+pip install some-package
+```
+
+---
+
+# ⚠️ Important Best Practice
+
+Don't randomly alternate:
+
+```bash
+conda install A
+pip install B
+conda install C
+pip install D
+...
+```
+
+without understanding your dependency setup.
+
+Mixing Conda and pip can work, but it should be done deliberately because the two tools resolve dependencies differently.
+
+A sensible pattern is:
+
+```text
+Create Conda environment
+        ↓
+Install Conda-managed dependencies
+        ↓
+Use pip only when necessary
+        ↓
+Test the complete environment
+```
+
+---
+
+## 🎤 Interview Answer
+
+> pip is Python's package installer, while Conda provides both environment and package management. In a Conda environment, I generally prefer Conda packages when appropriate and use pip when a required package isn't available through my Conda setup. I avoid unnecessary mixing because it can make dependency resolution more difficult.
+
+---
+
+# 19. `environment.yml`
+
+This is **very important for professional AI development**.
+
+Imagine you create this environment:
+
+```text
+ai-engineer
+│
+├── Python 3.12
+├── NumPy
+├── Pandas
+├── Matplotlib
+├── Jupyter
+└── Scikit-learn
+```
+
+Your teammate needs exactly the same environment.
+
+You shouldn't tell them:
+
+> "Bro, install these packages one by one." 😂
+
+Instead, you can define the environment in:
+
+```text
+environment.yml
+```
+
+---
+
+# What is `environment.yml`?
+
+It is a YAML file that describes a Conda environment and its dependencies.
+
+Example:
+
+```yaml
+name: ai-engineer
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.12
+  - numpy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - jupyter
+```
+
+---
+
+# Create the Environment from the File
+
+Another developer can run:
+
+```bash
+conda env create -f environment.yml
+```
+
+Then:
+
+```bash
+conda activate ai-engineer
+```
+
+Now they have an environment based on the specification.
+
+---
+
+# Export an Existing Environment
+
+If you've already created your environment, you can export it:
+
+```bash
+conda env export > environment.yml
+```
+
+This creates:
+
+```text
+environment.yml
+```
+
+---
+
+# Why Is This Important?
+
+It improves:
+
+* Reproducibility
+* Collaboration
+* Deployment
+* CI/CD
+* Environment recovery
+
+---
+
+## GitHub Structure
+
+Your AI project could contain:
+
+```text
+AI-Project/
+│
+├── README.md
+├── environment.yml
+├── .gitignore
+│
+├── data/
+├── notebooks/
+├── src/
+└── tests/
+```
+
+Notice:
+
+```text
+environment.yml
+```
+
+is committed to GitHub.
+
+But the actual environment directory is **not**.
+
+---
+
+## 🎤 Interview Answer
+
+> `environment.yml` is a configuration file that describes a Conda environment and its dependencies. It allows other developers or CI/CD systems to recreate a consistent environment using `conda env create -f environment.yml`.
+
+---
+
+# 20. Jupyter Integration
+
+Now we're connecting what you learned in **Lesson 06 – Jupyter Notebook** with Miniconda.
+
+Suppose you have:
+
+```text
+ai-engineer
+```
+
+environment.
+
+You want Jupyter to use that exact environment.
+
+---
+
+## Step 1 — Activate
+
+```bash
+conda activate ai-engineer
+```
+
+---
+
+## Step 2 — Install Jupyter
+
+You can install Jupyter through Conda:
+
+```bash
+conda install jupyter
+```
+
+Or, depending on your setup, use pip:
+
+```bash
+pip install jupyter
+```
+
+---
+
+## Step 3 — Install the Kernel Package
+
+For reliable kernel registration:
+
+```bash
+python -m pip install ipykernel
+```
+
+---
+
+## Step 4 — Register the Environment
+
+```bash
+python -m ipykernel install --user --name ai-engineer --display-name "Python (ai-engineer)"
+```
+
+---
+
+## What Does This Do?
+
+It tells Jupyter:
+
+> "This Conda environment can be used as a notebook kernel."
+
+---
+
+## Start Jupyter
+
+```bash
+jupyter notebook
+```
+
+or:
+
+```bash
+jupyter lab
+```
+
+Then select:
+
+```text
+Python (ai-engineer)
+```
+
+as the kernel.
+
+---
+
+# Why Is This Important?
+
+Suppose your notebook says:
+
+```python
+import pandas
+```
+
+but Pandas was installed in:
+
+```text
+ai-engineer
+```
+
+and your notebook is actually using:
+
+```text
+base
+```
+
+You may get:
+
+```text
+ModuleNotFoundError
+```
+
+The package exists—but **not in the environment your notebook is using**.
+
+---
+
+## Professional Workflow
+
+```text
+Miniconda
+    ↓
+ai-engineer environment
+    ↓
+Python 3.12
+    ↓
+Packages
+    ↓
+Jupyter Kernel
+    ↓
+Student_EDA.ipynb
+```
+
+---
+
+## 🎤 Interview Answer
+
+> I integrate Jupyter with a Conda environment by activating the environment, installing Jupyter and `ipykernel`, registering the environment as a Jupyter kernel, and then selecting that kernel in the notebook. This ensures the notebook uses the project's Python interpreter and dependencies.
+
+---
+
+# 21. VS Code Integration
+
+Now we connect **Miniconda → VS Code**.
+
+This is particularly important because you're using VS Code as your main development environment.
+
+---
+
+# Step 1 — Open Your Project
+
+For example:
+
+```text
+Jupyter-EDA/
+```
+
+---
+
+# Step 2 — Open Command Palette
+
+```text
+Ctrl + Shift + P
+```
+
+Search:
+
+```text
+Python: Select Interpreter
+```
+
+---
+
+# Step 3 — Select Your Conda Environment
+
+You should see something similar to:
+
+```text
+Python 3.12.x ('ai-engineer': conda)
+```
+
+Select it.
+
+---
+
+# Step 4 — Verify
+
+Open the VS Code terminal.
+
+You should see something similar to:
+
+```text
+(ai-engineer)
+```
+
+Then:
+
+```bash
+python --version
+```
+
+---
+
+# Step 5 — Check Python Path
+
+Windows:
+
+```bash
+where python
+```
+
+It should point to something similar to:
+
+```text
+...\miniconda3\envs\ai-engineer\python.exe
+```
+
+---
+
+# Step 6 — Jupyter Notebook
+
+Open:
+
+```text
+Student_EDA.ipynb
+```
+
+At the top of the notebook, select the kernel/interpreter.
+
+Choose:
+
+```text
+Python (ai-engineer)
+```
+
+Now your notebook and VS Code terminal can use the same environment.
+
+---
+
+# 🧩 Complete Professional Workflow
+
+You now have:
+
+```text
+                    Miniconda
+                       │
+                       ▼
+                ai-engineer
+                       │
+                 Python 3.12
+                       │
+          ┌────────────┴────────────┐
+          │                         │
+       VS Code                  Jupyter
+          │                         │
+       Python                  Notebook
+          │                         │
+          └────────────┬────────────┘
+                       │
+                 AI Project
+                       │
+              environment.yml
+                       │
+                    GitHub
+```
+
+This is the workflow I want you to understand.
+
+---
+
+# 🧪 Practical Exercise
+
+Let's apply everything to your existing **Jupyter-EDA** project.
+
+Your current structure:
+
+```text
+Jupyter-EDA/
+│
+├── README.md
+├── requirements.txt
+├── .gitignore
+│
+├── data/
+│   └── students.csv
+│
+├── notebooks/
+│   └── Student_EDA.ipynb
+│
+├── images/
+│
+└── outputs/
+```
+
+We're going to improve it.
+
+---
+
+## Step 1 — Create Conda Environment
+
+```bash
+conda create -n jupyter-eda python=3.12
+```
+
+---
+
+## Step 2 — Activate
+
+```bash
+conda activate jupyter-eda
+```
+
+---
+
+## Step 3 — Install Packages
+
+```bash
+conda install pandas numpy matplotlib
+```
+
+Then:
+
+```bash
+python -m pip install jupyter ipykernel
+```
+
+---
+
+## Step 4 — Register Kernel
+
+```bash
+python -m ipykernel install --user --name jupyter-eda --display-name "Python (jupyter-eda)"
+```
+
+---
+
+## Step 5 — Open VS Code
+
+Open:
+
+```text
+Jupyter-EDA
+```
+
+Select:
+
+```text
+Python 3.12 ('jupyter-eda': conda)
+```
+
+---
+
+## Step 6 — Open Your Notebook
+
+```text
+notebooks/
+└── Student_EDA.ipynb
+```
+
+Select:
+
+```text
+Python (jupyter-eda)
+```
+
+---
+
+## Step 7 — Test
+
+Create a cell:
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+print("Environment is working!")
+print("Pandas:", pd.__version__)
+print("NumPy:", np.__version__)
+```
+
+Run it.
+
+You should get something similar to:
+
+```text
+Environment is working!
+Pandas: 2.x.x
+NumPy: 2.x.x
+```
+
+The exact versions may differ.
+
+---
+
+# Step 8 — Export Environment
+
+From the activated environment:
+
+```bash
+conda env export > environment.yml
+```
+
+Now your project becomes:
+
+```text
+Jupyter-EDA/
+│
+├── README.md
+├── environment.yml
+├── requirements.txt
+├── .gitignore
+│
+├── data/
+│   └── students.csv
+│
+├── notebooks/
+│   └── Student_EDA.ipynb
+│
+├── images/
+│
+└── outputs/
+```
+
+---
+
+# ⚠️ `requirements.txt` vs `environment.yml`
+
+Since you've already learned `requirements.txt`, understand this distinction.
+
+### `requirements.txt`
+
+Primarily describes Python packages for pip:
+
+```text
+pandas
+numpy
+matplotlib
+jupyter
+```
+
+Recreate with:
+
+```bash
+pip install -r requirements.txt
+```
+
+### `environment.yml`
+
+Describes a Conda environment:
+
+```yaml
+name: jupyter-eda
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.12
+  - pandas
+  - numpy
+  - matplotlib
+  - jupyter
+```
+
+Recreate with:
+
+```bash
+conda env create -f environment.yml
+```
+
+---
+
+# ⭐ Which One Should You Use?
+
+For a Conda-based project:
+
+```text
+environment.yml
+        ↓
+Primary environment specification
+```
+
+For a pip/venv project:
+
+```text
+requirements.txt
+        ↓
+Primary dependency specification
+```
+
+You **don't automatically need both**.
+
+For your Miniconda projects, I'd use `environment.yml` as the main environment definition.
+
+---
+
+# 🧠 Professional Best Practice
+
+Don't commit:
+
+```text
+jupyter-eda/
+├── ...
+└── environment/    ❌
+```
+
+or a Conda environment directory.
+
+Instead commit:
+
+```text
+environment.yml    ✅
+```
+
+The idea is:
+
+```text
+Actual environment
+       ❌
+       │
+       │ Don't commit
+       ▼
+
+environment.yml
+       ✅
+       │
+       │ Commit
+       ▼
+GitHub
+       │
+       ▼
+Another Developer
+       │
+       ▼
+conda env create -f environment.yml
+       │
+       ▼
+Recreated Environment
+```
+
+---
+
+# 🏆 Commands to Remember
+
+
+```bash
+# Activate
+conda activate ai-engineer
+
+# Install
+conda install pandas
+
+# Install multiple
+conda install numpy pandas matplotlib
+
+# Update
+conda update pandas
+
+# Remove package
+conda remove pandas
+
+# List packages
+conda list
+
+# Export environment
+conda env export > environment.yml
+
+# Create from environment file
+conda env create -f environment.yml
+
+# Install Jupyter kernel support
+python -m pip install ipykernel
+
+# Register kernel
+python -m ipykernel install --user --name ai-engineer --display-name "Python (ai-engineer)"
+```
+
+---
+
+# 🔥 The Most Important Concept
+
+Understand the **relationship**:
+
+```text
+                  MINICONDA
+                      │
+                      ▼
+              CONDA ENVIRONMENT
+                      │
+          ┌───────────┴───────────┐
+          │                       │
+       Python                 Packages
+          │                       │
+          └───────────┬───────────┘
+                      │
+             environment.yml
+                      │
+            ┌─────────┴─────────┐
+            ▼                   ▼
+         VS Code             Jupyter
+            │                   │
+            └─────────┬─────────┘
+                      ▼
+                  AI PROJECT
+                      │
+                      ▼
+                   GitHub
+```
+
+That is the **professional development workflow** you're building throughout this roadmap.
 
