@@ -411,3 +411,881 @@ Miniconda
 
 ---
 
+# Part 2 – Conda Environments
+
+---
+
+# 08. Creating an Environment
+
+## What is a Conda Environment?
+
+A **Conda environment** is an isolated workspace containing its own Python interpreter and project dependencies.
+
+For example:
+
+```text
+Miniconda
+│
+├── base
+│
+├── student-ml
+│
+├── computer-vision
+│
+└── rag-project
+```
+
+Each environment can have different packages and Python versions.
+
+---
+
+## Basic Command
+
+```bash
+conda create -n ai-project
+```
+
+However, for AI development, I recommend specifying the Python version:
+
+```bash
+conda create -n ai-project python=3.12
+```
+
+Here:
+
+```text
+conda create
+    ↓
+Create an environment
+
+-n
+    ↓
+Environment name
+
+ai-project
+    ↓
+Environment name
+
+python=3.12
+    ↓
+Python version
+```
+
+---
+
+## Example
+
+Create your first learning environment:
+
+```bash
+conda create -n ai-engineer python=3.12
+```
+
+Conda will show the packages it plans to install and ask:
+
+```text
+Proceed ([y]/n)?
+```
+
+Type:
+
+```text
+y
+```
+
+---
+
+## Verify It Was Created
+
+```bash
+conda env list
+```
+
+You should see something similar to:
+
+```text
+# conda environments:
+#
+base                  *  ...
+ai-engineer              ...
+```
+
+The `*` indicates the currently active environment.
+
+---
+
+## Interview Answer
+
+> A Conda environment is an isolated workspace containing its own Python interpreter and dependencies. I can create one using `conda create -n ai-engineer python=3.12`, which allows the project to use a specific Python version without affecting other projects.
+
+---
+
+# 09. Activating an Environment
+
+## What Does Activation Mean?
+
+Activation tells your terminal:
+
+> "For the commands I run now, use this Conda environment."
+
+---
+
+## Command
+
+```bash
+conda activate ai-engineer
+```
+
+Your terminal should change from something like:
+
+```text
+(base) C:\Users\Janusha>
+```
+
+to:
+
+```text
+(ai-engineer) C:\Users\Janusha>
+```
+
+That `(ai-engineer)` is important.
+
+It tells you which environment is currently active.
+
+---
+
+## Verify Python
+
+Run:
+
+```bash
+python --version
+```
+
+You should get:
+
+```text
+Python 3.12.x
+```
+
+---
+
+## Verify Conda Environment
+
+You can also run:
+
+```bash
+conda info
+```
+
+Look for the active environment.
+
+---
+
+## Verify Which Python Is Being Used
+
+On Windows:
+
+```bash
+where python
+```
+
+You should see a path associated with your Conda environment.
+
+This is a useful troubleshooting command.
+
+---
+
+## Example
+
+```bash
+conda activate ai-engineer
+
+python --version
+
+where python
+```
+
+---
+
+## Professional Relevance
+
+Before installing packages, always make sure the correct environment is activated.
+
+Otherwise, you might accidentally install packages into the wrong environment.
+
+---
+
+## Interview Answer
+
+> Activating a Conda environment makes that environment's Python interpreter and packages available to the current terminal session. I use `conda activate environment-name` and verify it using `python --version` or `where python`.
+
+---
+
+# 10. Deactivating an Environment
+
+## What Does Deactivation Mean?
+
+Deactivation exits the currently active Conda environment and returns you to the previous environment, usually `base`.
+
+---
+
+## Command
+
+```bash
+conda deactivate
+```
+
+If you were here:
+
+```text
+(ai-engineer) C:\Users\Janusha>
+```
+
+after:
+
+```bash
+conda deactivate
+```
+
+you may return to:
+
+```text
+(base) C:\Users\Janusha>
+```
+
+Running it again may leave the base environment entirely, depending on your Conda configuration.
+
+---
+
+## Why Deactivate?
+
+It's useful when:
+
+* You're finished working on a project.
+* You want to switch environments.
+* You don't want commands to affect the current project environment.
+
+---
+
+## Example
+
+```bash
+conda activate ai-engineer
+
+# Work on project
+
+conda deactivate
+```
+
+---
+
+## Interview Answer
+
+> `conda deactivate` exits the currently active Conda environment. It is useful when I finish working on a project or want to switch to another environment.
+
+---
+
+# 11. Listing Environments
+
+## Why List Environments?
+
+You need to know:
+
+* Which environments exist.
+* Which environment is active.
+* What environments you can use.
+
+---
+
+## Command 1
+
+```bash
+conda env list
+```
+
+Example:
+
+```text
+# conda environments:
+#
+base                    *  C:\Users\Janusha\miniconda3
+ai-engineer                 C:\Users\Janusha\miniconda3\envs\ai-engineer
+computer-vision             C:\Users\Janusha\miniconda3\envs\computer-vision
+```
+
+---
+
+## Command 2
+
+You can also use:
+
+```bash
+conda info --envs
+```
+
+Both commands are useful for listing Conda environments.
+
+---
+
+## Understanding `*`
+
+```text
+ai-engineer       *
+```
+
+The asterisk means:
+
+> This is the currently active environment.
+
+---
+
+## Professional Example
+
+Imagine you have:
+
+```text
+base
+
+python-fundamentals
+
+ai-engineer
+
+computer-vision
+
+rag-project
+```
+
+You can switch between them:
+
+```bash
+conda activate ai-engineer
+```
+
+then:
+
+```bash
+conda activate computer-vision
+```
+
+---
+
+## Interview Answer
+
+> I can list Conda environments using `conda env list` or `conda info --envs`. The asterisk identifies the currently active environment.
+
+---
+
+# 12. Removing Environments
+
+Sometimes you create an environment that you no longer need.
+
+For example:
+
+```text
+test-project
+```
+
+You can remove it.
+
+---
+
+## Recommended Command
+
+```bash
+conda remove --name test-project --all
+```
+
+Or:
+
+```bash
+conda env remove -n test-project
+```
+
+---
+
+## Example
+
+```bash
+conda env list
+```
+
+Suppose:
+
+```text
+base
+ai-engineer
+test-project
+```
+
+Remove:
+
+```bash
+conda env remove -n test-project
+```
+
+Then verify:
+
+```bash
+conda env list
+```
+
+`test-project` should no longer appear.
+
+---
+
+## ⚠️ Important
+
+Removing an environment deletes the packages and environment associated with it.
+
+Make sure you don't need it before deleting it.
+
+---
+
+## Interview Answer
+
+> I can remove a Conda environment using `conda env remove -n environment-name`. This permanently removes that environment and its installed packages, so I would verify that it is no longer needed first.
+
+---
+
+# 13. Selecting Python Versions
+
+This is one of Conda's most useful features.
+
+You can create environments with different Python versions.
+
+---
+
+## Python 3.12
+
+```bash
+conda create -n project-python312 python=3.12
+```
+
+---
+
+## Python 3.11
+
+```bash
+conda create -n project-python311 python=3.11
+```
+
+---
+
+## Python 3.10
+
+```bash
+conda create -n project-python310 python=3.10
+```
+
+Now:
+
+```text
+Miniconda
+│
+├── project-python312
+│   └── Python 3.12
+│
+├── project-python311
+│   └── Python 3.11
+│
+└── project-python310
+    └── Python 3.10
+```
+
+---
+
+## Why Is This Useful?
+
+Imagine:
+
+```text
+Project A → Python 3.12
+
+Project B → Python 3.11
+
+Project C → Python 3.10
+```
+
+You don't need to keep changing the global Python installation.
+
+Each project gets its own environment.
+
+---
+
+## Check Version
+
+After activating:
+
+```bash
+conda activate project-python311
+```
+
+Run:
+
+```bash
+python --version
+```
+
+Output:
+
+```text
+Python 3.11.x
+```
+
+Switch:
+
+```bash
+conda activate project-python312
+```
+
+Then:
+
+```bash
+python --version
+```
+
+Output:
+
+```text
+Python 3.12.x
+```
+
+---
+
+## Interview Answer
+
+> Conda allows different projects to use different Python versions by creating separate environments. For example, I can create one environment with Python 3.11 and another with Python 3.12, then activate the environment required by each project.
+
+---
+
+# 14. Environment Management
+
+Now we combine everything we've learned.
+
+---
+
+## Environment Lifecycle
+
+```text
+                 Create
+                   ↓
+              Environment
+                   ↓
+                Activate
+                   ↓
+            Install Packages
+                   ↓
+               Develop
+                   ↓
+              Deactivate
+                   ↓
+             Reuse Later
+                   ↓
+                Remove
+```
+
+---
+
+# Essential Commands
+
+| Task                         | Command                                  |
+| ---------------------------- | ---------------------------------------- |
+| Create environment           | `conda create -n ai-project python=3.12` |
+| Activate                     | `conda activate ai-project`              |
+| Deactivate                   | `conda deactivate`                       |
+| List environments            | `conda env list`                         |
+| Show environment information | `conda info`                             |
+| Remove environment           | `conda env remove -n ai-project`         |
+| Check Python                 | `python --version`                       |
+| Find Python on Windows       | `where python`                           |
+
+---
+
+# 🧪 Complete Practical Exercise
+
+Let's create an actual environment for your AI Engineer Academy.
+
+## Step 1 — Open Terminal
+
+You can use:
+
+* Miniconda Prompt
+* PowerShell
+* VS Code Terminal
+
+---
+
+## Step 2 — Check Conda
+
+```bash
+conda --version
+```
+
+Example:
+
+```text
+conda 25.x.x
+```
+
+---
+
+## Step 3 — Create Environment
+
+```bash
+conda create -n ai-engineer python=3.12
+```
+
+---
+
+## Step 4 — Activate
+
+```bash
+conda activate ai-engineer
+```
+
+Your terminal should show:
+
+```text
+(ai-engineer)
+```
+
+---
+
+## Step 5 — Verify Python
+
+```bash
+python --version
+```
+
+---
+
+## Step 6 — Find Python
+
+Windows:
+
+```bash
+where python
+```
+
+You should see a path similar to:
+
+```text
+...\miniconda3\envs\ai-engineer\python.exe
+```
+
+The exact path will depend on where Miniconda is installed.
+
+---
+
+## Step 7 — List Environments
+
+```bash
+conda env list
+```
+
+You should see:
+
+```text
+base
+ai-engineer *
+```
+
+---
+
+## Step 8 — Deactivate
+
+```bash
+conda deactivate
+```
+
+---
+
+## Step 9 — Activate Again
+
+```bash
+conda activate ai-engineer
+```
+
+---
+
+# 🧠 Exercise
+
+Create these three environments:
+
+```text
+python-learning
+ai-engineer
+test-environment
+```
+
+Use:
+
+### Python Learning
+
+```bash
+conda create -n python-learning python=3.12
+```
+
+### AI Engineer
+
+```bash
+conda create -n ai-engineer python=3.12
+```
+
+### Test
+
+```bash
+conda create -n test-environment python=3.11
+```
+
+Then:
+
+```bash
+conda env list
+```
+
+You should have something similar to:
+
+```text
+base
+
+python-learning
+
+ai-engineer
+
+test-environment
+```
+
+---
+
+# 🧪 Test Python Versions
+
+### Test environment
+
+```bash
+conda activate test-environment
+
+python --version
+```
+
+Expected:
+
+```text
+Python 3.11.x
+```
+
+Now:
+
+```bash
+conda activate ai-engineer
+
+python --version
+```
+
+Expected:
+
+```text
+Python 3.12.x
+```
+
+You've now demonstrated **multiple Python versions on the same machine without changing the system Python installation**.
+
+---
+
+# ⚠️ One Important Correction to Your Mental Model
+
+Don't think:
+
+> "Every project needs Conda."
+
+Instead:
+
+```text
+Simple Python Project
+        ↓
+venv + pip
+```
+
+or:
+
+```text
+Complex AI/ML Project
+        ↓
+Conda + packages
+```
+
+Both are valid.
+
+Your goal is to understand **why you choose one**.
+
+---
+
+# 🎯 Professional AI Workflow
+
+For your future AI projects, you may have:
+
+```text
+AI Engineer Academy
+│
+├── Project 001
+│   └── student-ml
+│
+├── Project 002
+│   └── house-price
+│
+├── Project 003
+│   └── fraud-detection
+│
+├── Project 004
+│   └── computer-vision
+│
+└── Project 005
+    └── rag-chatbot
+```
+
+Each environment is isolated.
+
+This becomes especially important when you eventually work with:
+
+* Scikit-learn
+* TensorFlow
+* PyTorch
+* OpenCV
+* Transformers
+* LangChain
+* FastAPI
+
+because dependency requirements can differ significantly between projects.
+
+---
+
+# ⭐ The Command Set You Should Memorize
+
+
+These are enough for this part:
+
+```bash
+# Create
+conda create -n ai-engineer python=3.12
+
+# Activate
+conda activate ai-engineer
+
+# Deactivate
+conda deactivate
+
+# List
+conda env list
+
+# Check Python
+python --version
+
+# Windows: locate Python
+where python
+
+# Remove
+conda env remove -n ai-engineer
+```
+
+

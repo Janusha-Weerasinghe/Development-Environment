@@ -606,3 +606,702 @@ Then install your project dependencies and configure **VS Code/Jupyter** to use 
 And importantly:
 
 > **Don't use Conda just because it's "for AI."** Understand when it provides value. For a simple Python project, `venv` + pip may be perfectly appropriate. For more complex scientific/AI environments, Conda can be a useful choice.
+
+---
+
+# Part 02
+
+# 🟢 Beginner
+
+## 1. What is a Conda environment?
+
+### Definition
+
+A **Conda environment** is an isolated workspace containing its own Python version and project dependencies.
+
+### Example
+
+```bash
+conda create -n ai-engineer python=3.12
+```
+
+This creates:
+
+```text
+ai-engineer
+    │
+    ├── Python 3.12
+    ├── Packages
+    └── Project dependencies
+```
+
+### Why?
+
+It prevents one project's packages from interfering with another project's packages.
+
+### 🎤 Interview Answer
+
+> A Conda environment is an isolated environment that contains a specific Python version and project dependencies. It allows different projects to use different configurations without causing dependency conflicts.
+
+---
+
+# 2. How do you create a Conda environment?
+
+Use:
+
+```bash
+conda create -n ai-engineer python=3.12
+```
+
+Breakdown:
+
+```text
+conda create
+    ↓
+Create environment
+
+-n
+    ↓
+Name the environment
+
+ai-engineer
+    ↓
+Environment name
+
+python=3.12
+    ↓
+Python version
+```
+
+Conda may ask:
+
+```text
+Proceed ([y]/n)?
+```
+
+Enter:
+
+```text
+y
+```
+
+### 🎤 Interview Answer
+
+> I create a Conda environment using `conda create -n ai-engineer python=3.12`. This creates an isolated environment called `ai-engineer` with Python 3.12.
+
+---
+
+# 3. How do you activate an environment?
+
+Use:
+
+```bash
+conda activate ai-engineer
+```
+
+Your terminal should show something similar to:
+
+```text
+(ai-engineer) C:\Users\Janusha>
+```
+
+The environment name appearing in parentheses indicates that it is active.
+
+### Verify:
+
+```bash
+python --version
+```
+
+### 🎤 Interview Answer
+
+> I activate a Conda environment using `conda activate environment-name`. Once activated, commands such as `python` and package installation operate within that environment.
+
+---
+
+# 4. How do you deactivate an environment?
+
+Use:
+
+```bash
+conda deactivate
+```
+
+For example:
+
+```text
+(ai-engineer) C:\Users\Janusha>
+```
+
+becomes:
+
+```text
+(base) C:\Users\Janusha>
+```
+
+depending on your Conda configuration.
+
+### 🎤 Interview Answer
+
+> I use `conda deactivate` to leave the currently active Conda environment and return to the previous environment.
+
+---
+
+# 5. How do you list all Conda environments?
+
+Use:
+
+```bash
+conda env list
+```
+
+You can also use:
+
+```bash
+conda info --envs
+```
+
+Example:
+
+```text
+# conda environments:
+
+base
+ai-engineer       *
+computer-vision
+rag-project
+```
+
+The `*` identifies the active environment.
+
+### 🎤 Interview Answer
+
+> I can list Conda environments using `conda env list` or `conda info --envs`. The asterisk indicates the currently active environment.
+
+---
+
+# 🟡 Intermediate
+
+# 6. How do you create an environment with a specific Python version?
+
+Specify the version during creation.
+
+For Python 3.12:
+
+```bash
+conda create -n ai-project python=3.12
+```
+
+For Python 3.11:
+
+```bash
+conda create -n cv-project python=3.11
+```
+
+You could therefore have:
+
+```text
+ai-project
+    → Python 3.12
+
+cv-project
+    → Python 3.11
+```
+
+### 🎤 Interview Answer
+
+> I specify the Python version when creating the environment, for example `conda create -n ai-project python=3.12`. This allows different projects to use different Python versions.
+
+---
+
+# 7. How do you check which Python version is active?
+
+First activate the environment:
+
+```bash
+conda activate ai-engineer
+```
+
+Then:
+
+```bash
+python --version
+```
+
+Example:
+
+```text
+Python 3.12.10
+```
+
+You can also use:
+
+```bash
+python -V
+```
+
+### 🎤 Interview Answer
+
+> After activating the environment, I use `python --version` to verify which Python version is currently being used.
+
+---
+
+# 8. How do you find the Python executable being used on Windows?
+
+Use:
+
+```bash
+where python
+```
+
+For example:
+
+```text
+C:\Users\Janusha\miniconda3\envs\ai-engineer\python.exe
+```
+
+This is extremely useful when troubleshooting environment problems.
+
+For example, if you thought you were using:
+
+```text
+ai-engineer
+```
+
+but `where python` shows:
+
+```text
+C:\Python312\python.exe
+```
+
+you know that your terminal isn't using the expected Conda environment.
+
+### 🎤 Interview Answer
+
+> On Windows, I use `where python` to find the Python executable currently being resolved by the terminal. This helps verify that the correct Conda environment is being used.
+
+---
+
+# 9. How do you remove a Conda environment?
+
+Use:
+
+```bash
+conda env remove -n test-project
+```
+
+For example:
+
+```bash
+conda env remove -n old-project
+```
+
+Then verify:
+
+```bash
+conda env list
+```
+
+### ⚠️ Important
+
+Don't remove an environment while you're actively using it.
+
+First:
+
+```bash
+conda deactivate
+```
+
+Then remove it.
+
+### 🎤 Interview Answer
+
+> I deactivate the environment first and then remove it using `conda env remove -n environment-name`. I verify the environment is no longer needed before deleting it because its installed packages and configuration will be removed.
+
+---
+
+# 10. Why should you verify the active environment before installing packages?
+
+This is **very important in professional development**.
+
+Imagine you want:
+
+```bash
+pip install pandas
+```
+
+But you accidentally have:
+
+```text
+(base)
+```
+
+active instead of:
+
+```text
+(ai-engineer)
+```
+
+You may install Pandas into the wrong environment.
+
+Then your project says:
+
+```text
+ModuleNotFoundError
+```
+
+even though you installed the package.
+
+---
+
+## Correct Workflow
+
+Before installing:
+
+```bash
+conda activate ai-engineer
+```
+
+Check:
+
+```bash
+python --version
+```
+
+On Windows:
+
+```bash
+where python
+```
+
+Then install your package.
+
+### 🎤 Interview Answer
+
+> I verify the active environment before installing packages because installing into the wrong environment can cause dependency problems and make packages unavailable to the project I'm working on.
+
+---
+
+# 🔴 Interview-Level
+
+# 11. How would you manage two projects requiring different Python versions?
+
+Suppose:
+
+```text
+Project A → Python 3.11
+
+Project B → Python 3.12
+```
+
+Create two environments:
+
+```bash
+conda create -n project-a python=3.11
+```
+
+```bash
+conda create -n project-b python=3.12
+```
+
+For Project A:
+
+```bash
+conda activate project-a
+```
+
+For Project B:
+
+```bash
+conda activate project-b
+```
+
+Therefore:
+
+```text
+Miniconda
+│
+├── project-a
+│   └── Python 3.11
+│
+└── project-b
+    └── Python 3.12
+```
+
+### 🎤 Interview Answer
+
+> I would create separate Conda environments for the two projects, specifying the required Python version for each. I would activate the appropriate environment when working on each project, keeping their dependencies isolated.
+
+---
+
+# 12. What does the `*` mean in `conda env list`?
+
+Example:
+
+```text
+# conda environments:
+
+base
+ai-engineer       *
+computer-vision
+```
+
+The:
+
+```text
+*
+```
+
+means:
+
+> **This is the currently active Conda environment.**
+
+So here:
+
+```text
+ai-engineer
+```
+
+is active.
+
+### 🎤 Interview Answer
+
+> The asterisk in `conda env list` identifies the currently active Conda environment.
+
+---
+
+# 13. What happens when you activate a Conda environment?
+
+When you run:
+
+```bash
+conda activate ai-engineer
+```
+
+Conda configures the current terminal session to use that environment.
+
+The environment's:
+
+* Python interpreter
+* Installed packages
+* Executable paths
+
+become the ones used by the terminal.
+
+Your prompt normally changes to:
+
+```text
+(ai-engineer)
+```
+
+For example:
+
+```bash
+python
+```
+
+now refers to the Python installation associated with that environment.
+
+### 🎤 Interview Answer
+
+> Activating a Conda environment changes the current shell so that commands use the environment's Python interpreter, packages, and executables. The environment name is normally displayed in the terminal prompt.
+
+---
+
+# 14. Why shouldn't you delete an environment without checking its importance first?
+
+Because deleting an environment removes its installed dependencies and configuration.
+
+Imagine:
+
+```text
+ai-engineer
+│
+├── Python
+├── NumPy
+├── Pandas
+├── Jupyter
+├── Scikit-learn
+└── Project dependencies
+```
+
+If you delete it:
+
+```bash
+conda env remove -n ai-engineer
+```
+
+those installed packages in that environment are removed.
+
+Your project files may still exist, but the environment itself is gone.
+
+You may need to recreate it from a dependency specification.
+
+### 🎤 Interview Answer
+
+> An environment contains the project's Python interpreter and dependencies, so deleting it removes that environment and its installed packages. I should verify that it is no longer needed and that I can recreate it before deleting it.
+
+---
+
+# 15. Describe the complete lifecycle of a Conda environment.
+
+This is the **best question in this section** because it tests whether you understand the complete workflow.
+
+---
+
+## Step 1 — Create
+
+```bash
+conda create -n ai-engineer python=3.12
+```
+
+↓
+
+## Step 2 — Activate
+
+```bash
+conda activate ai-engineer
+```
+
+↓
+
+## Step 3 — Verify
+
+```bash
+python --version
+```
+
+and on Windows:
+
+```bash
+where python
+```
+
+↓
+
+## Step 4 — Install Dependencies
+
+For example:
+
+```bash
+conda install pandas numpy matplotlib
+```
+
+↓
+
+## Step 5 — Develop
+
+Work in:
+
+```text
+VS Code
++
+Jupyter
+```
+
+↓
+
+## Step 6 — Deactivate
+
+```bash
+conda deactivate
+```
+
+↓
+
+## Step 7 — Reuse
+
+Later:
+
+```bash
+conda activate ai-engineer
+```
+
+↓
+
+## Step 8 — Remove When No Longer Needed
+
+```bash
+conda env remove -n ai-engineer
+```
+
+---
+
+# 🎯 Complete Lifecycle
+
+```text
+              CREATE
+                 │
+                 ▼
+        ┌─────────────────┐
+        │ Conda Environment│
+        └────────┬────────┘
+                 │
+                 ▼
+              ACTIVATE
+                 │
+                 ▼
+              VERIFY
+                 │
+                 ▼
+        INSTALL DEPENDENCIES
+                 │
+                 ▼
+              DEVELOP
+          ┌──────┴──────┐
+          │             │
+        VS Code      Jupyter
+          │             │
+          └──────┬──────┘
+                 │
+                 ▼
+             DEACTIVATE
+                 │
+                 ▼
+               REUSE
+                 │
+                 ▼
+              REMOVE
+          (when needed)
+```
+
+### 🎤 Interview Answer
+
+> The lifecycle starts by creating an environment with the required Python version. I then activate and verify it, install the required dependencies, and use the environment for development in tools such as VS Code and Jupyter. When finished, I deactivate it. I can reactivate and reuse it later, and eventually remove it when it is no longer required.
+
+---
+
+# 🧠 Quick Interview Revision
+
+If an interviewer gives you a terminal and says:
+
+> **"Set up a Python 3.12 environment for an AI project."**
+
+You should be able to immediately write:
+
+```bash
+conda create -n ai-engineer python=3.12
+
+conda activate ai-engineer
+
+python --version
+
+where python
+```
+
+Then install your dependencies:
+
+```bash
+conda install pandas numpy matplotlib
+```
+
+And verify:
+
+```bash
+conda list
+```
+
+That's the practical skill we're building.
+
+---
+
