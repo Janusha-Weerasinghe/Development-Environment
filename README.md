@@ -391,3 +391,52 @@ For **Lesson 06 – Jupyter Notebook**, I'd streamline it like this.
 29. Quiz
 
 ---
+
+
+# Lesson 07 – Miniconda
+
+## Part 1 – Fundamentals
+
+1. Introduction to Miniconda
+2. Why Miniconda?
+3. Miniconda vs Anaconda
+4. Conda vs `venv`
+5. Industry Usage
+6. Installation
+7. Conda Architecture
+
+## Part 2 – Conda Environments
+
+8. Creating an Environment
+9. Activating an Environment
+10. Deactivating an Environment
+11. Listing Environments
+12. Removing Environments
+13. Selecting Python Versions
+14. Environment Management
+
+## Part 3 – Package Management
+
+15. Installing Packages
+16. Updating Packages
+17. Removing Packages
+18. Conda vs pip
+19. `environment.yml`
+20. Jupyter Integration
+21. VS Code Integration
+
+## Part 4 – Professional Development
+
+22. Practical
+23. Exercises
+24. Assignment
+25. Mini Project
+26. GitHub
+27. README
+28. Interview Questions
+29. Best Practices
+30. Common Mistakes
+31. Summary
+32. Quiz
+
+---
