@@ -1,0 +1,1674 @@
+# 📚 Lesson 08 – PostgreSQL
+
+# Part 1 – PostgreSQL Fundamentals
+
+---
+
+# 01. Introduction to PostgreSQL
+
+## 1. What is PostgreSQL?
+
+### Definition
+
+**PostgreSQL** is an open-source **object-relational database management system (ORDBMS)** that uses and extends SQL.
+
+It is commonly used to store, manage, query, and manipulate structured data.
+
+For example, an application might store:
+
+```text
+Students
+Courses
+Users
+Orders
+Payments
+Products
+Transactions
+```
+
+inside PostgreSQL.
+
+---
+
+### Simple Architecture
+
+```text
+Application
+     ↓
+PostgreSQL
+     ↓
+Database
+     ↓
+Tables
+     ↓
+Rows + Columns
+```
+
+For example:
+
+```text
+students
+────────────────────────
+id | name    | age
+────────────────────────
+1  | Janusha | 28
+2  | Kasuni  | 25
+3  | Amal    | 30
+```
+
+---
+
+### Purpose
+
+PostgreSQL provides a reliable system for:
+
+* Storing data
+* Retrieving data
+* Updating data
+* Deleting data
+* Maintaining relationships
+* Enforcing data integrity
+* Handling multiple users/applications
+
+---
+
+### Example
+
+You could create a table:
+
+```sql
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    age INTEGER
+);
+```
+
+Then:
+
+```sql
+INSERT INTO students (name, age)
+VALUES ('Janusha', 28);
+```
+
+Retrieve it:
+
+```sql
+SELECT *
+FROM students;
+```
+
+---
+
+### 🎤 Interview Answer
+
+> PostgreSQL is an open-source object-relational database management system that uses SQL to store, manage, and retrieve data. It is widely used for backend applications, APIs, data platforms, and other systems that require reliable relational data management.
+
+---
+
+# 2. What is a Relational Database?
+
+A **relational database** stores data in structured tables consisting of:
+
+```text
+Rows
++
+Columns
+```
+
+For example:
+
+### Students
+
+| id | name    | age |
+| -: | ------- | --: |
+|  1 | Janusha |  28 |
+|  2 | Amal    |  25 |
+|  3 | Kasuni  |  27 |
+
+### Courses
+
+| id | course_name    |
+| -: | -------------- |
+|  1 | AI             |
+|  2 | Database       |
+|  3 | Cyber Security |
+
+The tables can be related.
+
+For example:
+
+```text
+Students
+    │
+    │ student_id
+    ▼
+Enrollments
+    │
+    │ course_id
+    ▼
+Courses
+```
+
+This relationship is one of the main ideas behind relational databases.
+
+---
+
+## Why "Relational"?
+
+Because data can be connected through **relationships between tables**.
+
+For example:
+
+```text
+Student
+   │
+   └── enrolls in ──> Course
+```
+
+---
+
+### 🎤 Interview Answer
+
+> A relational database organizes data into tables containing rows and columns. Relationships between tables are represented using keys such as primary keys and foreign keys.
+
+---
+
+# 3. What is an RDBMS?
+
+**RDBMS** means:
+
+> **Relational Database Management System**
+
+It is software that allows you to create, manage, query, and control relational databases.
+
+Examples include:
+
+```text
+PostgreSQL
+MySQL
+Microsoft SQL Server
+Oracle Database
+```
+
+---
+
+## Database vs RDBMS
+
+This distinction is useful in interviews.
+
+### Database
+
+The actual collection of data.
+
+```text
+students
+courses
+enrollments
+```
+
+### RDBMS
+
+The software that manages that data.
+
+```text
+PostgreSQL
+```
+
+Think:
+
+```text
+RDBMS
+  ↓
+manages
+  ↓
+Database
+  ↓
+Tables
+  ↓
+Data
+```
+
+---
+
+### 🎤 Interview Answer
+
+> An RDBMS is software used to manage relational databases. It provides features such as SQL querying, transactions, relationships, constraints, and data integrity. PostgreSQL is an example of an RDBMS.
+
+---
+
+# 4. PostgreSQL vs Traditional Databases
+
+The phrase **"traditional databases"** can mean different things, so don't treat it as a precise technical category.
+
+For this lesson, the important comparison is between PostgreSQL and older/basic relational database systems.
+
+PostgreSQL provides many capabilities beyond basic table storage and SQL querying.
+
+For example:
+
+```text
+PostgreSQL
+│
+├── Relational data
+├── SQL
+├── Transactions
+├── Constraints
+├── Indexes
+├── JSON/JSONB
+├── Extensions
+└── Advanced data types
+```
+
+It is therefore suitable for applications that need more than simple CRUD operations.
+
+---
+
+## Example
+
+A basic application might only need:
+
+```text
+Users
+Products
+Orders
+```
+
+PostgreSQL can handle this easily.
+
+But it can also support more advanced requirements such as:
+
+```text
+Relational data
++
+JSON documents
++
+Complex queries
++
+Extensions
++
+Large applications
+```
+
+---
+
+### 🎤 Interview Answer
+
+> PostgreSQL is more than a basic relational data store. It combines strong relational and SQL capabilities with features such as JSON/JSONB support, extensibility, advanced data types, and robust transaction handling.
+
+---
+
+# 02. History
+
+## 5. PostgreSQL Origins
+
+PostgreSQL has its roots in the **POSTGRES project** at the University of California, Berkeley.
+
+The project was started in the 1980s under the leadership of **Michael Stonebraker**.
+
+The original POSTGRES system was designed to explore improvements beyond traditional relational database systems.
+
+Later, SQL support was added, and the project eventually became known as PostgreSQL.
+
+---
+
+## Important Timeline
+
+A simplified timeline:
+
+```text
+1986
+ │
+ ▼
+POSTGRES project
+ │
+ ▼
+Evolution and development
+ │
+ ▼
+SQL support added
+ │
+ ▼
+Postgres95
+ │
+ ▼
+PostgreSQL
+ │
+ ▼
+Modern PostgreSQL
+```
+
+The name **PostgreSQL** reflects its origins in POSTGRES while emphasizing its SQL capabilities.
+
+---
+
+# 6. Evolution of PostgreSQL
+
+Over time, PostgreSQL evolved from a research database project into a mature production database system.
+
+Its development expanded to support:
+
+```text
+SQL
++
+Transactions
++
+Indexes
++
+Advanced data types
++
+JSON
++
+JSONB
++
+Extensions
++
+Replication
++
+Performance improvements
+```
+
+The important point for this lesson is:
+
+> PostgreSQL wasn't designed as a modern cloud database from day one. It evolved over decades into a powerful general-purpose database.
+
+---
+
+# 7. Why Did PostgreSQL Become Popular?
+
+Several factors contributed to its adoption.
+
+### 1. Open Source
+
+Organizations can use PostgreSQL without paying proprietary database licensing fees.
+
+### 2. Standards-based SQL
+
+Developers can use familiar SQL.
+
+### 3. Reliability
+
+It provides strong transaction and data-integrity capabilities.
+
+### 4. Extensibility
+
+Developers can extend PostgreSQL with additional functionality.
+
+### 5. Advanced features
+
+It supports features such as:
+
+```text
+JSON/JSONB
+Indexes
+Transactions
+Advanced data types
+Extensions
+```
+
+### 6. Large ecosystem
+
+There are many:
+
+* Developers
+* Libraries
+* Tools
+* Tutorials
+* Framework integrations
+
+---
+
+### 🎤 Interview Answer
+
+> PostgreSQL became popular because it combines open-source availability with strong SQL support, reliability, extensibility, advanced features, and a large developer ecosystem.
+
+---
+
+# 03. Why PostgreSQL?
+
+Now let's go through each point from your roadmap.
+
+---
+
+# 8. Open Source
+
+PostgreSQL is open-source software.
+
+This means organizations can:
+
+* Use it
+* Modify it
+* Study it
+* Contribute to it
+
+without depending on a proprietary licensing model.
+
+---
+
+## Why is this important for companies?
+
+It reduces vendor lock-in and provides access to a large ecosystem.
+
+For developers:
+
+```text
+PostgreSQL
+    ↓
+Free to use
+    ↓
+Learn
+    ↓
+Build projects
+    ↓
+Deploy applications
+```
+
+---
+
+### 🎤 Interview Answer
+
+> PostgreSQL is open source, which makes it accessible to developers and organizations without proprietary licensing costs. It also benefits from community development and transparency.
+
+---
+
+# 9. Reliability
+
+PostgreSQL is designed for reliable data management.
+
+Important features include:
+
+```text
+Transactions
+Data integrity
+Constraints
+Concurrency control
+Recovery mechanisms
+```
+
+For example, imagine a bank transfer:
+
+```text
+Account A
+- $100
+
+Account B
++ $100
+```
+
+You don't want only one side of the transaction to succeed.
+
+A transaction can ensure the operations are handled as a unit.
+
+```sql
+BEGIN;
+
+UPDATE accounts
+SET balance = balance - 100
+WHERE id = 1;
+
+UPDATE accounts
+SET balance = balance + 100
+WHERE id = 2;
+
+COMMIT;
+```
+
+We'll study transactions in more detail later.
+
+---
+
+### 🎤 Interview Answer
+
+> PostgreSQL provides strong reliability through transactions, data integrity mechanisms, concurrency control, and recovery features.
+
+---
+
+# 10. SQL Support
+
+PostgreSQL uses SQL as its primary query language.
+
+For example:
+
+```sql
+SELECT *
+FROM students;
+```
+
+Filtering:
+
+```sql
+SELECT *
+FROM students
+WHERE age >= 18;
+```
+
+Joining:
+
+```sql
+SELECT students.name, courses.course_name
+FROM students
+JOIN courses
+ON students.course_id = courses.id;
+```
+
+SQL is one of the most important skills you'll develop in this lesson.
+
+---
+
+### 🎤 Interview Answer
+
+> PostgreSQL provides strong support for SQL, allowing developers to create, query, update, and manage relational data using a standardized database language.
+
+---
+
+# 11. ACID Compliance
+
+This is an **important interview topic**.
+
+ACID stands for:
+
+```text
+A → Atomicity
+C → Consistency
+I → Isolation
+D → Durability
+```
+
+---
+
+## Atomicity
+
+A transaction is treated as a unit.
+
+Either:
+
+```text
+Everything succeeds
+```
+
+or:
+
+```text
+Everything rolls back
+```
+
+---
+
+## Consistency
+
+A successful transaction should leave the database in a valid state according to its constraints and rules.
+
+---
+
+## Isolation
+
+Concurrent transactions should not improperly interfere with each other.
+
+---
+
+## Durability
+
+Once a transaction is successfully committed, its changes are designed to persist even if a failure occurs.
+
+---
+
+### Example
+
+Bank transfer:
+
+```text
+BEGIN
+   │
+   ├── Deduct from A
+   │
+   ├── Add to B
+   │
+   ▼
+ COMMIT
+```
+
+If something fails:
+
+```text
+ROLLBACK
+```
+
+---
+
+### 🎤 Interview Answer
+
+> ACID represents Atomicity, Consistency, Isolation, and Durability. These properties help ensure that database transactions are processed reliably and that data remains consistent.
+
+---
+
+# 12. Extensibility
+
+One of PostgreSQL's important strengths is its extensibility.
+
+PostgreSQL supports extensions that add functionality.
+
+Examples include:
+
+```text
+PostGIS
+pg_trgm
+pgvector
+```
+
+For your future AI work, **pgvector** is particularly interesting because it can be used for vector similarity search and AI/RAG applications.
+
+However, we won't go deeply into pgvector yet.
+
+---
+
+### 🎤 Interview Answer
+
+> PostgreSQL is extensible, meaning developers can add functionality through extensions. This allows PostgreSQL to support specialized workloads beyond traditional relational database operations.
+
+---
+
+# 13. Scalability
+
+PostgreSQL can support:
+
+```text
+Small applications
+        ↓
+Growing applications
+        ↓
+Large production systems
+```
+
+It provides features and architecture suitable for applications with significant data and concurrent workloads.
+
+However, remember:
+
+> "PostgreSQL is scalable" does **not** mean that every PostgreSQL database automatically scales infinitely.
+
+Performance depends on:
+
+* Database design
+* Queries
+* Indexes
+* Hardware
+* Configuration
+* Application architecture
+
+---
+
+### 🎤 Interview Answer
+
+> PostgreSQL can scale to support applications ranging from small projects to large production workloads, provided that database design, queries, indexing, infrastructure, and application architecture are properly designed.
+
+---
+
+# 14. JSON / JSONB Support
+
+This is particularly useful for modern applications.
+
+PostgreSQL supports JSON data.
+
+Example:
+
+```sql
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    profile JSONB
+);
+```
+
+You could store:
+
+```json
+{
+    "skills": ["Python", "AI", "SQL"],
+    "experience": 2
+}
+```
+
+---
+
+## JSON vs JSONB
+
+At this stage, remember:
+
+```text
+JSON
+↓
+Stores JSON data
+
+JSONB
+↓
+Binary representation optimized for processing/querying
+```
+
+`JSONB` is often preferred when you need to query and index JSON data.
+
+---
+
+### Why useful?
+
+Modern applications sometimes have both:
+
+```text
+Structured relational data
++
+Flexible JSON data
+```
+
+PostgreSQL can handle both.
+
+---
+
+### 🎤 Interview Answer
+
+> PostgreSQL supports JSON and JSONB, allowing applications to store semi-structured data alongside traditional relational data. JSONB is particularly useful when JSON data needs to be efficiently queried and indexed.
+
+---
+
+# 15. Strong Community
+
+PostgreSQL has a large global community.
+
+This provides:
+
+```text
+Documentation
+Libraries
+Extensions
+Tools
+Tutorials
+Developer support
+Contributions
+```
+
+This matters professionally because developers are not working with an isolated technology.
+
+---
+
+### 🎤 Interview Answer
+
+> PostgreSQL has a strong open-source community that contributes to its development, documentation, extensions, tools, and ecosystem.
+
+---
+
+# 04. Industry Usage
+
+PostgreSQL is used across many types of systems.
+
+---
+
+# 16. Software Companies
+
+Software companies use PostgreSQL for application data such as:
+
+```text
+Users
+Accounts
+Products
+Orders
+Payments
+Logs
+Configurations
+```
+
+A typical backend:
+
+```text
+Frontend
+   ↓
+Backend API
+   ↓
+PostgreSQL
+```
+
+---
+
+# 17. SaaS Applications
+
+SaaS applications commonly need:
+
+```text
+Users
+Organizations
+Subscriptions
+Invoices
+Permissions
+Projects
+Activity
+```
+
+PostgreSQL's relational structure works well for this type of interconnected data.
+
+---
+
+# 18. Web Applications
+
+For example:
+
+```text
+React
+   ↓
+FastAPI / Node.js / ASP.NET
+   ↓
+PostgreSQL
+```
+
+PostgreSQL stores the application's persistent data.
+
+---
+
+# 19. Data Platforms
+
+PostgreSQL can also be used for:
+
+```text
+Data storage
+Data analysis
+Reporting
+ETL processes
+Analytics
+```
+
+You can connect:
+
+```text
+PostgreSQL
+      ↓
+Python
+      ↓
+Pandas
+      ↓
+EDA
+```
+
+This connects directly with your Jupyter and Data Science modules.
+
+---
+
+# 20. AI/ML Systems
+
+PostgreSQL can act as a source of training or application data.
+
+Example:
+
+```text
+PostgreSQL
+     ↓
+Python
+     ↓
+Pandas
+     ↓
+Data Cleaning
+     ↓
+Feature Engineering
+     ↓
+Machine Learning
+```
+
+For AI applications:
+
+```text
+Application
+     ↓
+PostgreSQL
+     ↓
+Application Data
+     ↓
+AI Model
+```
+
+And later:
+
+```text
+PostgreSQL
+     ↓
+pgvector
+     ↓
+Embeddings
+     ↓
+RAG
+```
+
+Again, we'll study this later.
+
+---
+
+# 21. Backend APIs
+
+This is especially important for you because of your Web API experience.
+
+A typical architecture:
+
+```text
+Client
+  ↓
+REST API
+  ↓
+Business Logic
+  ↓
+PostgreSQL
+```
+
+For example:
+
+```text
+GET /students
+       ↓
+FastAPI
+       ↓
+PostgreSQL
+       ↓
+students table
+```
+
+The database doesn't directly communicate with the frontend in a typical secure architecture.
+
+---
+
+# 05. PostgreSQL vs Other Databases
+
+We don't need deep database administration here.
+
+The goal is to understand **when each technology is generally appropriate**.
+
+---
+
+# 22. PostgreSQL vs MySQL
+
+| PostgreSQL                   | MySQL                      |
+| ---------------------------- | -------------------------- |
+| Open source                  | Open source                |
+| Strong SQL capabilities      | Strong SQL capabilities    |
+| Highly extensible            | Widely used                |
+| Rich data types              | Strong web ecosystem       |
+| JSON/JSONB                   | JSON support               |
+| Advanced relational features | Common in web applications |
+
+### Simple interview explanation
+
+> PostgreSQL and MySQL are both popular open-source relational databases. PostgreSQL is particularly known for extensibility, advanced SQL capabilities, and rich data types, while MySQL has historically been very popular in web application stacks.
+
+Don't say:
+
+> "PostgreSQL is always better than MySQL."
+
+The appropriate choice depends on the application.
+
+---
+
+# 23. PostgreSQL vs SQL Server
+
+| PostgreSQL                 | SQL Server                               |
+| -------------------------- | ---------------------------------------- |
+| Open source                | Microsoft's commercial database platform |
+| Cross-platform             | Strong Microsoft ecosystem               |
+| SQL-based                  | SQL-based                                |
+| Extensible                 | Strong enterprise tooling                |
+| Popular across many stacks | Strong .NET/Azure integration            |
+
+### Interview answer
+
+> PostgreSQL is an open-source, cross-platform database, while SQL Server is Microsoft's database platform with strong integration with the Microsoft ecosystem. Both are capable relational database systems.
+
+---
+
+# 24. PostgreSQL vs MongoDB
+
+This is an important distinction.
+
+### PostgreSQL
+
+Primarily relational:
+
+```text
+Tables
+Rows
+Columns
+Relationships
+```
+
+### MongoDB
+
+Document-oriented:
+
+```text
+Collections
+     ↓
+Documents
+     ↓
+JSON-like structures
+```
+
+Conceptually:
+
+```text
+PostgreSQL
+
+students
+├── id
+├── name
+└── age
+```
+
+versus:
+
+```text
+MongoDB
+
+students
+{
+    "name": "Janusha",
+    "age": 28
+}
+```
+
+### Interview Answer
+
+> PostgreSQL is primarily a relational database using tables and relationships, while MongoDB is a document-oriented NoSQL database that stores flexible document structures. PostgreSQL is generally a strong choice when relational integrity and complex relationships are important.
+
+---
+
+# 25. PostgreSQL vs SQLite
+
+### PostgreSQL
+
+A full client-server database system.
+
+```text
+Application
+    ↓
+PostgreSQL Server
+    ↓
+Database
+```
+
+### SQLite
+
+An embedded database.
+
+```text
+Application
+    ↓
+SQLite database file
+```
+
+SQLite is excellent for:
+
+* Small applications
+* Local storage
+* Prototypes
+* Embedded systems
+* Mobile applications
+
+PostgreSQL is more appropriate for many multi-user server applications.
+
+---
+
+### Interview Answer
+
+> PostgreSQL is a client-server relational database system designed for multi-user applications, while SQLite is an embedded database stored in a local file. SQLite is useful for lightweight applications and prototypes, whereas PostgreSQL is often more suitable for server-based production systems.
+
+---
+
+# 26. PostgreSQL Architecture
+
+Now let's understand the architecture from your roadmap.
+
+```text
+Application
+      ↓
+PostgreSQL Client
+      ↓
+PostgreSQL Server
+      ↓
+Database
+      ↓
+Schema
+      ↓
+Tables
+      ↓
+Rows / Columns
+```
+
+Let's break this down.
+
+---
+
+# Application
+
+This is your software.
+
+For example:
+
+```text
+React
+FastAPI
+Django
+Node.js
+ASP.NET
+Python
+```
+
+The application needs data.
+
+---
+
+# PostgreSQL Client
+
+The client is the interface used to communicate with PostgreSQL.
+
+Examples:
+
+```text
+psql
+pgAdmin
+Python database driver
+Database tools
+```
+
+The client sends SQL commands to the PostgreSQL server.
+
+---
+
+# PostgreSQL Server
+
+The PostgreSQL server is the database service responsible for processing database operations.
+
+It:
+
+```text
+Receives requests
+       ↓
+Processes SQL
+       ↓
+Reads/writes data
+       ↓
+Returns results
+```
+
+---
+
+# Database
+
+A PostgreSQL server can contain multiple databases.
+
+For example:
+
+```text
+PostgreSQL Server
+│
+├── ai_academy
+├── ecommerce
+└── student_management
+```
+
+---
+
+# Schema
+
+A schema organizes database objects inside a database.
+
+For example:
+
+```text
+ai_academy
+│
+├── public
+│   ├── students
+│   ├── courses
+│   └── results
+│
+└── analytics
+    ├── reports
+    └── summaries
+```
+
+The default schema commonly encountered is:
+
+```text
+public
+```
+
+---
+
+# Tables
+
+Tables store structured data.
+
+Example:
+
+```text
+students
+```
+
+```text
+id | name | age
+---|------|----
+1  | Janusha | 28
+2  | Amal | 25
+```
+
+---
+
+# Rows
+
+A row represents one record.
+
+```text
+1 | Janusha | 28
+```
+
+is one row.
+
+---
+
+# Columns
+
+Columns represent attributes.
+
+```text
+id
+name
+age
+```
+
+---
+
+## 🎤 Interview Answer
+
+> A typical PostgreSQL architecture consists of an application communicating through a PostgreSQL client or driver with the PostgreSQL server. The server manages databases, which contain schemas, and schemas contain tables. Tables store data as rows and columns.
+
+---
+
+# 07. PostgreSQL Installation
+
+Now we move from theory to actual setup.
+
+---
+
+# 27. PostgreSQL Server
+
+The **PostgreSQL server** is the actual database service.
+
+Your applications connect to this service.
+
+Think:
+
+```text
+Your Python application
+        ↓
+PostgreSQL connection
+        ↓
+PostgreSQL Server
+        ↓
+Database
+```
+
+---
+
+# 28. pgAdmin
+
+**pgAdmin** is a graphical administration and development tool for PostgreSQL.
+
+Instead of typing every command manually, you can visually manage databases.
+
+You can use pgAdmin to:
+
+* Create databases
+* Create tables
+* Run SQL
+* View data
+* Manage users
+* Inspect database objects
+
+For learning PostgreSQL, pgAdmin is very useful.
+
+---
+
+# 29. PostgreSQL Command-Line Tools
+
+One important tool is:
+
+```text
+psql
+```
+
+`psql` is PostgreSQL's interactive command-line client.
+
+For example:
+
+```bash
+psql -U postgres
+```
+
+You can then execute SQL commands.
+
+---
+
+# 30. Default Port
+
+PostgreSQL commonly uses:
+
+```text
+5432
+```
+
+So a typical local connection might look like:
+
+```text
+Host: localhost
+Port: 5432
+```
+
+Don't assume every PostgreSQL installation must use 5432—the port can be changed.
+
+---
+
+# 31. PostgreSQL Service
+
+On Windows, PostgreSQL runs as a system service.
+
+You need the PostgreSQL server service running before applications can connect to the local server.
+
+Conceptually:
+
+```text
+PostgreSQL Service
+       ↓
+PostgreSQL Server
+       ↓
+Accepts Connections
+```
+
+If the service isn't running, your application may receive a connection error.
+
+---
+
+# 32. Installation Components
+
+For your development setup, you'll commonly encounter:
+
+```text
+PostgreSQL Server
+        +
+pgAdmin
+        +
+Command-line tools
+```
+
+That's enough for this stage.
+
+We're **not** going deep into:
+
+* Advanced server configuration
+* Replication administration
+* High availability
+* Database clustering
+* Production DBA operations
+
+Those are outside the current lesson scope.
+
+---
+
+# 08. Connecting to PostgreSQL
+
+This is extremely important because eventually your Python/FastAPI applications will need to connect to PostgreSQL.
+
+A connection normally requires:
+
+```text
+Host
+Port
+Database
+Username
+Password
+```
+
+---
+
+# 33. Host
+
+The host tells your application **where PostgreSQL is running**.
+
+For a local installation:
+
+```text
+localhost
+```
+
+or:
+
+```text
+127.0.0.1
+```
+
+For a remote server:
+
+```text
+database.example.com
+```
+
+---
+
+# 34. Port
+
+The default PostgreSQL port is:
+
+```text
+5432
+```
+
+Example:
+
+```text
+localhost:5432
+```
+
+---
+
+# 35. Database
+
+You need to specify which database you want to connect to.
+
+Example:
+
+```text
+ai_academy
+```
+
+---
+
+# 36. Username
+
+A PostgreSQL user account is required.
+
+For example:
+
+```text
+postgres
+```
+
+For real applications, you would normally create a dedicated application user rather than using a superuser account.
+
+---
+
+# 37. Password
+
+The password authenticates the PostgreSQL user.
+
+### ⚠️ Very important for your GitHub projects
+
+Never write:
+
+```python
+password = "MyRealPassword123"
+```
+
+inside code that will be pushed to GitHub.
+
+Instead, use environment variables or a secret-management mechanism.
+
+For example:
+
+```text
+DATABASE_HOST
+DATABASE_PORT
+DATABASE_NAME
+DATABASE_USER
+DATABASE_PASSWORD
+```
+
+We'll cover secure configuration later.
+
+---
+
+# Connection Architecture
+
+Your future FastAPI project could look like:
+
+```text
+                    Client
+                      │
+                      ▼
+                   FastAPI
+                      │
+                      ▼
+                Database Driver
+                      │
+             ┌────────┴────────┐
+             │ Connection Info │
+             │                │
+             │ Host           │
+             │ Port           │
+             │ Database       │
+             │ Username       │
+             │ Password       │
+             └────────┬────────┘
+                      │
+                      ▼
+                PostgreSQL
+                      │
+                      ▼
+                  Database
+```
+
+---
+
+# Example Connection Information
+
+For local development:
+
+```text
+Host     : localhost
+Port     : 5432
+Database : ai_academy
+Username : postgres
+Password : ********
+```
+
+Your Python application can use these values to establish a database connection.
+
+---
+
+# 🎤 Interview Answer
+
+> To connect to PostgreSQL, an application typically needs the database host, port, database name, username, and password. For a local PostgreSQL installation, the host is commonly `localhost` and the default port is `5432`. Credentials should be stored securely rather than hard-coded in source code.
+
+---
+
+# 🧠 Part 1 Mental Model
+
+This is the most important diagram from today's lesson:
+
+```text
+                         APPLICATION
+                              │
+                    Python / FastAPI
+                              │
+                              ▼
+                    PostgreSQL CLIENT
+                    / Driver / psql
+                              │
+                              ▼
+                    POSTGRESQL SERVER
+                              │
+                    ┌─────────┴─────────┐
+                    │                   │
+                Database A          Database B
+                    │
+                 Schema
+                    │
+              ┌─────┴─────┐
+              │           │
+           students     courses
+              │           │
+           rows/cols   rows/cols
+```
+
+And the connection information:
+
+```text
+Host
+  ↓
+Port
+  ↓
+Database
+  ↓
+Username
+  ↓
+Password
+```
+
+---
+
+# 🔥 One Answer You Should Be Able to Give
+
+If an interviewer asks:
+
+> **"Why would you choose PostgreSQL for an AI/backend application?"**
+
+A strong answer would be:
+
+> **"PostgreSQL provides reliable relational data management, strong SQL support, transactions and data integrity, while also supporting flexible data through JSON/JSONB and extensibility through extensions. For an AI or backend application, it can serve as the primary data store and integrate with Python, APIs, data-processing tools, and later AI technologies such as vector extensions."**
+
+That's a much stronger answer than simply saying:
+
+> "Because PostgreSQL is popular."
+
+---
+
+## ✅ Part 1 Completion Target
+
+You should understand this chain:
+
+```text
+PostgreSQL
+   ↓
+RDBMS
+   ↓
+SQL + Relational Data
+   ↓
+Server
+   ↓
+Database
+   ↓
+Schema
+   ↓
+Tables
+   ↓
+Rows + Columns
+   ↓
+Application/API
+```
+
+And you should be comfortable with:
+
+```text
+Host
+Port
+Database
+Username
+Password
+```
