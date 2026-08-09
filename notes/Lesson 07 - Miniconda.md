@@ -2420,3 +2420,778 @@ Understand the **relationship**:
 
 That is the **professional development workflow** you're building throughout this roadmap.
 
+---
+
+# Part 4 – Professional Development
+
+---
+
+# 22. Practical
+
+We're going to create a small project that demonstrates:
+
+* Conda environment creation
+* Python version verification
+* Package installation
+* Environment information
+* Jupyter integration
+* VS Code integration
+* `environment.yml`
+* GitHub-ready structure
+
+## Practical Project
+
+```text
+Miniconda-Practice/
+│
+├── README.md
+├── environment.yml
+├── .gitignore
+│
+├── src/
+│   └── environment_checker.py
+│
+└── notebooks/
+    └── environment_test.ipynb
+```
+
+---
+
+## Step 1 — Create the Environment
+
+```bash
+conda create -n miniconda-practice python=3.12
+```
+
+Activate:
+
+```bash
+conda activate miniconda-practice
+```
+
+---
+
+## Step 2 — Install Packages
+
+```bash
+conda install pandas numpy matplotlib
+```
+
+Install Jupyter support:
+
+```bash
+python -m pip install jupyter ipykernel
+```
+
+---
+
+## Step 3 — Verify
+
+```bash
+python --version
+```
+
+```bash
+conda list
+```
+
+Windows:
+
+```bash
+where python
+```
+
+---
+
+# Step 4 — Create Python Program
+
+Create:
+
+```text
+src/environment_checker.py
+```
+
+Add:
+
+```python
+import platform
+import sys
+
+print("=" * 50)
+print("Miniconda Environment Checker")
+print("=" * 50)
+
+print(f"Python Version : {sys.version.split()[0]}")
+print(f"Operating System : {platform.system()}")
+print(f"Python Executable : {sys.executable}")
+
+print("\nEnvironment Ready!")
+```
+
+Run:
+
+```bash
+python src/environment_checker.py
+```
+
+You should see something similar to:
+
+```text
+==================================================
+Miniconda Environment Checker
+==================================================
+Python Version : 3.12.x
+Operating System : Windows
+Python Executable : ...\miniconda3\envs\miniconda-practice\python.exe
+
+Environment Ready!
+```
+
+The important part is that the Python executable points to your **Conda environment**.
+
+---
+
+# 23. Exercises
+
+## Exercise 1 — Environment Creation
+
+Create:
+
+```text
+data-science
+```
+
+using Python 3.12.
+
+```bash
+conda create -n data-science python=3.12
+```
+
+---
+
+## Exercise 2 — Package Installation
+
+Activate it:
+
+```bash
+conda activate data-science
+```
+
+Install:
+
+```bash
+conda install numpy pandas matplotlib
+```
+
+---
+
+## Exercise 3 — Verification
+
+Run:
+
+```bash
+python --version
+```
+
+and:
+
+```bash
+conda list
+```
+
+Then verify:
+
+```python
+import numpy
+import pandas
+import matplotlib
+
+print("All packages imported successfully.")
+```
+
+---
+
+## Exercise 4 — Environment Switching
+
+Create two environments:
+
+```text
+ml-project
+cv-project
+```
+
+Use different Python versions:
+
+```bash
+conda create -n ml-project python=3.12
+```
+
+```bash
+conda create -n cv-project python=3.11
+```
+
+Then switch between them and verify:
+
+```bash
+python --version
+```
+
+---
+
+## Exercise 5 — Export
+
+Activate:
+
+```bash
+conda activate data-science
+```
+
+Then:
+
+```bash
+conda env export > environment.yml
+```
+
+Open the file and understand what it contains.
+
+---
+
+# 24. Assignment
+
+## Assignment Title
+
+**Professional Conda Environment Setup**
+
+### Objective
+
+Create a reproducible Conda environment for an AI/ML project.
+
+### Requirements
+
+Create:
+
+```text
+AI-Conda-Environment/
+│
+├── README.md
+├── environment.yml
+├── .gitignore
+│
+├── src/
+│   └── environment_checker.py
+│
+└── notebooks/
+    └── environment_test.ipynb
+```
+
+### Your environment must contain:
+
+```text
+Python
+NumPy
+Pandas
+Matplotlib
+Jupyter
+ipykernel
+```
+
+### Demonstrate:
+
+* Environment creation
+* Activation
+* Package installation
+* Python version verification
+* Package verification
+* Jupyter kernel selection
+* VS Code interpreter selection
+* Environment export
+
+---
+
+# 25. Mini Project
+
+# 🏆 Project: AI Development Environment Manager
+
+## Objective
+
+Create a small project demonstrating that you can build and verify a reproducible AI development environment using Miniconda.
+
+---
+
+## Folder Structure
+
+```text
+AI-Environment-Manager/
+│
+├── README.md
+├── environment.yml
+├── .gitignore
+│
+├── src/
+│   └── environment_checker.py
+│
+├── notebooks/
+│   └── environment_test.ipynb
+│
+└── outputs/
+```
+
+---
+
+## Requirements
+
+Your Python program should display:
+
+1. Python version
+2. Python executable path
+3. Operating system
+4. Current working directory
+5. Installed NumPy version
+6. Installed Pandas version
+7. Environment status
+
+---
+
+## Example
+
+```python
+import os
+import platform
+import sys
+
+import numpy
+import pandas
+
+
+print("=" * 50)
+print("AI Development Environment Manager")
+print("=" * 50)
+
+print(f"Python Version      : {sys.version.split()[0]}")
+print(f"Python Executable   : {sys.executable}")
+print(f"Operating System    : {platform.system()}")
+print(f"Current Directory   : {os.getcwd()}")
+
+print(f"NumPy Version       : {numpy.__version__}")
+print(f"Pandas Version      : {pandas.__version__}")
+
+print("\nStatus              : Environment Ready")
+```
+
+---
+
+## Why `sys.executable`?
+
+This is particularly useful.
+
+It tells you exactly which Python interpreter is running the program.
+
+For example:
+
+```text
+C:\Users\Janusha\miniconda3\envs\ai-engineer\python.exe
+```
+
+That proves your project is using the intended environment.
+
+---
+
+# 26. GitHub
+
+Once the mini project works, put it on GitHub.
+
+## Recommended Repository
+
+```text
+AI-Environment-Manager
+```
+
+---
+
+## Git Setup
+
+Inside your project:
+
+```bash
+git init
+```
+
+Configure your identity if you haven't already:
+
+```bash
+git config user.name "Your Name"
+git config user.email "your-email@example.com"
+```
+
+---
+
+## `.gitignore`
+
+Create:
+
+```text
+.gitignore
+```
+
+Example:
+
+```gitignore
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+```
+
+If you ever create a Conda environment **inside the project directory**, ignore that directory too.
+
+---
+
+## Commit
+
+```bash
+git add .
+```
+
+```bash
+git commit -m "Create Miniconda environment manager"
+```
+
+Then push to GitHub.
+
+---
+
+## Important
+
+Commit:
+
+```text
+environment.yml
+```
+
+Don't commit the actual Conda environment.
+
+The idea is:
+
+```text
+environment.yml
+       ↓
+GitHub
+       ↓
+Developer clones project
+       ↓
+conda env create -f environment.yml
+       ↓
+Environment recreated
+```
+
+---
+
+# 27. README
+
+Your README should explain the project professionally.
+
+## Suggested README
+
+````markdown
+# AI Environment Manager
+
+## Overview
+
+AI Environment Manager is a Python project created to demonstrate
+professional Conda environment management for AI and Machine Learning
+development.
+
+## Objectives
+
+- Create an isolated Conda environment
+- Manage Python dependencies
+- Verify the Python interpreter
+- Integrate Jupyter
+- Integrate VS Code
+- Export a reproducible environment
+
+## Technologies
+
+- Python 3.12
+- Miniconda
+- Conda
+- NumPy
+- Pandas
+- Matplotlib
+- Jupyter
+- VS Code
+
+## Project Structure
+
+```text
+AI-Environment-Manager/
+├── README.md
+├── environment.yml
+├── .gitignore
+├── src/
+├── notebooks/
+└── outputs/
+````
+
+## Installation
+
+Create the environment:
+
+```bash
+conda env create -f environment.yml
+```
+
+Activate:
+
+```bash
+conda activate ai-environment-manager
+```
+
+## Run
+
+```bash
+python src/environment_checker.py
+```
+
+## Jupyter
+
+Select the project Conda environment as the Jupyter kernel.
+
+# 29. Best Practices
+
+## 1. Use project-specific environments
+
+```text
+Project A → Environment A
+Project B → Environment B
+```
+
+---
+
+## 2. Specify Python versions
+
+Prefer:
+
+```bash
+conda create -n ai-project python=3.12
+```
+
+rather than leaving the version unspecified when reproducibility matters.
+
+---
+
+## 3. Keep environments reproducible
+
+Use:
+
+```text
+environment.yml
+```
+
+---
+
+## 4. Don't install everything globally
+
+Keep project dependencies isolated.
+
+---
+
+## 5. Verify before installing
+
+```bash
+conda activate project-name
+```
+
+Then:
+
+```bash
+python --version
+```
+
+---
+
+## 6. Use the correct VS Code interpreter
+
+Don't assume VS Code automatically chose the environment you intended.
+
+Verify it.
+
+---
+
+## 7. Use the correct Jupyter kernel
+
+The notebook kernel should correspond to the project's environment.
+
+---
+
+## 8. Be careful mixing Conda and pip
+
+Use pip deliberately when needed.
+
+---
+
+## 9. Don't blindly update everything
+
+Avoid:
+
+```bash
+conda update --all
+```
+
+on an important project without testing afterward.
+
+---
+
+## 10. Commit the environment specification
+
+```text
+environment.yml
+```
+
+not the actual environment.
+
+---
+
+# 30. Common Mistakes
+
+### ❌ Mistake 1 — Installing packages in `base`
+
+Instead:
+
+```bash
+conda activate ai-engineer
+```
+
+then install.
+
+---
+
+### ❌ Mistake 2 — Wrong Jupyter kernel
+
+Your package is installed but Jupyter can't find it.
+
+Check:
+
+```python
+import sys
+print(sys.executable)
+```
+
+---
+
+### ❌ Mistake 3 — Wrong VS Code interpreter
+
+Check:
+
+```text
+Ctrl + Shift + P
+→ Python: Select Interpreter
+```
+
+---
+
+### ❌ Mistake 4 — Installing everything with pip automatically
+
+If you're using Conda, understand which packages should come from Conda and when pip is actually necessary.
+
+---
+
+### ❌ Mistake 5 — No environment specification
+
+Without:
+
+```text
+environment.yml
+```
+
+recreating the environment can become difficult.
+
+---
+
+### ❌ Mistake 6 — Committing the environment
+
+Don't upload the actual environment directory.
+
+---
+
+### ❌ Mistake 7 — Updating everything without testing
+
+Dependency updates can break existing projects.
+
+---
+
+### ❌ Mistake 8 — Not checking `sys.executable`
+
+This is one of the easiest ways to diagnose environment problems.
+
+---
+
+# 31. Summary
+
+You've now learned the complete Miniconda workflow:
+
+```text
+Miniconda
+    ↓
+Conda
+    ↓
+Create Environment
+    ↓
+Choose Python Version
+    ↓
+Activate
+    ↓
+Install Packages
+    ↓
+Jupyter
+    ↓
+VS Code
+    ↓
+Develop
+    ↓
+Export environment.yml
+    ↓
+GitHub
+    ↓
+Reproduce Environment
+```
+
+---
+
+
+# 🏁 Lesson 07 Completion Goal
+
+When you finish this lesson, you should be able to explain and demonstrate:
+
+```text
+Miniconda
+   ↓
+Conda
+   ↓
+Environment
+   ↓
+Python Version
+   ↓
+Packages
+   ↓
+Jupyter
+   ↓
+VS Code
+   ↓
+environment.yml
+   ↓
+GitHub
+```
+
+
