@@ -1672,3 +1672,1367 @@ Database
 Username
 Password
 ```
+--
+
+# 📚 Part 2 – SQL Fundamentals
+
+```text
+09 Database Creation
+10 Database Connection
+11 Tables
+12 Data Types
+13 INSERT
+14 SELECT
+15 WHERE
+16 UPDATE
+17 DELETE
+18 ORDER BY & LIMIT
+```
+
+---
+
+# 09. Database Creation
+
+## What is a Database?
+
+A **database** is an organized collection of data managed by a database management system.
+
+For this lesson, we'll create:
+
+```text
+ai_academy
+```
+
+Our eventual structure will be:
+
+```text
+ai_academy
+│
+└── public
+    │
+    ├── students
+    ├── courses
+    └── results
+```
+
+---
+
+## Creating a Database
+
+Using SQL:
+
+```sql
+CREATE DATABASE ai_academy;
+```
+
+This tells PostgreSQL:
+
+> Create a new database named `ai_academy`.
+
+---
+
+## Using `psql`
+
+If you're connected to PostgreSQL:
+
+```bash
+psql -U postgres
+```
+
+Then:
+
+```sql
+CREATE DATABASE ai_academy;
+```
+
+---
+
+## Checking Databases
+
+In `psql`:
+
+```sql
+\l
+```
+
+You'll see the available databases.
+
+You can also use:
+
+```sql
+SELECT datname
+FROM pg_database;
+```
+
+---
+
+## Important Difference
+
+Don't confuse:
+
+```text
+Database
+```
+
+with:
+
+```text
+Table
+```
+
+For example:
+
+```text
+ai_academy       ← Database
+    │
+    └── students ← Table
+```
+
+---
+
+## 🎤 Interview Answer
+
+> I can create a PostgreSQL database using `CREATE DATABASE database_name`. For example, `CREATE DATABASE ai_academy;` creates a database named `ai_academy`.
+
+---
+
+# 10. Database Connection
+
+Once the database exists, we need to connect to it.
+
+There are two different concepts:
+
+```text
+Creating a database
+        ↓
+Connecting to the database
+```
+
+---
+
+## Using `psql`
+
+You can connect directly:
+
+```bash
+psql -U postgres -d ai_academy
+```
+
+Here:
+
+```text
+-U postgres
+```
+
+means:
+
+> Connect using the `postgres` user.
+
+And:
+
+```text
+-d ai_academy
+```
+
+means:
+
+> Connect to the `ai_academy` database.
+
+---
+
+## Inside `psql`
+
+You can switch databases using:
+
+```sql
+\c ai_academy
+```
+
+You may see something like:
+
+```text
+You are now connected to database "ai_academy".
+```
+
+---
+
+## Checking Current Database
+
+```sql
+SELECT current_database();
+```
+
+---
+
+## Checking Current User
+
+```sql
+SELECT current_user;
+```
+
+---
+
+## Connection Information
+
+A PostgreSQL connection generally involves:
+
+```text
+Host
+Port
+Database
+Username
+Password
+```
+
+Example:
+
+```text
+Host     : localhost
+Port     : 5432
+Database : ai_academy
+Username : postgres
+Password : ********
+```
+
+---
+
+## Professional Example
+
+A Python application might eventually connect using something conceptually like:
+
+```text
+Python/FastAPI
+       ↓
+Database Driver
+       ↓
+localhost:5432
+       ↓
+ai_academy
+```
+
+---
+
+## 🎤 Interview Answer
+
+> After creating a PostgreSQL database, I can connect to it using `psql -U postgres -d ai_academy` or switch to it using `\c ai_academy` inside psql. Applications use connection information such as host, port, database, username, and password.
+
+---
+
+# 11. Tables
+
+Now we're going to create our first table.
+
+## What is a Table?
+
+A table stores related data using:
+
+```text
+Columns
++
+Rows
+```
+
+For example:
+
+```text
+students
+────────────────────────────
+id | name | age | email
+────────────────────────────
+1  | Janusha | 28 | ...
+2  | Amal    | 25 | ...
+```
+
+---
+
+# Creating a Table
+
+```sql
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    age INTEGER,
+    email VARCHAR(150)
+);
+```
+
+Let's understand each part.
+
+### `students`
+
+The table name.
+
+### `id`
+
+The identifier column.
+
+### `SERIAL`
+
+Automatically generates sequential integer values.
+
+### `PRIMARY KEY`
+
+Uniquely identifies each row.
+
+### `name`
+
+Stores text.
+
+### `VARCHAR(100)`
+
+Text with a maximum length of 100 characters.
+
+### `age`
+
+Stores an integer.
+
+### `email`
+
+Stores text.
+
+---
+
+## View Tables
+
+In `psql`:
+
+```sql
+\dt
+```
+
+Or:
+
+```sql
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'public';
+```
+
+---
+
+## Describe a Table
+
+In `psql`:
+
+```sql
+\d students
+```
+
+This shows information about the table structure.
+
+---
+
+## 🎤 Interview Answer
+
+> A table is a database object that stores related data in rows and columns. I can create one using `CREATE TABLE`, defining each column's name, data type, and constraints.
+
+---
+
+# 12. Data Types
+
+A database needs to know **what kind of data each column stores**.
+
+PostgreSQL provides many data types.
+
+For this lesson, focus on these:
+
+| Data Type   | Purpose              | Example               |
+| ----------- | -------------------- | --------------------- |
+| `INTEGER`   | Whole numbers        | `28`                  |
+| `BIGINT`    | Large whole numbers  | `1000000000`          |
+| `DECIMAL`   | Exact numeric values | `85.50`               |
+| `VARCHAR`   | Limited text         | `'Janusha'`           |
+| `TEXT`      | Text                 | `'Software Engineer'` |
+| `BOOLEAN`   | True/false           | `TRUE`                |
+| `DATE`      | Date                 | `2026-08-09`          |
+| `TIMESTAMP` | Date + time          | `2026-08-09 10:30:00` |
+| `JSONB`     | JSON data            | `{"skill":"Python"}`  |
+
+---
+
+## Example
+
+```sql
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    salary DECIMAL(10,2),
+    is_active BOOLEAN,
+    joining_date DATE
+);
+```
+
+---
+
+## INTEGER
+
+```sql
+age INTEGER
+```
+
+Stores:
+
+```text
+18
+25
+28
+40
+```
+
+---
+
+## DECIMAL
+
+```sql
+salary DECIMAL(10,2)
+```
+
+Useful for exact decimal values.
+
+For example:
+
+```text
+125000.50
+```
+
+---
+
+## VARCHAR
+
+```sql
+name VARCHAR(100)
+```
+
+Stores text up to the specified character limit.
+
+---
+
+## TEXT
+
+```sql
+description TEXT
+```
+
+Useful for longer text.
+
+---
+
+## BOOLEAN
+
+```sql
+is_active BOOLEAN
+```
+
+Values:
+
+```text
+TRUE
+FALSE
+```
+
+---
+
+## DATE
+
+```sql
+birth_date DATE
+```
+
+Example:
+
+```text
+1998-02-20
+```
+
+---
+
+## TIMESTAMP
+
+```sql
+created_at TIMESTAMP
+```
+
+Example:
+
+```text
+2026-08-09 10:30:00
+```
+
+---
+
+## JSONB
+
+```sql
+skills JSONB
+```
+
+Example:
+
+```json
+{
+    "languages": ["Python", "SQL"],
+    "experience": 2
+}
+```
+
+---
+
+## 🎤 Interview Answer
+
+> A PostgreSQL data type defines what kind of value a column can store. Common types include INTEGER for whole numbers, VARCHAR and TEXT for strings, BOOLEAN for true or false values, DATE and TIMESTAMP for dates and times, and JSONB for semi-structured JSON data.
+
+---
+
+# 13. INSERT
+
+Now we have a table.
+
+But it's empty.
+
+```text
+students
+────────────────────
+id | name | age
+────────────────────
+(empty)
+```
+
+We need to add data.
+
+That's what `INSERT` does.
+
+---
+
+# Basic INSERT
+
+```sql
+INSERT INTO students (name, age, email)
+VALUES ('Janusha', 28, 'janusha@example.com');
+```
+
+Because `id` is automatically generated by `SERIAL`, we don't need to provide it.
+
+---
+
+## Insert Multiple Rows
+
+```sql
+INSERT INTO students (name, age, email)
+VALUES
+    ('Janusha', 28, 'janusha@example.com'),
+    ('Amal', 25, 'amal@example.com'),
+    ('Kasuni', 27, 'kasuni@example.com'),
+    ('Nimal', 30, 'nimal@example.com');
+```
+
+Now:
+
+```text
+students
+────────────────────────────────
+id | name    | age | email
+────────────────────────────────
+1  | Janusha | 28  | ...
+2  | Amal    | 25  | ...
+3  | Kasuni  | 27  | ...
+4  | Nimal   | 30  | ...
+```
+
+---
+
+## Why specify column names?
+
+Prefer:
+
+```sql
+INSERT INTO students (name, age, email)
+VALUES (...);
+```
+
+instead of:
+
+```sql
+INSERT INTO students
+VALUES (...);
+```
+
+Explicit columns make your query clearer and safer if the table structure changes.
+
+---
+
+## 🎤 Interview Answer
+
+> `INSERT` is used to add new records to a table. I normally specify the target columns explicitly and then provide the corresponding values.
+
+---
+
+# 14. SELECT
+
+Now we want to retrieve the data.
+
+That's what `SELECT` does.
+
+---
+
+## Select Everything
+
+```sql
+SELECT *
+FROM students;
+```
+
+Result:
+
+```text
+id | name    | age | email
+---|---------|-----|-------------------
+1  | Janusha | 28  | janusha@example.com
+2  | Amal    | 25  | amal@example.com
+3  | Kasuni  | 27  | kasuni@example.com
+```
+
+---
+
+## Select Specific Columns
+
+Instead of:
+
+```sql
+SELECT *
+FROM students;
+```
+
+you can use:
+
+```sql
+SELECT name, age
+FROM students;
+```
+
+Result:
+
+```text
+name    | age
+--------|----
+Janusha | 28
+Amal    | 25
+Kasuni  | 27
+```
+
+---
+
+## Why avoid `SELECT *` in production?
+
+Because you might only need a few columns.
+
+For example:
+
+```sql
+SELECT name, email
+FROM students;
+```
+
+is often better than:
+
+```sql
+SELECT *
+FROM students;
+```
+
+when you only need name and email.
+
+This can reduce unnecessary data transfer and make queries clearer.
+
+---
+
+## Column Alias
+
+You can rename a column in the result:
+
+```sql
+SELECT
+    name AS student_name,
+    age AS student_age
+FROM students;
+```
+
+---
+
+## 🎤 Interview Answer
+
+> `SELECT` is used to retrieve data from a database. I can select all columns using `SELECT *` or specify only the columns I need, which is generally preferable in application code.
+
+---
+
+# 15. WHERE
+
+`WHERE` is used to **filter rows**.
+
+Without filtering:
+
+```sql
+SELECT *
+FROM students;
+```
+
+returns everyone.
+
+With:
+
+```sql
+SELECT *
+FROM students
+WHERE age >= 28;
+```
+
+we only get students aged 28 or older.
+
+---
+
+## Comparison Operators
+
+You can use:
+
+```text
+=       Equal
+<>      Not equal
+>       Greater than
+<       Less than
+>=      Greater than or equal
+<=      Less than or equal
+```
+
+---
+
+## Examples
+
+### Age greater than 25
+
+```sql
+SELECT *
+FROM students
+WHERE age > 25;
+```
+
+### Age exactly 28
+
+```sql
+SELECT *
+FROM students
+WHERE age = 28;
+```
+
+### Age not 28
+
+```sql
+SELECT *
+FROM students
+WHERE age <> 28;
+```
+
+---
+
+# AND
+
+```sql
+SELECT *
+FROM students
+WHERE age >= 25
+AND age <= 30;
+```
+
+Both conditions must be true.
+
+---
+
+# OR
+
+```sql
+SELECT *
+FROM students
+WHERE age = 25
+OR age = 30;
+```
+
+At least one condition must be true.
+
+---
+
+# LIKE
+
+Search text patterns:
+
+```sql
+SELECT *
+FROM students
+WHERE name LIKE 'J%';
+```
+
+This means:
+
+> Names starting with J.
+
+`%` represents any sequence of characters.
+
+---
+
+# 🎤 Interview Answer
+
+> `WHERE` filters rows based on a condition. For example, `SELECT * FROM students WHERE age >= 28` returns only students whose age is at least 28.
+
+---
+
+# 16. UPDATE
+
+`UPDATE` modifies existing records.
+
+Example:
+
+```sql
+UPDATE students
+SET age = 29
+WHERE id = 1;
+```
+
+This changes the age of the student whose ID is `1`.
+
+---
+
+## ⚠️ Very Important
+
+Never casually run:
+
+```sql
+UPDATE students
+SET age = 29;
+```
+
+without a `WHERE` condition.
+
+That updates **every row**.
+
+Before updating, it's safer to check:
+
+```sql
+SELECT *
+FROM students
+WHERE id = 1;
+```
+
+Then:
+
+```sql
+UPDATE students
+SET age = 29
+WHERE id = 1;
+```
+
+Then verify:
+
+```sql
+SELECT *
+FROM students
+WHERE id = 1;
+```
+
+---
+
+## Update Multiple Columns
+
+```sql
+UPDATE students
+SET
+    age = 29,
+    email = 'newemail@example.com'
+WHERE id = 1;
+```
+
+---
+
+## 🎤 Interview Answer
+
+> `UPDATE` modifies existing records. I normally use a `WHERE` condition to ensure that only the intended rows are changed. An UPDATE without a suitable WHERE clause can modify every row in the table.
+
+---
+
+# 17. DELETE
+
+`DELETE` removes rows.
+
+Example:
+
+```sql
+DELETE FROM students
+WHERE id = 4;
+```
+
+This deletes the student whose ID is 4.
+
+---
+
+## ⚠️ Dangerous Query
+
+```sql
+DELETE FROM students;
+```
+
+This removes **all rows** from the table.
+
+The table itself still exists, but its data is deleted.
+
+---
+
+## Safer Workflow
+
+First:
+
+```sql
+SELECT *
+FROM students
+WHERE id = 4;
+```
+
+Then:
+
+```sql
+DELETE FROM students
+WHERE id = 4;
+```
+
+Then verify:
+
+```sql
+SELECT *
+FROM students;
+```
+
+---
+
+## DELETE vs DROP
+
+Don't confuse these.
+
+### DELETE
+
+Removes rows:
+
+```sql
+DELETE FROM students;
+```
+
+Table remains.
+
+### DROP TABLE
+
+Removes the entire table:
+
+```sql
+DROP TABLE students;
+```
+
+Table structure is removed.
+
+This distinction becomes very important later.
+
+---
+
+## 🎤 Interview Answer
+
+> `DELETE` removes records from a table. A `WHERE` clause should normally be used to limit which records are deleted. Without `WHERE`, all rows are deleted.
+
+---
+
+# 18. ORDER BY & LIMIT
+
+Now we want to control the order and number of results.
+
+---
+
+# ORDER BY
+
+Suppose:
+
+```text
+students
+────────────────
+Janusha | 28
+Amal    | 25
+Kasuni  | 27
+Nimal   | 30
+```
+
+Sort by age:
+
+```sql
+SELECT *
+FROM students
+ORDER BY age;
+```
+
+Default:
+
+```text
+ASC
+```
+
+meaning ascending.
+
+```text
+25
+27
+28
+30
+```
+
+---
+
+# DESC
+
+Descending:
+
+```sql
+SELECT *
+FROM students
+ORDER BY age DESC;
+```
+
+Result:
+
+```text
+30
+28
+27
+25
+```
+
+---
+
+# LIMIT
+
+`LIMIT` restricts the number of rows returned.
+
+```sql
+SELECT *
+FROM students
+LIMIT 3;
+```
+
+Only three rows are returned.
+
+---
+
+# ORDER BY + LIMIT
+
+This combination is extremely useful.
+
+For example:
+
+> Find the 2 oldest students.
+
+```sql
+SELECT *
+FROM students
+ORDER BY age DESC
+LIMIT 2;
+```
+
+---
+
+## Another Example
+
+Find the 5 highest grades:
+
+```sql
+SELECT *
+FROM students
+ORDER BY grade DESC
+LIMIT 5;
+```
+
+---
+
+## 🎤 Interview Answer
+
+> `ORDER BY` sorts query results in ascending or descending order, while `LIMIT` restricts the number of rows returned. They are often used together, such as retrieving the top five highest-scoring students.
+
+---
+
+# 🧠 Complete SQL Workflow
+
+You've now learned the basic CRUD workflow.
+
+```text
+                 PostgreSQL
+                     │
+                     ▼
+                  TABLE
+                     │
+       ┌─────────────┼─────────────┐
+       │             │             │
+       ▼             ▼             ▼
+     INSERT        SELECT        UPDATE
+       │             │             │
+       │          WHERE            │
+       │             │             │
+       └─────────────┼─────────────┘
+                     │
+                   DELETE
+                     │
+                ORDER BY
+                     │
+                  LIMIT
+```
+
+The four major CRUD operations are:
+
+```text
+C → CREATE / INSERT
+R → READ / SELECT
+U → UPDATE
+D → DELETE
+```
+
+---
+
+# 🧪 Your First Complete PostgreSQL Practice
+
+Now I recommend **actually running this**, rather than only reading it.
+
+## Step 1 — Create database
+
+```sql
+CREATE DATABASE ai_academy;
+```
+
+Connect:
+
+```sql
+\c ai_academy
+```
+
+---
+
+## Step 2 — Create table
+
+```sql
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    age INTEGER,
+    email VARCHAR(150)
+);
+```
+
+---
+
+## Step 3 — Insert data
+
+```sql
+INSERT INTO students (name, age, email)
+VALUES
+    ('Janusha', 28, 'janusha@example.com'),
+    ('Amal', 25, 'amal@example.com'),
+    ('Kasuni', 27, 'kasuni@example.com'),
+    ('Nimal', 30, 'nimal@example.com'),
+    ('Tharindu', 23, 'tharindu@example.com');
+```
+
+---
+
+## Step 4 — Read everything
+
+```sql
+SELECT *
+FROM students;
+```
+
+---
+
+## Step 5 — Filter
+
+```sql
+SELECT *
+FROM students
+WHERE age >= 27;
+```
+
+---
+
+## Step 6 — Sort
+
+```sql
+SELECT *
+FROM students
+ORDER BY age DESC;
+```
+
+---
+
+## Step 7 — Top 3
+
+```sql
+SELECT *
+FROM students
+ORDER BY age DESC
+LIMIT 3;
+```
+
+---
+
+## Step 8 — Update
+
+First:
+
+```sql
+SELECT *
+FROM students
+WHERE name = 'Janusha';
+```
+
+Then:
+
+```sql
+UPDATE students
+SET email = 'janusha.ai@example.com'
+WHERE name = 'Janusha';
+```
+
+Verify:
+
+```sql
+SELECT *
+FROM students
+WHERE name = 'Janusha';
+```
+
+---
+
+## Step 9 — Delete
+
+First:
+
+```sql
+SELECT *
+FROM students
+WHERE name = 'Tharindu';
+```
+
+Then:
+
+```sql
+DELETE FROM students
+WHERE name = 'Tharindu';
+```
+
+Verify:
+
+```sql
+SELECT *
+FROM students;
+```
+
+---
+
+# 🎯 The SQL Mental Model
+
+When an interviewer gives you a requirement, think:
+
+> **What data do I need?**
+
+```sql
+SELECT
+```
+
+> **Which table?**
+
+```sql
+FROM
+```
+
+> **Which records?**
+
+```sql
+WHERE
+```
+
+> **How should they be ordered?**
+
+```sql
+ORDER BY
+```
+
+> **How many?**
+
+```sql
+LIMIT
+```
+
+For example:
+
+> "Give me the top 5 students aged 18 or older."
+
+Think:
+
+```sql
+SELECT *
+FROM students
+WHERE age >= 18
+ORDER BY age DESC
+LIMIT 5;
+```
+
+---
+
+# 🔥 Important Interview Follow-Ups
+
+Interviewers often don't stop at:
+
+> "What does SELECT do?"
+
+They may ask:
+
+### Why shouldn't you always use `SELECT *`?
+
+> Because it retrieves every column, which may transfer unnecessary data and make queries less explicit. Selecting only required columns is generally better for application code.
+
+### What happens if UPDATE has no WHERE?
+
+> It updates every row in the table.
+
+### What happens if DELETE has no WHERE?
+
+> It deletes every row from the table.
+
+### What is the difference between DELETE and DROP?
+
+> `DELETE` removes rows while keeping the table. `DROP TABLE` removes the table itself.
+
+### What does LIMIT do?
+
+> It restricts the number of rows returned by a query.
+
+### What is the difference between ASC and DESC?
+
+> `ASC` sorts ascending, while `DESC` sorts descending.
+
+---
+
+
+---
+
+## 🏆 Your Practical Goal
+
+Don't just memorize these commands:
+
+```sql
+CREATE DATABASE
+CREATE TABLE
+INSERT
+SELECT
+WHERE
+UPDATE
+DELETE
+ORDER BY
+LIMIT
+```
+
