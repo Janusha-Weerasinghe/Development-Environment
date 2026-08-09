@@ -1952,3 +1952,1223 @@ This is one of the most important concepts from this part:
                     DELETE
 ```
 
+---
+
+
+## Part 3 Interview Questions & Answers
+
+---
+
+# 🟢 Beginner
+
+## 1. What is a primary key?
+
+A **primary key** is a column or combination of columns that uniquely identifies each row in a table.
+
+Example:
+
+```sql
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100)
+);
+```
+
+Here:
+
+```text
+id → Primary Key
+```
+
+Primary keys must be:
+
+* Unique
+* NOT NULL
+
+### 🎤 Interview Answer
+
+> A primary key uniquely identifies each record in a table. It must contain unique, non-null values.
+
+---
+
+## 2. What is a foreign key?
+
+A **foreign key** is a column that references a key in another table.
+
+Example:
+
+```sql
+CREATE TABLE enrollments (
+    id SERIAL PRIMARY KEY,
+    student_id INTEGER REFERENCES students(id)
+);
+```
+
+Here:
+
+```text
+enrollments.student_id
+        ↓
+students.id
+```
+
+### 🎤 Interview Answer
+
+> A foreign key is a column that references a key in another table. It establishes a relationship between tables and helps maintain referential integrity.
+
+---
+
+## 3. What is a constraint?
+
+A **constraint** is a rule enforced by the database to control what data can be stored.
+
+Common constraints:
+
+```text
+PRIMARY KEY
+FOREIGN KEY
+NOT NULL
+UNIQUE
+CHECK
+DEFAULT
+```
+
+Example:
+
+```sql
+age INTEGER CHECK (age >= 0)
+```
+
+### 🎤 Interview Answer
+
+> A constraint is a database rule used to maintain data integrity and prevent invalid data from being stored.
+
+---
+
+## 4. What is a relationship?
+
+A database relationship describes how records in different tables are connected.
+
+Example:
+
+```text
+Student
+   ↓
+Enrollment
+   ↓
+Course
+```
+
+A student can enroll in a course.
+
+### 🎤 Interview Answer
+
+> A relationship describes how records between different database tables are associated with each other.
+
+---
+
+## 5. What are the three main relationship types?
+
+The three common types are:
+
+```text
+1. One-to-One
+2. One-to-Many
+3. Many-to-Many
+```
+
+Examples:
+
+```text
+User → Profile
+```
+
+One-to-One.
+
+```text
+Student → Results
+```
+
+One-to-Many.
+
+```text
+Students ↔ Courses
+```
+
+Many-to-Many.
+
+### 🎤 Interview Answer
+
+> The three main relational database relationships are one-to-one, one-to-many, and many-to-many.
+
+---
+
+## 6. What is normalization?
+
+**Normalization** is the process of organizing data to reduce unnecessary duplication and improve data integrity.
+
+Instead of:
+
+```text
+students
+────────────────────────────
+student | course | lecturer
+```
+
+we separate the entities:
+
+```text
+students
+courses
+lecturers
+enrollments
+```
+
+### 🎤 Interview Answer
+
+> Normalization organizes database data to reduce redundancy and improve consistency and maintainability.
+
+---
+
+## 7. What is an ER diagram?
+
+**ER** means **Entity-Relationship**.
+
+An ER diagram visually represents:
+
+```text
+Entities
+Attributes
+Relationships
+```
+
+Example:
+
+```text
+Students
+   │
+   │
+   ▼
+Enrollments
+   │
+   │
+   ▼
+Courses
+```
+
+### 🎤 Interview Answer
+
+> An ER diagram is a visual representation of the entities, attributes, and relationships in a database. It helps developers design the database before implementing the tables.
+
+---
+
+## 8. What is a JOIN?
+
+A JOIN combines related data from multiple tables.
+
+Example:
+
+```sql
+SELECT
+    students.name,
+    results.score
+FROM students
+JOIN results
+    ON students.id = results.student_id;
+```
+
+This combines:
+
+```text
+students
++
+results
+```
+
+### 🎤 Interview Answer
+
+> A JOIN is used to retrieve related data from multiple tables using a relationship between columns, usually primary and foreign keys.
+
+---
+
+## 9. What is an aggregate function?
+
+Aggregate functions perform calculations across multiple rows.
+
+Common examples:
+
+```text
+COUNT()
+SUM()
+AVG()
+MIN()
+MAX()
+```
+
+Example:
+
+```sql
+SELECT AVG(score)
+FROM results;
+```
+
+### 🎤 Interview Answer
+
+> An aggregate function performs a calculation across multiple rows, such as counting records, calculating an average, or finding the minimum or maximum value.
+
+---
+
+## 10. What does GROUP BY do?
+
+`GROUP BY` groups rows with the same value so aggregate functions can be applied to each group.
+
+Example:
+
+```sql
+SELECT
+    student_id,
+    AVG(score)
+FROM results
+GROUP BY student_id;
+```
+
+This calculates the average score **for each student**.
+
+### 🎤 Interview Answer
+
+> GROUP BY groups rows with the same values so that aggregate functions can be applied separately to each group.
+
+---
+
+# 🟡 Intermediate
+
+## 11. What is the difference between a primary key and foreign key?
+
+| Primary Key              | Foreign Key                    |
+| ------------------------ | ------------------------------ |
+| Identifies a record      | References another table's key |
+| Uniquely identifies rows | Establishes relationships      |
+| Must be unique           | Can contain repeated values    |
+| Cannot be NULL           | Can be NULL unless restricted  |
+
+Example:
+
+```text
+students
+──────────────
+id ← PRIMARY KEY
+```
+
+```text
+results
+──────────────
+student_id ← FOREIGN KEY
+     │
+     └──────→ students.id
+```
+
+### 🎤 Interview Answer
+
+> A primary key uniquely identifies a record within its own table, while a foreign key references a key in another table and establishes a relationship between the tables.
+
+---
+
+# 12. What is referential integrity?
+
+Referential integrity ensures that relationships between tables remain valid.
+
+Suppose:
+
+```text
+students
+id
+---
+1
+2
+3
+```
+
+And:
+
+```text
+results
+student_id
+----------
+1
+2
+999 ❌
+```
+
+If `student_id` is a foreign key referencing `students.id`, PostgreSQL can prevent the invalid `999` reference.
+
+### 🎤 Interview Answer
+
+> Referential integrity ensures that foreign-key relationships remain valid. It prevents records from referencing non-existent records in the related table.
+
+---
+
+# 13. What are the main PostgreSQL constraints?
+
+The main constraints covered in this lesson are:
+
+```text
+PRIMARY KEY
+FOREIGN KEY
+NOT NULL
+UNIQUE
+CHECK
+DEFAULT
+```
+
+Example:
+
+```sql
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE,
+    age INTEGER CHECK (age >= 0),
+    is_active BOOLEAN DEFAULT TRUE
+);
+```
+
+### 🎤 Interview Answer
+
+> The main constraints are PRIMARY KEY, FOREIGN KEY, NOT NULL, UNIQUE, CHECK, and DEFAULT. They help enforce data integrity and prevent invalid data.
+
+---
+
+# 14. What is a one-to-many relationship?
+
+A one-to-many relationship means:
+
+> One record in one table can be related to many records in another table.
+
+Example:
+
+```text
+Student
+   │
+   ├── Result
+   ├── Result
+   └── Result
+```
+
+One student can have many results.
+
+Database:
+
+```text
+students
+id | name
+1  | Janusha
+```
+
+```text
+results
+id | student_id | score
+1  | 1          | 85
+2  | 1          | 90
+3  | 1          | 78
+```
+
+### 🎤 Interview Answer
+
+> A one-to-many relationship means one record in one table can be associated with multiple records in another table. For example, one student can have multiple results.
+
+---
+
+# 15. How do you implement many-to-many relationships?
+
+You normally use an **intermediate/junction table**.
+
+Example:
+
+```text
+Students
+   │
+   ▼
+Enrollments
+   ▲
+   │
+Courses
+```
+
+Tables:
+
+```text
+students
+id
+```
+
+```text
+courses
+id
+```
+
+```text
+enrollments
+student_id
+course_id
+```
+
+Example:
+
+```text
+Janusha → AI
+Janusha → Database
+Amal    → AI
+```
+
+### 🎤 Interview Answer
+
+> A many-to-many relationship is normally implemented using a junction table containing foreign keys referencing the two related tables.
+
+---
+
+# 16. What is 1NF?
+
+**1NF = First Normal Form.**
+
+The basic idea is that values should be **atomic**, rather than storing multiple values or repeating groups in one field.
+
+Bad:
+
+```text
+student_id | courses
+-----------|-------------------
+1          | AI, Database, SQL
+```
+
+Better:
+
+```text
+student_id | course
+-----------|---------
+1          | AI
+1          | Database
+1          | SQL
+```
+
+### 🎤 Interview Answer
+
+> First Normal Form requires data to be organized into atomic values rather than storing multiple values or repeating groups in a single field.
+
+---
+
+# 17. What is 2NF?
+
+**2NF = Second Normal Form.**
+
+A table must first satisfy 1NF, and non-key attributes should depend on the **whole primary key**, particularly when the table has a composite key.
+
+Simplified example:
+
+```text
+Composite Key
+      ↓
+All non-key attributes
+      ↓
+Depend on the complete key
+```
+
+### 🎤 Interview Answer
+
+> Second Normal Form builds on 1NF and ensures that non-key attributes depend on the whole primary key rather than only part of a composite key.
+
+---
+
+# 18. What is 3NF?
+
+**3NF = Third Normal Form.**
+
+A table must satisfy 2NF and avoid unnecessary dependencies between non-key attributes.
+
+Simplified:
+
+```text
+Primary Key
+     ↓
+Non-key attribute
+```
+
+rather than:
+
+```text
+Primary Key
+     ↓
+Non-key attribute A
+     ↓
+Non-key attribute B
+```
+
+### 🎤 Interview Answer
+
+> Third Normal Form builds on 2NF and removes unnecessary dependencies where non-key attributes depend on other non-key attributes.
+
+---
+
+# 19. What is the difference between INNER JOIN and LEFT JOIN?
+
+### INNER JOIN
+
+Returns only matching records.
+
+```sql
+SELECT *
+FROM students
+INNER JOIN results
+ON students.id = results.student_id;
+```
+
+Conceptually:
+
+```text
+Students     Results
+    A  ─────── A
+    B  ─────── B
+    C
+
+Result:
+A
+B
+```
+
+### LEFT JOIN
+
+Returns all records from the left table, plus matching records from the right table.
+
+```sql
+SELECT *
+FROM students
+LEFT JOIN results
+ON students.id = results.student_id;
+```
+
+If C has no result:
+
+```text
+C | NULL
+```
+
+### 🎤 Interview Answer
+
+> INNER JOIN returns only rows that match in both tables, while LEFT JOIN returns every row from the left table and matching rows from the right table. Non-matching right-side values appear as NULL.
+
+---
+
+# 20. What is the difference between WHERE and HAVING?
+
+This is **very important**.
+
+### WHERE
+
+Filters individual rows **before grouping**.
+
+```sql
+SELECT *
+FROM results
+WHERE score >= 50;
+```
+
+### HAVING
+
+Filters groups **after aggregation**.
+
+```sql
+SELECT
+    student_id,
+    AVG(score) AS average_score
+FROM results
+GROUP BY student_id
+HAVING AVG(score) > 80;
+```
+
+Think:
+
+```text
+Rows
+ ↓
+WHERE
+ ↓
+GROUP BY
+ ↓
+Aggregate
+ ↓
+HAVING
+ ↓
+Result
+```
+
+### 🎤 Interview Answer
+
+> WHERE filters individual rows before grouping, while HAVING filters groups after GROUP BY and aggregation.
+
+---
+
+# 🔴 Interview-Level
+
+## 21. How would you design a student-course database?
+
+I would identify the main entities:
+
+```text
+Students
+Courses
+Enrollments
+Results
+```
+
+Then establish relationships:
+
+```text
+Students
+    │
+    │
+    ▼
+Enrollments
+    │
+    │
+    ▼
+Courses
+```
+
+And:
+
+```text
+Students
+    │
+    ▼
+Results
+```
+
+Example:
+
+```text
+STUDENTS
+──────────────
+PK id
+name
+email
+age
+```
+
+```text
+COURSES
+──────────────
+PK id
+course_name
+```
+
+```text
+ENROLLMENTS
+──────────────
+PK id
+FK student_id
+FK course_id
+```
+
+```text
+RESULTS
+──────────────
+PK id
+FK student_id
+FK course_id
+score
+```
+
+### 🎤 Interview Answer
+
+> I would identify students and courses as the main entities. Because students and courses have a many-to-many relationship, I would introduce an enrollments junction table. I would also create a results table linked to students and courses using foreign keys, with appropriate primary keys and constraints.
+
+---
+
+# 22. How would you model a many-to-many relationship?
+
+Suppose:
+
+```text
+Students ↔ Courses
+```
+
+A student can take many courses, and a course can have many students.
+
+I would create:
+
+```text
+students
+courses
+enrollments
+```
+
+The enrollment table contains:
+
+```text
+student_id
+course_id
+```
+
+Example:
+
+```sql
+CREATE TABLE enrollments (
+    id SERIAL PRIMARY KEY,
+    student_id INTEGER REFERENCES students(id),
+    course_id INTEGER REFERENCES courses(id)
+);
+```
+
+### 🎤 Interview Answer
+
+> I would model the many-to-many relationship using a junction table. The junction table would contain foreign keys referencing both the students and courses tables.
+
+---
+
+# 23. Why is normalization important?
+
+Normalization helps:
+
+* Reduce duplicate data
+* Improve data consistency
+* Improve maintainability
+* Reduce update anomalies
+* Improve data organization
+
+Example:
+
+Instead of storing:
+
+```text
+Janusha | AI | Dr. Silva | dr.silva@example.com
+Janusha | SQL | Dr. Silva | dr.silva@example.com
+```
+
+we can store lecturer information once.
+
+### 🎤 Interview Answer
+
+> Normalization is important because it reduces unnecessary data duplication and helps maintain consistency and integrity. It also makes the database easier to maintain.
+
+---
+
+# 24. When might you intentionally denormalize a database?
+
+Normalization isn't always the final answer.
+
+Sometimes we intentionally duplicate or precompute data to improve:
+
+* Read performance
+* Reporting performance
+* Analytics workloads
+
+For example:
+
+```text
+Highly normalized database
+        ↓
+Many JOINs
+        ↓
+Expensive repeated queries
+```
+
+A reporting system might store precomputed values:
+
+```text
+student_id
+average_score
+total_courses
+```
+
+This can make frequently requested reports faster.
+
+### 🎤 Interview Answer
+
+> I might intentionally denormalize when read performance or reporting requirements justify some controlled data duplication. The trade-off is increased storage and a greater risk of data inconsistency if the duplicated data is not maintained correctly.
+
+---
+
+# 25. How would you retrieve students and their results using JOIN?
+
+Assume:
+
+```text
+students.id
+```
+
+relates to:
+
+```text
+results.student_id
+```
+
+Query:
+
+```sql
+SELECT
+    students.name,
+    results.score
+FROM students
+INNER JOIN results
+    ON students.id = results.student_id;
+```
+
+Result:
+
+```text
+name    | score
+--------|------
+Janusha | 85
+Janusha | 90
+Amal    | 75
+```
+
+### 🎤 Interview Answer
+
+> I would join the students and results tables using the student's primary key and the corresponding foreign key, then select the required student and result columns.
+
+---
+
+# 26. How would you find the average score per student?
+
+Use:
+
+```sql
+SELECT
+    student_id,
+    AVG(score) AS average_score
+FROM results
+GROUP BY student_id;
+```
+
+Result:
+
+```text
+student_id | average_score
+-----------|--------------
+1          | 87.5
+2          | 75
+3          | 91
+```
+
+### 🎤 Interview Answer
+
+> I would use AVG on the score column and GROUP BY student_id so the average is calculated separately for each student.
+
+---
+
+# 27. How would you find students whose average score is greater than 80?
+
+This requires:
+
+```text
+GROUP BY
++
+AVG()
++
+HAVING
+```
+
+Query:
+
+```sql
+SELECT
+    student_id,
+    AVG(score) AS average_score
+FROM results
+GROUP BY student_id
+HAVING AVG(score) > 80;
+```
+
+### Why HAVING?
+
+Because:
+
+```text
+AVG(score)
+```
+
+is an aggregate result.
+
+You can't use that aggregate filter as a normal row-level `WHERE` condition in this form.
+
+### 🎤 Interview Answer
+
+> I would group results by student, calculate AVG(score), and use HAVING to filter groups whose average is greater than 80.
+
+---
+
+# 28. Why should foreign keys be used?
+
+Foreign keys provide:
+
+### 1. Relationships
+
+They connect tables.
+
+### 2. Referential integrity
+
+They prevent invalid references.
+
+### 3. Data consistency
+
+They ensure related records remain valid.
+
+Example:
+
+```text
+students
+id = 1
+```
+
+Then:
+
+```text
+results.student_id = 1
+```
+
+is a valid relationship.
+
+But:
+
+```text
+results.student_id = 999
+```
+
+can be rejected if student 999 doesn't exist and the FK rules don't allow it.
+
+### 🎤 Interview Answer
+
+> Foreign keys should be used to establish relationships between tables and maintain referential integrity. They help prevent invalid references and improve data consistency.
+
+---
+
+# 29. What problems can occur if database constraints are not used?
+
+Without constraints, you could have:
+
+```text
+Duplicate emails
+Invalid ages
+Missing required names
+Invalid student references
+Duplicate records
+```
+
+For example:
+
+```text
+students
+id | email
+---|-------------------
+1  | janusha@email.com
+2  | janusha@email.com
+```
+
+If email should be unique but there is no:
+
+```sql
+UNIQUE
+```
+
+constraint, the database won't enforce that rule.
+
+### 🎤 Interview Answer
+
+> Without appropriate constraints, invalid or inconsistent data can enter the database. This can lead to duplicate records, invalid relationships, missing required values, and data-integrity problems.
+
+---
+
+# 30. Explain the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN.
+
+This is one of the most important JOIN questions.
+
+### INNER JOIN
+
+Returns:
+
+> Only matching records from both tables.
+
+```text
+A ∩ B
+```
+
+---
+
+### LEFT JOIN
+
+Returns:
+
+> All records from the left table + matching records from the right.
+
+```text
+A + matching B
+```
+
+---
+
+### RIGHT JOIN
+
+Returns:
+
+> All records from the right table + matching records from the left.
+
+```text
+B + matching A
+```
+
+---
+
+### FULL OUTER JOIN
+
+Returns:
+
+> All records from both tables, whether they match or not.
+
+```text
+A + B
+```
+
+---
+
+## Visual Summary
+
+```text
+          INNER JOIN
+       Matching only
+
+       ┌───────┐
+       │   A   │
+       │   ┌───┼───┐
+       │   │███│   │
+       └───┼───┘   │
+           │   B   │
+           └───────┘
+```
+
+Simpler to memorize:
+
+| JOIN              | Result                    |
+| ----------------- | ------------------------- |
+| `INNER JOIN`      | Matching rows only        |
+| `LEFT JOIN`       | All left + matching right |
+| `RIGHT JOIN`      | All right + matching left |
+| `FULL OUTER JOIN` | All rows from both        |
+
+### 🎤 Interview Answer
+
+> INNER JOIN returns only matching records from both tables. LEFT JOIN returns all records from the left table and matching records from the right. RIGHT JOIN does the opposite. FULL OUTER JOIN returns all records from both tables, including non-matching records.
+
+---
+
+# 🏆 Part 3 — What You Should Really Know
+
+
+
+Make sure you understand this architecture:
+
+```text
+                    DATABASE DESIGN
+                           │
+                           ▼
+                       ENTITIES
+                           │
+                           ▼
+                         TABLES
+                           │
+              ┌────────────┴────────────┐
+              ▼                         ▼
+        PRIMARY KEY                FOREIGN KEY
+              │                         │
+              └────────────┬────────────┘
+                           ▼
+                      RELATIONSHIPS
+                           │
+                           ▼
+                      NORMALIZATION
+                           │
+                           ▼
+                        ER DIAGRAM
+                           │
+                           ▼
+                          JOIN
+                           │
+                           ▼
+                     AGGREGATION
+                           │
+                           ▼
+                   GROUP BY + HAVING
+```
+
+And the **five concepts I'd make sure you can explain without notes** are:
+
+### 1. Primary Key
+
+> "Uniquely identifies a record."
+
+### 2. Foreign Key
+
+> "Connects a record to another table and maintains referential integrity."
+
+### 3. Normalization
+
+> "Reduces unnecessary duplication and improves data integrity."
+
+### 4. JOIN
+
+> "Combines related data from multiple tables."
+
+### 5. GROUP BY + HAVING
+
+> "Groups data for aggregation and filters the resulting groups."
+
+---
+
+# 🧪 Final Practical Challenge
+
+
+You have:
+
+```text
+students
+────────────────────
+id
+name
+email
+```
+
+```text
+courses
+────────────────────
+id
+course_name
+```
+
+```text
+enrollments
+────────────────────
+id
+student_id
+course_id
+```
+
+```text
+results
+────────────────────
+id
+student_id
+course_id
+score
+```
+
+Now try to write SQL for:
+
+1. Create the four tables with appropriate primary/foreign keys.
+2. Insert 5 students.
+3. Insert 3 courses.
+4. Enroll students into courses.
+5. Add student results.
+6. Display each student's name and score.
+7. Calculate each student's average score.
+8. Display only students whose average is above 80.
+9. Display students who don't have results.
+10. Display the top 3 students by average score.
