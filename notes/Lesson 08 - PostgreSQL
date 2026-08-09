@@ -3035,4 +3035,1461 @@ DELETE
 ORDER BY
 LIMIT
 ```
+---
+
+# 📚 Part 3 – Database Design
+
+
+---
+
+# 19. Primary Keys
+
+## What is a Primary Key?
+
+A **primary key** is a column, or combination of columns, that uniquely identifies each row in a table.
+
+Example:
+
+```text
+students
+
+id | name    | age
+---|---------|----
+1  | Janusha | 28
+2  | Amal    | 25
+3  | Kasuni  | 27
+```
+
+Here:
+
+```text
+id
+```
+
+is the primary key.
+
+Therefore:
+
+```text
+id = 1 → Janusha
+id = 2 → Amal
+id = 3 → Kasuni
+```
+
+Each student can be uniquely identified.
+
+---
+
+## Creating a Primary Key
+
+You already used:
+
+```sql
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    age INTEGER
+);
+```
+
+This means:
+
+```text
+id
+ ↓
+Primary Key
+ ↓
+Unique identifier
+```
+
+---
+
+## Primary Key Rules
+
+A primary key:
+
+### 1. Must be unique
+
+You cannot have:
+
+```text
+id
+--
+1
+1 ❌
+```
+
+### 2. Cannot be NULL
+
+You cannot have:
+
+```text
+id
+--
+1
+NULL ❌
+```
+
+### 3. There is one primary-key constraint per table
+
+That constraint can involve one column or multiple columns.
+
+---
+
+## Why Primary Keys Matter
+
+Imagine:
+
+```text
+students
+
+name
+---------
+Janusha
+Janusha
+Amal
+```
+
+Names aren't necessarily unique.
+
+But:
+
+```text
+id | name
+---|--------
+1  | Janusha
+2  | Janusha
+3  | Amal
+```
+
+Each record can be uniquely identified.
+
+---
+
+## 🎤 Interview Answer
+
+> A primary key is a column or set of columns that uniquely identifies each row in a table. It must contain unique, non-null values and is used to identify records reliably.
+
+---
+
+# 20. Foreign Keys
+
+Now we need to connect tables.
+
+Suppose we have:
+
+```text
+students
+
+id | name
+---|--------
+1  | Janusha
+2  | Amal
+```
+
+And:
+
+```text
+courses
+
+id | course_name
+---|-------------
+1  | AI
+2  | Database
+```
+
+We need another table to represent enrollment:
+
+```text
+enrollments
+
+id | student_id | course_id
+---|------------|----------
+1  | 1          | 1
+2  | 1          | 2
+3  | 2          | 1
+```
+
+Here:
+
+```text
+student_id
+```
+
+references:
+
+```text
+students.id
+```
+
+and:
+
+```text
+course_id
+```
+
+references:
+
+```text
+courses.id
+```
+
+These are **foreign keys**.
+
+---
+
+## Creating a Foreign Key
+
+```sql
+CREATE TABLE enrollments (
+    id SERIAL PRIMARY KEY,
+
+    student_id INTEGER
+        REFERENCES students(id),
+
+    course_id INTEGER
+        REFERENCES courses(id)
+);
+```
+
+---
+
+## What does this achieve?
+
+It prevents invalid relationships.
+
+For example, if there is no:
+
+```text
+student_id = 999
+```
+
+in the `students` table, PostgreSQL can prevent an enrollment from referencing student 999.
+
+This is called **referential integrity**.
+
+---
+
+## Primary Key vs Foreign Key
+
+| Primary Key                        | Foreign Key                            |
+| ---------------------------------- | -------------------------------------- |
+| Identifies a row                   | References a row in another table      |
+| Must be unique                     | Does not necessarily need to be unique |
+| Cannot be NULL                     | Can be NULL unless restricted          |
+| Defines the identity of the record | Creates relationships between tables   |
+
+Example:
+
+```text
+students
+────────────
+id ← PRIMARY KEY
+
+
+enrollments
+────────────
+student_id ← FOREIGN KEY
+              ↓
+          students.id
+```
+
+---
+
+## 🎤 Interview Answer
+
+> A foreign key is a column that references a key in another table. It is used to establish relationships between tables and maintain referential integrity.
+
+---
+
+# 21. Constraints
+
+A **constraint** is a rule that controls what data can be stored in a table.
+
+Think:
+
+```text
+Application
+     ↓
+Database
+     ↓
+Constraints
+     ↓
+Valid data
+```
+
+PostgreSQL provides several important constraints.
+
+---
+
+# 1. PRIMARY KEY
+
+```sql
+id INTEGER PRIMARY KEY
+```
+
+Ensures unique identification.
+
+---
+
+# 2. FOREIGN KEY
+
+```sql
+student_id INTEGER
+REFERENCES students(id)
+```
+
+Maintains relationships.
+
+---
+
+# 3. NOT NULL
+
+```sql
+name VARCHAR(100) NOT NULL
+```
+
+This means:
+
+> Name must be provided.
+
+You cannot insert:
+
+```text
+name = NULL
+```
+
+---
+
+# 4. UNIQUE
+
+```sql
+email VARCHAR(150) UNIQUE
+```
+
+Prevents duplicate values.
+
+For example:
+
+```text
+janusha@example.com
+janusha@example.com ❌
+```
+
+---
+
+# 5. CHECK
+
+You can enforce conditions.
+
+```sql
+age INTEGER CHECK (age >= 0)
+```
+
+This prevents:
+
+```text
+age = -10 ❌
+```
+
+---
+
+# 6. DEFAULT
+
+Provides a default value.
+
+```sql
+is_active BOOLEAN DEFAULT TRUE
+```
+
+If you don't provide a value:
+
+```text
+is_active
+    ↓
+TRUE
+```
+
+---
+
+## Example Table
+
+```sql
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+
+    name VARCHAR(100) NOT NULL,
+
+    email VARCHAR(150) UNIQUE,
+
+    age INTEGER CHECK (age >= 0),
+
+    is_active BOOLEAN DEFAULT TRUE
+);
+```
+
+---
+
+## Why Constraints Matter
+
+Without constraints:
+
+```text
+Bad data
+   ↓
+Database
+   ↓
+Inconsistent data
+```
+
+With constraints:
+
+```text
+Data
+ ↓
+Validation rules
+ ↓
+Valid database
+```
+
+---
+
+## 🎤 Interview Answer
+
+> Constraints are rules enforced by the database to maintain data integrity. Common PostgreSQL constraints include PRIMARY KEY, FOREIGN KEY, NOT NULL, UNIQUE, CHECK, and DEFAULT.
+
+---
+
+# 22. Relationships
+
+Database relationships describe how tables are connected.
+
+The three important types are:
+
+```text
+One-to-One
+One-to-Many
+Many-to-Many
+```
+
+---
+
+# 1. One-to-One
+
+One record in table A relates to one record in table B.
+
+Example:
+
+```text
+User
+ │
+ └────── Profile
+```
+
+For example:
+
+```text
+users
+id | name
+
+profiles
+id | user_id
+```
+
+One user → one profile.
+
+---
+
+# 2. One-to-Many
+
+This is extremely common.
+
+One student can have many results:
+
+```text
+Student
+   │
+   ├── Result
+   ├── Result
+   └── Result
+```
+
+For example:
+
+```text
+students
+id | name
+1  | Janusha
+```
+
+```text
+results
+id | student_id | score
+1  | 1          | 85
+2  | 1          | 90
+3  | 1          | 78
+```
+
+One student:
+
+```text
+1
+```
+
+has many results.
+
+---
+
+# 3. Many-to-Many
+
+Many students can take many courses.
+
+```text
+Students
+   │
+   │
+   ▼
+Enrollments
+   │
+   │
+   ▼
+Courses
+```
+
+Example:
+
+```text
+Janusha → AI
+Janusha → Database
+Amal    → AI
+Amal    → Cyber Security
+```
+
+You normally implement this using a **junction/association table**:
+
+```text
+enrollments
+```
+
+---
+
+## Relationship Diagram
+
+```text
+students
+   │
+   │ 1
+   │
+   │
+   │ many
+   ▼
+enrollments
+   ▲
+   │ many
+   │
+   │
+   │ 1
+   │
+courses
+```
+
+---
+
+## 🎤 Interview Answer
+
+> Database relationships describe how records in different tables are associated. The main types are one-to-one, one-to-many, and many-to-many. Many-to-many relationships are commonly implemented using an intermediate junction table.
+
+---
+
+# 23. Normalization
+
+Normalization is one of the most important database-design concepts.
+
+## What problem does it solve?
+
+Imagine storing everything in one table:
+
+```text
+students
+
+student_name
+course
+lecturer
+lecturer_email
+course_fee
+course_room
+```
+
+You might get:
+
+```text
+Janusha | AI       | Dr. Silva | ...
+Janusha | Database | Dr. Perera | ...
+Amal    | AI       | Dr. Silva | ...
+```
+
+The lecturer information gets repeated.
+
+This can cause:
+
+* Duplicate data
+* Update problems
+* Inconsistent information
+* Difficult maintenance
+
+---
+
+# Normalized Design
+
+Instead, separate the entities.
+
+```text
+students
+courses
+lecturers
+enrollments
+```
+
+Then connect them using keys.
+
+```text
+students
+   │
+   ▼
+enrollments
+   ▲
+   │
+courses
+   │
+   ▼
+lecturers
+```
+
+---
+
+# 1NF — First Normal Form
+
+A table should contain **atomic values** rather than repeating groups or lists in a single field.
+
+Bad:
+
+```text
+student_id | courses
+-----------|---------------------
+1          | AI, Database, Python
+```
+
+Better:
+
+```text
+student_id | course
+-----------|---------
+1          | AI
+1          | Database
+1          | Python
+```
+
+---
+
+# 2NF — Second Normal Form
+
+The table should already satisfy 1NF and non-key attributes should depend on the **whole primary key**, particularly relevant when using composite keys.
+
+For beginner-level understanding:
+
+> Don't store attributes that depend on only part of a composite key.
+
+---
+
+# 3NF — Third Normal Form
+
+The table should satisfy 2NF and non-key attributes should not depend on other non-key attributes.
+
+Simplified idea:
+
+```text
+Primary Key
+     ↓
+Directly determines
+     ↓
+Non-key attributes
+```
+
+Avoid unnecessary indirect dependencies.
+
+---
+
+## Why Normalization?
+
+```text
+Before
+
+One Huge Table
+      ↓
+Duplicate Data
+      ↓
+Inconsistency
+      ↓
+Maintenance Problems
+```
+
+After:
+
+```text
+Normalized Tables
+      ↓
+Less Duplication
+      ↓
+Better Integrity
+      ↓
+Easier Maintenance
+```
+
+---
+
+## Important Interview Nuance
+
+Don't say:
+
+> "Normalization always makes databases faster."
+
+That's not necessarily true.
+
+Normalization primarily improves:
+
+* Data integrity
+* Organization
+* Reduced redundancy
+* Maintainability
+
+Sometimes highly normalized systems require more joins, and denormalization can be useful for specific performance or reporting requirements.
+
+---
+
+## 🎤 Interview Answer
+
+> Normalization is the process of organizing relational data to reduce unnecessary duplication and improve data integrity. Common normal forms include 1NF, 2NF, and 3NF.
+
+---
+
+# 24. ER Diagrams
+
+**ERD** means:
+
+> **Entity-Relationship Diagram**
+
+It visually represents:
+
+```text
+Entities
++
+Attributes
++
+Relationships
+```
+
+---
+
+# Example: Student System
+
+Entities:
+
+```text
+Student
+Course
+Enrollment
+Result
+```
+
+Relationships:
+
+```text
+Student
+   │
+   │
+   ▼
+Enrollment
+   │
+   │
+   ▼
+Course
+```
+
+---
+
+## Example ERD
+
+```text
+┌──────────────────┐
+│     STUDENTS     │
+├──────────────────┤
+│ PK id            │
+│ name             │
+│ email            │
+└────────┬─────────┘
+         │
+         │ 1
+         │
+         │ N
+┌────────▼─────────┐
+│   ENROLLMENTS    │
+├──────────────────┤
+│ PK id            │
+│ FK student_id    │
+│ FK course_id     │
+└────────┬─────────┘
+         │
+         │ N
+         │
+         │ 1
+┌────────▼─────────┐
+│     COURSES      │
+├──────────────────┤
+│ PK id            │
+│ course_name      │
+└──────────────────┘
+```
+
+Here:
+
+```text
+PK = Primary Key
+FK = Foreign Key
+```
+
+---
+
+## Why ER Diagrams?
+
+Before creating tables, you can visually design the database.
+
+Workflow:
+
+```text
+Requirements
+     ↓
+Identify entities
+     ↓
+Identify attributes
+     ↓
+Identify relationships
+     ↓
+Create ERD
+     ↓
+Create tables
+     ↓
+Add constraints
+```
+
+This is extremely useful in professional development.
+
+---
+
+## 🎤 Interview Answer
+
+> An ER diagram is a visual representation of a database's entities, attributes, and relationships. It helps developers design and understand the database structure before implementing the actual tables.
+
+---
+
+# 25. JOINs
+
+Now we reach one of the **most important SQL concepts for interviews**.
+
+A JOIN allows you to retrieve related data from multiple tables.
+
+Suppose:
+
+### students
+
+| id | name    |
+| -: | ------- |
+|  1 | Janusha |
+|  2 | Amal    |
+|  3 | Kasuni  |
+
+### results
+
+| id | student_id | score |
+| -: | ---------: | ----: |
+|  1 |          1 |    85 |
+|  2 |          1 |    90 |
+|  3 |          2 |    75 |
+
+We want:
+
+```text
+Student Name | Score
+Janusha      | 85
+Janusha      | 90
+Amal         | 75
+```
+
+We need a JOIN.
+
+---
+
+# INNER JOIN
+
+```sql
+SELECT
+    students.name,
+    results.score
+FROM students
+INNER JOIN results
+    ON students.id = results.student_id;
+```
+
+The relationship is:
+
+```text
+students.id
+     =
+results.student_id
+```
+
+---
+
+## INNER JOIN Meaning
+
+Only records that match in **both tables** are returned.
+
+```text
+Students       Results
+
+    A  ──────── A
+    B  ──────── B
+    C
+
+Result:
+A
+B
+```
+
+---
+
+# LEFT JOIN
+
+A LEFT JOIN returns:
+
+> All rows from the left table + matching rows from the right table.
+
+```sql
+SELECT
+    students.name,
+    results.score
+FROM students
+LEFT JOIN results
+    ON students.id = results.student_id;
+```
+
+If Kasuni has no result:
+
+```text
+name    | score
+--------|------
+Janusha | 85
+Janusha | 90
+Amal    | 75
+Kasuni  | NULL
+```
+
+This is extremely useful when you want **all students**, even those without results.
+
+---
+
+# RIGHT JOIN
+
+RIGHT JOIN returns:
+
+> All rows from the right table + matching rows from the left table.
+
+It is less commonly used because many queries can be rewritten using a LEFT JOIN by changing table order.
+
+---
+
+# FULL OUTER JOIN
+
+Returns:
+
+> All matching and non-matching rows from both tables.
+
+Conceptually:
+
+```text
+Table A
+   +
+Table B
+   ↓
+Everything
+```
+
+---
+
+# JOIN Cheat Sheet
+
+| JOIN            | Returns                   |
+| --------------- | ------------------------- |
+| INNER JOIN      | Matching rows from both   |
+| LEFT JOIN       | All left + matching right |
+| RIGHT JOIN      | All right + matching left |
+| FULL OUTER JOIN | Everything from both      |
+
+---
+
+## 🎤 Interview Answer
+
+> A JOIN combines related data from multiple tables using a relationship between columns, typically primary and foreign keys. Common joins include INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN.
+
+---
+
+# 26. Aggregate Functions
+
+Aggregate functions perform calculations across multiple rows.
+
+The most important ones are:
+
+```text
+COUNT()
+SUM()
+AVG()
+MIN()
+MAX()
+```
+
+---
+
+# COUNT()
+
+Count rows:
+
+```sql
+SELECT COUNT(*)
+FROM students;
+```
+
+Example result:
+
+```text
+5
+```
+
+Meaning:
+
+> There are five students.
+
+---
+
+# AVG()
+
+Calculate average:
+
+```sql
+SELECT AVG(score)
+FROM results;
+```
+
+Example:
+
+```text
+82.67
+```
+
+---
+
+# SUM()
+
+Calculate total:
+
+```sql
+SELECT SUM(score)
+FROM results;
+```
+
+---
+
+# MIN()
+
+Find the smallest value:
+
+```sql
+SELECT MIN(score)
+FROM results;
+```
+
+---
+
+# MAX()
+
+Find the largest:
+
+```sql
+SELECT MAX(score)
+FROM results;
+```
+
+---
+
+## Example
+
+Suppose:
+
+```text
+score
+-----
+80
+90
+70
+100
+```
+
+Then:
+
+```text
+COUNT = 4
+SUM   = 340
+AVG   = 85
+MIN   = 70
+MAX   = 100
+```
+
+---
+
+## 🎤 Interview Answer
+
+> Aggregate functions perform calculations across multiple rows. Common PostgreSQL aggregate functions include COUNT, SUM, AVG, MIN, and MAX.
+
+---
+
+# 27. GROUP BY & HAVING
+
+Now we combine aggregation with grouping.
+
+Suppose:
+
+```text
+results
+
+student_id | score
+-----------|------
+1          | 80
+1          | 90
+2          | 70
+2          | 85
+3          | 95
+```
+
+We want:
+
+> Average score for each student.
+
+Use:
+
+```sql
+SELECT
+    student_id,
+    AVG(score) AS average_score
+FROM results
+GROUP BY student_id;
+```
+
+Result:
+
+```text
+student_id | average_score
+-----------|--------------
+1          | 85
+2          | 77.5
+3          | 95
+```
+
+---
+
+# What does GROUP BY do?
+
+It groups rows that have the same value.
+
+Conceptually:
+
+```text
+All Results
+     ↓
+GROUP BY student_id
+     ↓
+Student 1 → scores
+Student 2 → scores
+Student 3 → scores
+```
+
+Then:
+
+```text
+AVG()
+```
+
+can calculate the average for each group.
+
+---
+
+# HAVING
+
+`HAVING` filters **groups** after aggregation.
+
+Example:
+
+> Find students whose average score is greater than 80.
+
+```sql
+SELECT
+    student_id,
+    AVG(score) AS average_score
+FROM results
+GROUP BY student_id
+HAVING AVG(score) > 80;
+```
+
+---
+
+# WHERE vs HAVING
+
+This is a very common interview question.
+
+### WHERE
+
+Filters **rows before grouping**.
+
+```sql
+WHERE score >= 50
+```
+
+### HAVING
+
+Filters **groups after aggregation**.
+
+```sql
+HAVING AVG(score) > 80
+```
+
+Think:
+
+```text
+Rows
+ ↓
+WHERE
+ ↓
+GROUP BY
+ ↓
+Aggregate
+ ↓
+HAVING
+ ↓
+Result
+```
+
+---
+
+## 🎤 Interview Answer
+
+> GROUP BY groups rows with the same values so aggregate functions can be applied to each group. HAVING filters the resulting groups after aggregation, while WHERE filters individual rows before grouping.
+
+---
+
+# 🔥 Important SQL Query Order
+
+When writing a query containing these clauses, remember the syntax order:
+
+```sql
+SELECT ...
+FROM ...
+WHERE ...
+GROUP BY ...
+HAVING ...
+ORDER BY ...
+LIMIT ...;
+```
+
+Example:
+
+```sql
+SELECT
+    student_id,
+    AVG(score) AS average_score
+FROM results
+WHERE score >= 50
+GROUP BY student_id
+HAVING AVG(score) >= 80
+ORDER BY average_score DESC
+LIMIT 5;
+```
+
+Read it conceptually:
+
+```text
+FROM
+ ↓
+WHERE
+ ↓
+GROUP BY
+ ↓
+HAVING
+ ↓
+SELECT
+ ↓
+ORDER BY
+ ↓
+LIMIT
+```
+
+The **written SQL syntax order** and the **logical processing order** aren't exactly the same—this distinction becomes useful as you progress.
+
+---
+
+# 🧠 Part 3 Mental Model
+
+Everything we've learned connects together:
+
+```text
+                    DATABASE DESIGN
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+          ▼                ▼                ▼
+     Primary Key      Foreign Key      Constraints
+          │                │                │
+          └────────────────┼────────────────┘
+                           │
+                           ▼
+                     Relationships
+                           │
+                           ▼
+                     Normalization
+                           │
+                           ▼
+                       ER Diagram
+                           │
+                           ▼
+                         Tables
+                           │
+                           ▼
+                         JOINs
+                           │
+                           ▼
+                    Aggregations
+                           │
+                           ▼
+                  GROUP BY + HAVING
+```
+
+---
+
+# 🎯 Your Student Database
+
+By the end of this part, we should be thinking about the database like this:
+
+```text
+┌──────────────────┐
+│     STUDENTS     │
+├──────────────────┤
+│ PK id            │
+│ name             │
+│ email            │
+│ age              │
+└────────┬─────────┘
+         │
+         │ 1
+         │
+         │ N
+┌────────▼─────────┐
+│   ENROLLMENTS    │
+├──────────────────┤
+│ PK id            │
+│ FK student_id    │
+│ FK course_id     │
+└────────┬─────────┘
+         │
+         │ N
+         │
+         │ 1
+┌────────▼─────────┐
+│     COURSES      │
+├──────────────────┤
+│ PK id            │
+│ course_name      │
+└──────────────────┘
+         │
+         │
+         ▼
+┌──────────────────┐
+│     RESULTS      │
+├──────────────────┤
+│ PK id            │
+│ FK student_id    │
+│ FK course_id     │
+│ score            │
+└──────────────────┘
+```
+
+Now PostgreSQL isn't just:
+
+```text
+"Where I store data."
+```
+
+You're learning how to **design the data model**.
+
+---
+
+# 🔥 The 5 Things I Want You to Really Master
+
+
+
+### 1️⃣ Primary Key
+
+```text
+"Who is this record?"
+```
+
+### 2️⃣ Foreign Key
+
+```text
+"Which record in another table is this related to?"
+```
+
+### 3️⃣ Relationship
+
+```text
+"How are these tables connected?"
+```
+
+### 4️⃣ JOIN
+
+```text
+"How do I retrieve related data from multiple tables?"
+```
+
+### 5️⃣ GROUP BY + Aggregate
+
+```text
+"How do I calculate statistics for each group?"
+```
+
+For your future AI/data work, that last one becomes particularly useful:
+
+```text
+PostgreSQL
+    ↓
+SQL
+    ↓
+JOIN
+    ↓
+GROUP BY
+    ↓
+Aggregated Dataset
+    ↓
+Pandas
+    ↓
+EDA
+    ↓
+Machine Learning
+```
+
 
