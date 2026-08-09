@@ -1087,3 +1087,868 @@ SQLite     → Embedded relational
 
 ---
 
+## Part 2 Checkpoint Answers
+
+---
+
+# 🟢 Beginner
+
+### 1. What is a database?
+
+A **database** is an organized collection of data that can be stored, managed, and retrieved by a database management system.
+
+For example:
+
+```text
+ai_academy
+│
+├── students
+├── courses
+└── results
+```
+
+**Interview answer:**
+
+> A database is an organized collection of data that can be stored, managed, and retrieved efficiently.
+
+---
+
+### 2. How do you create a PostgreSQL database?
+
+Use:
+
+```sql
+CREATE DATABASE ai_academy;
+```
+
+In `psql`, you can verify databases with:
+
+```text
+\l
+```
+
+**Interview answer:**
+
+> I can create a PostgreSQL database using the `CREATE DATABASE` statement, for example `CREATE DATABASE ai_academy;`.
+
+---
+
+### 3. How do you connect to a PostgreSQL database using `psql`?
+
+From the terminal:
+
+```bash
+psql -U postgres -d ai_academy
+```
+
+Where:
+
+```text
+-U → username
+-d → database
+```
+
+You can also connect from inside `psql`:
+
+```sql
+\c ai_academy
+```
+
+**Interview answer:**
+
+> I can connect using `psql -U postgres -d ai_academy`, or use `\c ai_academy` to switch to the database from within psql.
+
+---
+
+### 4. What is a table?
+
+A **table** stores related data using rows and columns.
+
+Example:
+
+| id | name    | age |
+| -: | ------- | --: |
+|  1 | Janusha |  28 |
+|  2 | Amal    |  25 |
+
+Here:
+
+```text
+students = table
+id/name/age = columns
+each student = row
+```
+
+**Interview answer:**
+
+> A table is a database object that stores related data in rows and columns.
+
+---
+
+### 5. How do you create a table?
+
+Example:
+
+```sql
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    age INTEGER,
+    email VARCHAR(150)
+);
+```
+
+**Interview answer:**
+
+> I use the `CREATE TABLE` statement and define each column with its data type and any required constraints.
+
+---
+
+### 6. What is a data type?
+
+A data type defines **what kind of value a column can store**.
+
+Examples:
+
+```text
+INTEGER    → 28
+VARCHAR    → 'Janusha'
+BOOLEAN    → TRUE
+DATE       → 2026-08-09
+DECIMAL    → 85.50
+JSONB      → JSON data
+```
+
+**Interview answer:**
+
+> A data type defines the kind of data that can be stored in a database column, such as an integer, text, Boolean, date, or JSON value.
+
+---
+
+### 7. What is `INSERT`?
+
+`INSERT` adds new records to a table.
+
+```sql
+INSERT INTO students (name, age, email)
+VALUES ('Janusha', 28, 'janusha@example.com');
+```
+
+**Interview answer:**
+
+> `INSERT` is used to add new records to a database table.
+
+---
+
+### 8. What is `SELECT`?
+
+`SELECT` retrieves data.
+
+```sql
+SELECT *
+FROM students;
+```
+
+Or specific columns:
+
+```sql
+SELECT name, age
+FROM students;
+```
+
+**Interview answer:**
+
+> `SELECT` is used to retrieve data from one or more database tables.
+
+---
+
+### 9. What is `WHERE`?
+
+`WHERE` filters rows based on a condition.
+
+```sql
+SELECT *
+FROM students
+WHERE age >= 28;
+```
+
+Only students aged 28 or above are returned.
+
+**Interview answer:**
+
+> `WHERE` is used to filter records based on specified conditions.
+
+---
+
+### 10. What is `UPDATE`?
+
+`UPDATE` modifies existing records.
+
+```sql
+UPDATE students
+SET age = 29
+WHERE id = 1;
+```
+
+**Interview answer:**
+
+> `UPDATE` is used to modify existing records in a table.
+
+---
+
+### 11. What is `DELETE`?
+
+`DELETE` removes records.
+
+```sql
+DELETE FROM students
+WHERE id = 1;
+```
+
+**Interview answer:**
+
+> `DELETE` removes records from a table. A `WHERE` condition should normally be used when only specific records should be removed.
+
+---
+
+### 12. What is `ORDER BY`?
+
+`ORDER BY` sorts query results.
+
+Ascending:
+
+```sql
+SELECT *
+FROM students
+ORDER BY age ASC;
+```
+
+Descending:
+
+```sql
+SELECT *
+FROM students
+ORDER BY age DESC;
+```
+
+**Interview answer:**
+
+> `ORDER BY` is used to sort query results in ascending or descending order.
+
+---
+
+### 13. What is `LIMIT`?
+
+`LIMIT` restricts the number of rows returned.
+
+```sql
+SELECT *
+FROM students
+LIMIT 5;
+```
+
+This returns a maximum of five rows.
+
+**Interview answer:**
+
+> `LIMIT` restricts the number of rows returned by a query.
+
+---
+
+# 🟡 Intermediate
+
+## 14. Why should you specify column names in an `INSERT` statement?
+
+Prefer:
+
+```sql
+INSERT INTO students (name, age, email)
+VALUES ('Janusha', 28, 'janusha@example.com');
+```
+
+instead of:
+
+```sql
+INSERT INTO students
+VALUES (...);
+```
+
+### Why?
+
+It makes the query:
+
+* Clearer
+* Easier to maintain
+* Less dependent on column order
+* Safer when the table structure changes
+
+**Interview answer:**
+
+> Specifying column names makes the INSERT statement explicit and easier to maintain. It also reduces problems caused by relying on the table's column order.
+
+---
+
+# 15. Why shouldn't you always use `SELECT *`?
+
+`SELECT *` retrieves every column.
+
+```sql
+SELECT *
+FROM students;
+```
+
+But perhaps your application only needs:
+
+```sql
+SELECT name, email
+FROM students;
+```
+
+Selecting only required columns can:
+
+* Reduce unnecessary data transfer
+* Make queries clearer
+* Avoid retrieving sensitive/unneeded columns
+* Make application code more explicit
+
+**Interview answer:**
+
+> `SELECT *` retrieves all columns, which may return unnecessary data. In application code, selecting only the required columns is generally clearer and more efficient.
+
+---
+
+# 16. What happens when an `UPDATE` has no `WHERE` clause?
+
+Example:
+
+```sql
+UPDATE students
+SET age = 30;
+```
+
+This updates **every row** in the table.
+
+⚠️ This can be dangerous.
+
+Compare:
+
+```sql
+UPDATE students
+SET age = 30
+WHERE id = 1;
+```
+
+Only one matching record is updated.
+
+**Interview answer:**
+
+> An UPDATE without a WHERE clause can modify every row in the table, so I should carefully specify and verify the condition before executing it.
+
+---
+
+# 17. What happens when a `DELETE` has no `WHERE` clause?
+
+Example:
+
+```sql
+DELETE FROM students;
+```
+
+This deletes **all rows** from the table.
+
+The table itself remains.
+
+That's different from:
+
+```sql
+DROP TABLE students;
+```
+
+which removes the table itself.
+
+**Interview answer:**
+
+> A DELETE without a WHERE clause removes all rows from the table. The table structure remains, but its records are deleted.
+
+---
+
+# 18. What is the difference between `DELETE` and `DROP TABLE`?
+
+### DELETE
+
+```sql
+DELETE FROM students;
+```
+
+Removes:
+
+```text
+Rows
+```
+
+but keeps:
+
+```text
+Table
+```
+
+### DROP TABLE
+
+```sql
+DROP TABLE students;
+```
+
+Removes:
+
+```text
+Table
++
+Its structure
++
+Its data
+```
+
+### Easy way to remember
+
+```text
+DELETE → data inside table
+DROP   → table itself
+```
+
+**Interview answer:**
+
+> DELETE removes rows from a table, while DROP TABLE removes the entire table and its structure.
+
+---
+
+# 19. What is the difference between `ORDER BY ASC` and `ORDER BY DESC`?
+
+### ASC
+
+Ascending:
+
+```sql
+ORDER BY age ASC;
+```
+
+Example:
+
+```text
+20
+25
+28
+30
+```
+
+### DESC
+
+Descending:
+
+```sql
+ORDER BY age DESC;
+```
+
+Example:
+
+```text
+30
+28
+25
+20
+```
+
+`ASC` is also the default ordering direction.
+
+**Interview answer:**
+
+> ASC sorts values from lowest to highest or A to Z, while DESC sorts from highest to lowest or Z to A.
+
+---
+
+# 20. How do you retrieve the top 5 records?
+
+For example, the five oldest students:
+
+```sql
+SELECT *
+FROM students
+ORDER BY age DESC
+LIMIT 5;
+```
+
+The important combination is:
+
+```text
+ORDER BY → decide ranking
+LIMIT    → restrict results
+```
+
+**Interview answer:**
+
+> I would use ORDER BY to determine the ranking and LIMIT 5 to return only five records.
+
+---
+
+# 21. How do you filter records using multiple conditions?
+
+Use `AND` or `OR`.
+
+### AND
+
+Both conditions must be true:
+
+```sql
+SELECT *
+FROM students
+WHERE age >= 20
+AND age <= 30;
+```
+
+### OR
+
+At least one condition must be true:
+
+```sql
+SELECT *
+FROM students
+WHERE age = 20
+OR age = 30;
+```
+
+**Interview answer:**
+
+> I can combine multiple conditions using logical operators such as AND and OR.
+
+---
+
+# 22. What is the purpose of `LIKE`?
+
+`LIKE` is used for **pattern matching**, usually with text.
+
+For example:
+
+```sql
+SELECT *
+FROM students
+WHERE name LIKE 'J%';
+```
+
+This finds names beginning with `J`.
+
+The `%` means:
+
+> Any sequence of characters.
+
+Example:
+
+```text
+Janusha
+John
+Jamal
+```
+
+would match.
+
+**Interview answer:**
+
+> `LIKE` is used for pattern matching in text values. For example, `name LIKE 'J%'` finds names beginning with J.
+
+---
+
+# 🔴 Interview-Level
+
+## 23. Given a requirement, how would you construct a SQL query using SELECT, WHERE, ORDER BY, and LIMIT?
+
+Let's say the requirement is:
+
+> "Find the five oldest students who are at least 18."
+
+Break it down:
+
+### What data?
+
+```sql
+SELECT *
+```
+
+### From where?
+
+```sql
+FROM students
+```
+
+### Which records?
+
+```sql
+WHERE age >= 18
+```
+
+### How should they be ordered?
+
+```sql
+ORDER BY age DESC
+```
+
+### How many?
+
+```sql
+LIMIT 5
+```
+
+Final query:
+
+```sql
+SELECT *
+FROM students
+WHERE age >= 18
+ORDER BY age DESC
+LIMIT 5;
+```
+
+### Interview answer
+
+> I break the requirement into selection, source table, filtering, ordering, and result limit. Then I combine SELECT, FROM, WHERE, ORDER BY, and LIMIT in that order.
+
+---
+
+# 24. Why is blindly using UPDATE or DELETE dangerous?
+
+Because without a correct `WHERE` condition, the query can affect **every row**.
+
+For example:
+
+```sql
+UPDATE students
+SET age = 30;
+```
+
+could change every student.
+
+Similarly:
+
+```sql
+DELETE FROM students;
+```
+
+could delete every record.
+
+### Safer approach
+
+First:
+
+```sql
+SELECT *
+FROM students
+WHERE id = 5;
+```
+
+Check the result.
+
+Then:
+
+```sql
+UPDATE students
+SET age = 30
+WHERE id = 5;
+```
+
+**Interview answer:**
+
+> UPDATE and DELETE can affect many or all rows if the condition is incorrect or missing. I verify the target records with SELECT first and then execute the modification with an appropriate WHERE condition.
+
+---
+
+# 25. How would you safely verify records before modifying or deleting them?
+
+Use a `SELECT` first.
+
+For example, before deleting student 5:
+
+### Step 1
+
+```sql
+SELECT *
+FROM students
+WHERE id = 5;
+```
+
+### Step 2
+
+Check whether the correct record was returned.
+
+### Step 3
+
+Delete it:
+
+```sql
+DELETE FROM students
+WHERE id = 5;
+```
+
+For more critical operations, transactions can provide additional safety, which we'll cover later.
+
+**Interview answer:**
+
+> I would first use SELECT with the same WHERE condition to verify the records that will be affected. After confirming the result, I would execute the UPDATE or DELETE.
+
+---
+
+# 26. How would you retrieve the five highest-performing students?
+
+Assume we have:
+
+```text
+students
+```
+
+with:
+
+```text
+grade
+```
+
+Then:
+
+```sql
+SELECT *
+FROM students
+ORDER BY grade DESC
+LIMIT 5;
+```
+
+If grades are stored in a separate `results` table, we'd eventually use a `JOIN`.
+
+For now, the simple version is:
+
+```sql
+SELECT *
+FROM students
+ORDER BY grade DESC
+LIMIT 5;
+```
+
+**Interview answer:**
+
+> I would sort the students by grade in descending order and limit the result to five records.
+
+---
+
+# 27. How would you retrieve students whose age is between 20 and 30?
+
+You can use:
+
+```sql
+SELECT *
+FROM students
+WHERE age >= 20
+AND age <= 30;
+```
+
+You can also use `BETWEEN`:
+
+```sql
+SELECT *
+FROM students
+WHERE age BETWEEN 20 AND 30;
+```
+
+`BETWEEN` is inclusive, so 20 and 30 are included.
+
+**Interview answer:**
+
+> I can use `WHERE age BETWEEN 20 AND 30`, which includes both boundary values.
+
+---
+
+# 28. How would you update one student's information without affecting other students?
+
+Use a unique identifier such as the primary key.
+
+First verify:
+
+```sql
+SELECT *
+FROM students
+WHERE id = 1;
+```
+
+Then:
+
+```sql
+UPDATE students
+SET
+    name = 'Janusha Weerasinghe',
+    age = 29
+WHERE id = 1;
+```
+
+The primary key condition:
+
+```sql
+WHERE id = 1
+```
+
+ensures that only the intended record is targeted, assuming the ID is unique as a primary key.
+
+### Interview answer
+
+> I would use the student's unique primary key in the WHERE clause. For example, `UPDATE students SET age = 29 WHERE id = 1`. I would verify the target record with SELECT first.
+
+---
+
+# 🔥 Important SQL Pattern to Memorize
+
+For retrieval queries, remember this structure:
+
+```sql
+SELECT columns
+FROM table
+WHERE condition
+ORDER BY column ASC/DESC
+LIMIT number;
+```
+
+For example:
+
+```sql
+SELECT name, age
+FROM students
+WHERE age >= 20
+ORDER BY age DESC
+LIMIT 5;
+```
+
+Think:
+
+```text
+SELECT     → What do I want?
+FROM       → Where is it?
+WHERE      → Which records?
+ORDER BY   → In what order?
+LIMIT      → How many?
+```
+
+---
+
+# 🧠 CRUD — You Must Know This
+
+This is one of the most important concepts from this part:
+
+| Operation  | SQL      |
+| ---------- | -------- |
+| **Create** | `INSERT` |
+| **Read**   | `SELECT` |
+| **Update** | `UPDATE` |
+| **Delete** | `DELETE` |
+
+```text
+             CRUD
+              │
+      ┌───────┼────────┐
+      ↓       ↓        ↓
+   INSERT   SELECT   UPDATE
+                       │
+                       ↓
+                    DELETE
+```
+

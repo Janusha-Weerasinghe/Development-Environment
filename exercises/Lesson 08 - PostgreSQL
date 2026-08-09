@@ -1,0 +1,61 @@
+
+# 🎯 Practical Challenge
+
+Before moving to Part 3, try these **without looking at the answers**.
+
+Assume:
+
+```text
+students
+```
+
+contains:
+
+```text
+id
+name
+age
+email
+```
+
+### Challenge 1
+
+Retrieve all students.
+
+### Challenge 2
+
+Retrieve only `name` and `email`.
+
+### Challenge 3
+
+Find students older than 25.
+
+### Challenge 4
+
+Find students between 20 and 30.
+
+### Challenge 5
+
+Sort students from oldest to youngest.
+
+### Challenge 6
+
+Retrieve the 3 oldest students.
+
+### Challenge 7
+
+Find students whose names start with `A`.
+
+### Challenge 8
+
+Update the email of student ID 3.
+
+### Challenge 9
+
+Delete student ID 5.
+
+### Challenge 10
+
+Write a query to retrieve the 5 oldest students who are at least 18.
+
+---
