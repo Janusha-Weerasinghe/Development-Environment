@@ -3172,3 +3172,1392 @@ Now try to write SQL for:
 8. Display only students whose average is above 80.
 9. Display students who don't have results.
 10. Display the top 3 students by average score.
+
+---
+# Part 4 Interview Questions & Answers
+
+
+# 🟢 Beginner
+
+## 1. What is an index?
+
+An **index** is a database structure that helps PostgreSQL find rows more efficiently.
+
+Think about a book:
+
+```text
+Without index:
+Page 1 → Page 2 → Page 3 → ... → Page 500
+
+With index:
+"PostgreSQL" → Page 350
+```
+
+Example:
+
+```sql
+CREATE INDEX idx_student_name
+ON students(name);
+```
+
+This creates an index on the `name` column.
+
+### 🎤 Interview answer
+
+> An index is a database structure that helps PostgreSQL locate rows more efficiently, particularly for queries that frequently search or filter by indexed columns.
+
+---
+
+# 2. Why are indexes useful?
+
+Indexes can improve the performance of queries such as:
+
+```sql
+SELECT *
+FROM students
+WHERE name = 'Janusha';
+```
+
+Instead of potentially examining many rows, PostgreSQL may use the index to find relevant rows more efficiently.
+
+### Benefits
+
+```text
+Faster searches
+Faster filtering
+Can help some JOIN operations
+Can help some ORDER BY operations
+```
+
+### 🎤 Interview answer
+
+> Indexes are useful because they can significantly improve read and lookup performance, especially when querying large tables.
+
+---
+
+# 3. What are the disadvantages of indexes?
+
+Indexes aren't free.
+
+They require:
+
+```text
+Disk space
++
+Maintenance
+```
+
+When you perform:
+
+```sql
+INSERT
+UPDATE
+DELETE
+```
+
+PostgreSQL may also need to update relevant indexes.
+
+Therefore, too many indexes can negatively affect write performance.
+
+### 🎤 Interview answer
+
+> Indexes consume storage and require maintenance when data changes. Therefore, excessive indexing can slow down INSERT, UPDATE, and DELETE operations.
+
+---
+
+# 4. What is a view?
+
+A **view** is a named query that can be queried like a table.
+
+Example:
+
+```sql
+CREATE VIEW high_performers AS
+SELECT *
+FROM students
+WHERE grade >= 80;
+```
+
+Then:
+
+```sql
+SELECT *
+FROM high_performers;
+```
+
+Instead of repeatedly writing:
+
+```sql
+SELECT *
+FROM students
+WHERE grade >= 80;
+```
+
+you can use the view.
+
+### 🎤 Interview answer
+
+> A view is a named database query that can be queried like a table. Views are useful for simplifying and reusing queries and can also provide an abstraction over underlying tables.
+
+---
+
+# 5. What is a transaction?
+
+A **transaction** is a group of database operations treated as one logical unit of work.
+
+Classic example:
+
+```text
+Transfer $100
+
+Account A
+- $100
+
+Account B
++ $100
+```
+
+We want:
+
+```text
+Both operations succeed
+        OR
+Both operations fail
+```
+
+Not:
+
+```text
+A → -$100
+B → ❌
+```
+
+### 🎤 Interview answer
+
+> A transaction is a group of database operations treated as a single logical unit, ensuring that related operations are handled consistently.
+
+---
+
+# 6. What do BEGIN, COMMIT, and ROLLBACK do?
+
+### `BEGIN`
+
+Starts a transaction:
+
+```sql
+BEGIN;
+```
+
+### `COMMIT`
+
+Permanently applies the transaction's changes:
+
+```sql
+COMMIT;
+```
+
+### `ROLLBACK`
+
+Cancels the transaction's uncommitted changes:
+
+```sql
+ROLLBACK;
+```
+
+Workflow:
+
+```text
+BEGIN
+  ↓
+Operations
+  ↓
+Everything OK?
+ ┌───────┴───────┐
+YES              NO
+ ↓                ↓
+COMMIT          ROLLBACK
+```
+
+### 🎤 Interview answer
+
+> BEGIN starts a transaction, COMMIT saves its changes, and ROLLBACK cancels its uncommitted changes.
+
+---
+
+# 7. What does ACID stand for?
+
+ACID means:
+
+```text
+A → Atomicity
+C → Consistency
+I → Isolation
+D → Durability
+```
+
+### Atomicity
+
+All operations succeed or fail as one unit.
+
+### Consistency
+
+The database moves between valid states while respecting its rules and constraints.
+
+### Isolation
+
+Concurrent transactions are controlled so they don't improperly interfere with one another.
+
+### Durability
+
+Committed changes are designed to survive failures such as a server restart.
+
+### 🎤 Interview answer
+
+> ACID stands for Atomicity, Consistency, Isolation, and Durability. These properties help ensure that database transactions are reliable and consistent.
+
+---
+
+# 8. What is a PostgreSQL role?
+
+A **role** is a PostgreSQL database identity that can own objects and/or have privileges.
+
+A role can be given login capability:
+
+```sql
+CREATE ROLE app_user
+LOGIN
+PASSWORD '...';
+```
+
+PostgreSQL uses roles as the core mechanism for managing database identities and permissions.
+
+### 🎤 Interview answer
+
+> A PostgreSQL role represents a database identity and can have privileges, own database objects, and, when configured with LOGIN, be used to connect to the database.
+
+---
+
+# 9. What are database privileges?
+
+Privileges are permissions that determine what a role is allowed to do.
+
+Examples:
+
+```text
+SELECT
+INSERT
+UPDATE
+DELETE
+```
+
+For example:
+
+```sql
+GRANT SELECT
+ON students
+TO app_user;
+```
+
+This gives `app_user` permission to read from the `students` table, subject to the database's permission model.
+
+### 🎤 Interview answer
+
+> Database privileges define what operations a role is allowed to perform on database objects, such as SELECT, INSERT, UPDATE, and DELETE.
+
+---
+
+# 10. What is `pg_dump`?
+
+`pg_dump` is a PostgreSQL command-line utility used to create a **logical backup** of a database.
+
+Example:
+
+```bash
+pg_dump -U postgres -d ai_academy -f ai_academy.sql
+```
+
+Conceptually:
+
+```text
+Database
+   ↓
+pg_dump
+   ↓
+Backup file
+```
+
+### 🎤 Interview answer
+
+> `pg_dump` is a PostgreSQL utility used to create a logical backup of a database so that the data can later be restored.
+
+---
+
+# 🟡 Intermediate
+
+# 11. Why shouldn't every column be indexed?
+
+Because indexes have costs.
+
+If you index everything:
+
+```text
+students
+│
+├── id       → index
+├── name     → index
+├── age      → index
+├── email    → index
+├── address  → index
+├── phone    → index
+└── ...      → index
+```
+
+you create:
+
+```text
+More disk usage
++
+More index maintenance
++
+Potentially slower writes
+```
+
+You should create indexes based on actual query patterns and constraints.
+
+### 🎤 Interview answer
+
+> Not every column should be indexed because indexes consume storage and add maintenance overhead to write operations. Indexes should be created where they provide a meaningful benefit for common queries or enforce constraints.
+
+---
+
+# 12. What is the difference between a table and a view?
+
+### Table
+
+A table is a database object that **stores data**.
+
+```text
+students
+────────────
+id
+name
+age
+```
+
+### View
+
+A normal view is a **stored query definition** that presents data from underlying tables.
+
+```text
+high_performers
+       ↓
+SELECT ...
+FROM students
+WHERE grade >= 80
+```
+
+### Easy way to remember
+
+```text
+TABLE → stores data
+VIEW  → presents query results
+```
+
+### 🎤 Interview answer
+
+> A table stores data, while a normal view stores a query definition that presents data from one or more underlying tables.
+
+---
+
+# 13. Why are transactions important in backend applications?
+
+Backend applications frequently perform multiple related database operations.
+
+For example:
+
+```text
+Order creation
+   ↓
+Create order
+   ↓
+Update inventory
+   ↓
+Create payment record
+```
+
+Suppose:
+
+```text
+Create order     ✅
+Update inventory ✅
+Payment record   ❌
+```
+
+Without appropriate transaction handling, the database could be left in an inconsistent state.
+
+With a transaction:
+
+```text
+BEGIN
+ ↓
+Create order
+ ↓
+Update inventory
+ ↓
+Create payment
+ ↓
+COMMIT
+```
+
+If something fails:
+
+```text
+ROLLBACK
+```
+
+### 🎤 Interview answer
+
+> Transactions are important because backend operations often involve multiple related database changes. Transactions ensure these changes can be committed together or rolled back if something fails.
+
+---
+
+# 14. Explain Atomicity, Consistency, Isolation, and Durability.
+
+### Atomicity
+
+```text
+All succeed
+OR
+All fail
+```
+
+### Consistency
+
+Database rules and constraints remain satisfied.
+
+### Isolation
+
+Concurrent transactions are controlled so intermediate or conflicting states aren't improperly exposed.
+
+### Durability
+
+After a successful commit, changes are designed to survive system failures.
+
+### 🎤 Strong interview answer
+
+> Atomicity ensures a transaction is treated as one unit. Consistency ensures database rules remain satisfied. Isolation controls the interaction between concurrent transactions. Durability ensures committed changes persist despite failures.
+
+---
+
+# 15. Why should applications use dedicated database roles?
+
+Suppose your FastAPI application uses:
+
+```text
+postgres superuser
+```
+
+Then if the application is compromised, the attacker could potentially have extremely broad database privileges.
+
+Better:
+
+```text
+FastAPI
+   ↓
+app_user
+   ↓
+Required permissions only
+```
+
+This follows the:
+
+> **Principle of Least Privilege**
+
+### 🎤 Interview answer
+
+> Applications should use dedicated roles with only the permissions they require. This follows the principle of least privilege and limits the potential impact of a compromised application.
+
+---
+
+# 16. Why shouldn't database credentials be committed to GitHub?
+
+Suppose you commit:
+
+```python
+DATABASE_PASSWORD = "MyPassword123"
+```
+
+Anyone who can access the repository could potentially obtain the credential.
+
+Even private repositories require careful secret management.
+
+Instead use:
+
+```text
+Environment variables
+Secret managers
+Deployment platform secrets
+```
+
+For local development, you might use:
+
+```text
+.env
+```
+
+while ensuring it is appropriately excluded from Git.
+
+Example:
+
+```text
+.gitignore
+
+.env
+```
+
+### 🎤 Interview answer
+
+> Database credentials are sensitive secrets. They should not be committed to GitHub because exposed credentials can allow unauthorized access. Applications should use environment variables or a dedicated secret-management system.
+
+---
+
+# 17. What is the difference between `pg_dump` and `pg_restore`?
+
+### `pg_dump`
+
+Creates a backup.
+
+```text
+Database
+   ↓
+pg_dump
+   ↓
+Backup
+```
+
+### `pg_restore`
+
+Restores supported PostgreSQL archive formats.
+
+```text
+Backup
+   ↓
+pg_restore
+   ↓
+Database
+```
+
+Example:
+
+```bash
+pg_dump -U postgres -d ai_academy -Fc -f ai_academy.dump
+```
+
+Then:
+
+```bash
+pg_restore -U postgres -d ai_academy ai_academy.dump
+```
+
+For plain SQL dumps, restoration is commonly performed with `psql` instead.
+
+### 🎤 Interview answer
+
+> `pg_dump` creates a logical backup, while `pg_restore` restores backups in supported archive formats. Plain SQL dumps can instead be restored using `psql`.
+
+---
+
+# 18. What is the difference between psycopg and SQLAlchemy?
+
+This is important for Python development.
+
+## psycopg
+
+`psycopg` is a PostgreSQL database adapter/driver for Python.
+
+Conceptually:
+
+```text
+Python
+  ↓
+psycopg
+  ↓
+PostgreSQL
+```
+
+It lets Python communicate directly with PostgreSQL.
+
+---
+
+## SQLAlchemy
+
+SQLAlchemy is a Python SQL toolkit and ORM.
+
+Conceptually:
+
+```text
+Python Application
+       ↓
+SQLAlchemy
+       ↓
+psycopg
+       ↓
+PostgreSQL
+```
+
+SQLAlchemy can work with SQL directly and can also map database tables to Python objects through its ORM capabilities.
+
+### 🎤 Interview answer
+
+> psycopg is a PostgreSQL driver that allows Python to communicate with PostgreSQL. SQLAlchemy is a SQL toolkit and ORM that provides a higher-level way to work with databases and typically uses a driver such as psycopg underneath.
+
+---
+
+# 19. How does Python communicate with PostgreSQL?
+
+The basic architecture is:
+
+```text
+Python
+   ↓
+Database Driver
+   ↓
+PostgreSQL Server
+   ↓
+Database
+```
+
+For example:
+
+```text
+Python
+   ↓
+psycopg
+   ↓
+PostgreSQL
+```
+
+A connection contains information such as:
+
+```text
+Host
+Port
+Database
+Username
+Password
+```
+
+Example conceptually:
+
+```python
+import psycopg
+
+conn = psycopg.connect(
+    host="localhost",
+    port=5432,
+    dbname="ai_academy",
+    user="postgres",
+    password="..."
+)
+```
+
+### 🎤 Interview answer
+
+> Python communicates with PostgreSQL through a database driver such as psycopg. The driver manages the connection and allows Python code to execute SQL and retrieve results.
+
+---
+
+# 20. How does Pandas retrieve data from PostgreSQL?
+
+The basic flow is:
+
+```text
+PostgreSQL
+    ↓
+Database connection
+    ↓
+SQL query
+    ↓
+Pandas
+    ↓
+DataFrame
+```
+
+For example, using SQLAlchemy:
+
+```python
+import pandas as pd
+from sqlalchemy import create_engine
+
+engine = create_engine(
+    "postgresql+psycopg://user:password@localhost:5432/ai_academy"
+)
+
+df = pd.read_sql(
+    "SELECT * FROM students",
+    engine
+)
+```
+
+Now:
+
+```text
+df
+ ↓
+Pandas DataFrame
+```
+
+You can perform:
+
+```python
+df.head()
+df.info()
+df.describe()
+```
+
+and continue with EDA.
+
+### 🎤 Interview answer
+
+> Pandas can retrieve PostgreSQL data through a database connection, execute a SQL query, and load the resulting records into a DataFrame for analysis.
+
+---
+
+# 🔴 Interview-Level
+
+# 21. How would you safely implement a money transfer using a transaction?
+
+Suppose:
+
+```text
+Account 1 = $1000
+Account 2 = $500
+```
+
+Transfer `$100`.
+
+I would treat both balance changes as one transaction:
+
+```sql
+BEGIN;
+
+UPDATE accounts
+SET balance = balance - 100
+WHERE id = 1;
+
+UPDATE accounts
+SET balance = balance + 100
+WHERE id = 2;
+
+COMMIT;
+```
+
+If something goes wrong before committing:
+
+```sql
+ROLLBACK;
+```
+
+In a real application, I'd also validate the accounts, ensure sufficient balance, use parameterized SQL, and consider appropriate concurrency/locking behavior.
+
+### 🎤 Interview answer
+
+> I would wrap the debit and credit operations in one transaction. I would begin the transaction, perform both updates, validate the result, and commit only if everything succeeds. If an operation fails, I would roll back so the accounts aren't left inconsistent.
+
+---
+
+# 22. Why can indexes improve SELECT performance but hurt write performance?
+
+Consider:
+
+```text
+SELECT
+ ↓
+Index can help locate rows
+ ↓
+Faster read
+```
+
+But when inserting:
+
+```text
+INSERT
+ ↓
+Add row
+ ↓
+Update relevant indexes
+```
+
+Similarly:
+
+```text
+UPDATE
+DELETE
+```
+
+may require index maintenance.
+
+Therefore:
+
+```text
+Indexes
+   ↓
+Better reads
+   +
+More maintenance
+```
+
+### 🎤 Interview answer
+
+> Indexes can improve SELECT performance because PostgreSQL can use them to locate rows efficiently. However, INSERT, UPDATE, and DELETE operations may need to maintain those indexes, creating additional work and potentially slowing writes.
+
+---
+
+# 23. When would you create a database view?
+
+I'd create a view when I have a query that is:
+
+* Frequently reused
+* Complex
+* Useful to expose as a simpler interface
+* Appropriate to expose through a controlled subset of data
+
+Example:
+
+```sql
+CREATE VIEW high_performers AS
+SELECT
+    id,
+    name,
+    grade
+FROM students
+WHERE grade >= 80;
+```
+
+Then:
+
+```sql
+SELECT *
+FROM high_performers;
+```
+
+### 🎤 Interview answer
+
+> I would create a view when I want to encapsulate and reuse a query, simplify access to complex data, or expose a controlled subset of underlying data.
+
+---
+
+# 24. How would you design database permissions for a FastAPI application?
+
+I wouldn't use:
+
+```text
+FastAPI
+   ↓
+PostgreSQL superuser ❌
+```
+
+Instead:
+
+```text
+FastAPI
+   ↓
+app_user
+   ↓
+Required privileges
+```
+
+For example, depending on the application:
+
+```text
+SELECT
+INSERT
+UPDATE
+```
+
+but not necessarily:
+
+```text
+DROP DATABASE
+CREATE ROLE
+SUPERUSER
+```
+
+The exact permissions should be based on what the application actually needs.
+
+### 🎤 Interview answer
+
+> I would create a dedicated PostgreSQL role for the FastAPI application and grant only the permissions required by the application. I would avoid using a superuser and follow least privilege.
+
+---
+
+# 25. How would you back up and restore a PostgreSQL database?
+
+### Backup
+
+Use:
+
+```bash
+pg_dump
+```
+
+Example:
+
+```bash
+pg_dump -U postgres -d ai_academy -f ai_academy.sql
+```
+
+### Restore plain SQL
+
+Use:
+
+```bash
+psql
+```
+
+Example:
+
+```bash
+psql -U postgres -d ai_academy < ai_academy.sql
+```
+
+### Archive format
+
+Create:
+
+```bash
+pg_dump -U postgres -d ai_academy -Fc -f ai_academy.dump
+```
+
+Restore:
+
+```bash
+pg_restore -U postgres -d ai_academy ai_academy.dump
+```
+
+### 🎤 Interview answer
+
+> I would use pg_dump to create a logical backup. For a plain SQL dump, I can restore it with psql. For supported archive formats such as custom format, I can use pg_restore.
+
+---
+
+# 26. Explain the architecture of FastAPI + SQLAlchemy + PostgreSQL.
+
+This is a very important architecture for you.
+
+```text
+Client
+   ↓
+FastAPI
+   ↓
+API/Router
+   ↓
+Service Layer
+   ↓
+Repository / Data Access
+   ↓
+SQLAlchemy
+   ↓
+psycopg
+   ↓
+PostgreSQL
+```
+
+### Example request
+
+```text
+GET /students/1
+```
+
+Flow:
+
+```text
+Client
+  ↓
+FastAPI endpoint
+  ↓
+Service
+  ↓
+Repository
+  ↓
+SQLAlchemy
+  ↓
+psycopg
+  ↓
+PostgreSQL
+```
+
+Then the response travels back:
+
+```text
+PostgreSQL
+   ↓
+psycopg
+   ↓
+SQLAlchemy
+   ↓
+Repository
+   ↓
+Service
+   ↓
+FastAPI
+   ↓
+Client
+```
+
+### 🎤 Interview answer
+
+> FastAPI handles HTTP requests, the service layer contains business logic, the repository or data-access layer communicates with SQLAlchemy, SQLAlchemy uses a PostgreSQL driver such as psycopg, and PostgreSQL stores the persistent data.
+
+---
+
+# 27. Explain how PostgreSQL could feed data into an ML pipeline.
+
+A typical pipeline could be:
+
+```text
+PostgreSQL
+     ↓
+SQL Query
+     ↓
+Python
+     ↓
+Pandas
+     ↓
+Data Cleaning
+     ↓
+EDA
+     ↓
+Feature Engineering
+     ↓
+Train/Test Split
+     ↓
+ML Model
+```
+
+For example:
+
+```text
+PostgreSQL
+    ↓
+Student records
+    ↓
+Pandas DataFrame
+    ↓
+Attendance
+Study Hours
+Previous Scores
+    ↓
+Feature Engineering
+    ↓
+Student Performance Model
+```
+
+### 🎤 Interview answer
+
+> PostgreSQL can act as the persistent data source for an ML pipeline. Python can query the required data, load it into Pandas, perform cleaning and feature engineering, and then pass the prepared features to a machine learning model.
+
+---
+
+# 28. How could PostgreSQL participate in a RAG application?
+
+At a high level:
+
+```text
+Documents
+    ↓
+Chunking
+    ↓
+Embedding Model
+    ↓
+Vector Embeddings
+    ↓
+PostgreSQL + pgvector
+    ↓
+Similarity Search
+    ↓
+Relevant Context
+    ↓
+LLM
+    ↓
+Answer
+```
+
+The important part for your current PostgreSQL lesson is:
+
+```text
+PostgreSQL
+     +
+pgvector
+```
+
+`pgvector` allows PostgreSQL to store and query vector embeddings.
+
+For example:
+
+```text
+Document chunk
+      ↓
+Embedding
+      ↓
+[0.12, -0.44, 0.82, ...]
+      ↓
+PostgreSQL
+```
+
+Then a query can retrieve vectors that are semantically similar.
+
+You don't need to learn the implementation yet.
+
+### 🎤 Interview answer
+
+> PostgreSQL can participate in RAG by using the pgvector extension to store embeddings and perform similarity searches. The retrieved relevant content can then be provided to an LLM as context.
+
+---
+
+# 29. Why should a production application avoid using the PostgreSQL superuser?
+
+A superuser has extremely broad privileges.
+
+Imagine:
+
+```text
+FastAPI
+   ↓
+postgres superuser
+   ↓
+Can potentially perform highly privileged operations
+```
+
+If the application is compromised, the attacker may gain excessive access.
+
+Instead:
+
+```text
+FastAPI
+   ↓
+application role
+   ↓
+Only required privileges
+```
+
+This is the:
+
+> **Principle of Least Privilege**
+
+### 🎤 Interview answer
+
+> A production application should not normally use the PostgreSQL superuser because it has excessive privileges. A dedicated application role with only the required permissions limits the impact of a security compromise.
+
+---
+
+# 30. How would you troubleshoot a slow PostgreSQL query?
+
+Don't immediately assume:
+
+> "Add an index."
+
+Use a systematic approach.
+
+## Step 1 — Identify the slow query
+
+Find which query is actually slow.
+
+## Step 2 — Run EXPLAIN
+
+```sql
+EXPLAIN
+SELECT *
+FROM students
+WHERE email = 'janusha@example.com';
+```
+
+## Step 3 — Use EXPLAIN ANALYZE when appropriate
+
+```sql
+EXPLAIN ANALYZE
+SELECT *
+FROM students
+WHERE email = 'janusha@example.com';
+```
+
+This shows the actual execution behavior and timing.
+
+## Step 4 — Look for issues
+
+For example:
+
+```text
+Sequential scans
+Large amounts of data
+Poor join strategies
+Missing/ineffective indexes
+Expensive sorting
+```
+
+## Step 5 — Check indexes
+
+Ask:
+
+> Would an appropriate index help this query?
+
+Don't blindly add indexes.
+
+## Step 6 — Review the SQL
+
+Maybe you're doing:
+
+```sql
+SELECT *
+```
+
+when you only need:
+
+```sql
+SELECT name, email
+```
+
+Or perhaps you're joining more data than necessary.
+
+## Step 7 — Re-test
+
+After making a change:
+
+```text
+Before
+ ↓
+Measure
+ ↓
+Change
+ ↓
+Measure again
+```
+
+### 🎤 Interview answer
+
+> I would first identify the slow query, inspect its execution plan using EXPLAIN or EXPLAIN ANALYZE, check for inefficient scans, joins, sorting, or missing indexes, review the SQL itself, make an evidence-based change, and measure the query again.
+
+---
+
+# 🧠 The 30 Questions as One Mental Model
+
+
+They fit into this architecture:
+
+```text
+                    PostgreSQL
+                        │
+        ┌───────────────┼────────────────┐
+        │               │                │
+        ▼               ▼                ▼
+      Tables          Views           Indexes
+        │                                │
+        │                                │
+        ▼                                ▼
+   Relationships                    Query Performance
+        │
+        ▼
+    Transactions
+        │
+        ▼
+       ACID
+        │
+        ▼
+   Roles / Privileges
+        │
+        ▼
+      Security
+        │
+        ▼
+  Backup / Restore
+        │
+        ▼
+    PostgreSQL
+        │
+   ┌────┼──────────────┐
+   ▼    ▼              ▼
+Python FastAPI       Pandas
+   │    │              │
+   └────┼──────────────┘
+        ▼
+     AI / ML
+        │
+        ▼
+      RAG
+        │
+        ▼
+    pgvector
+```
+
+---
+
+# 🔥 The Most Important Interview Answers to Master
+
+If you're short on study time, prioritize these:
+
+### ⭐ 1. Indexes
+
+> Indexes can improve read performance but consume storage and add write-maintenance overhead.
+
+### ⭐ 2. Transactions
+
+> Transactions group related operations into a single unit that can be committed or rolled back.
+
+### ⭐ 3. ACID
+
+```text
+Atomicity
+Consistency
+Isolation
+Durability
+```
+
+### ⭐ 4. Roles & Least Privilege
+
+> Applications should use dedicated roles with only the permissions they require.
+
+### ⭐ 5. psycopg vs SQLAlchemy
+
+> psycopg is a PostgreSQL driver; SQLAlchemy is a SQL toolkit and ORM that can use a driver such as psycopg.
+
+### ⭐ 6. FastAPI Architecture
+
+```text
+FastAPI
+ ↓
+Service
+ ↓
+Repository / SQLAlchemy
+ ↓
+psycopg
+ ↓
+PostgreSQL
+```
+
+### ⭐ 7. ML Pipeline
+
+```text
+PostgreSQL
+ ↓
+Pandas
+ ↓
+Cleaning
+ ↓
+Feature Engineering
+ ↓
+ML
+```
+
+### ⭐ 8. RAG
+
+```text
+Documents
+ ↓
+Embeddings
+ ↓
+PostgreSQL + pgvector
+ ↓
+Similarity Search
+ ↓
+LLM
+```
