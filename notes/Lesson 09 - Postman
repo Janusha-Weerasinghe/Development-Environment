@@ -1,0 +1,949 @@
+# ✅ Lesson 09 – Postman
+
+## Part 1 – Postman Fundamentals
+
+### 01. Introduction to Postman
+
+* What is Postman?
+* Why Postman is used
+* API testing and development
+* Postman in professional software development
+* Postman vs browser
+
+### 02. APIs and HTTP
+
+* What is an API?
+* REST API
+* HTTP request
+* HTTP response
+* Client and server
+* HTTP methods:
+
+  * GET
+  * POST
+  * PUT
+  * PATCH
+  * DELETE
+
+### 03. Installing Postman
+
+* Installation
+* Creating an account
+* Postman desktop application
+* Postman web application
+* Creating your first request
+
+### 04. Postman Interface
+
+Understand:
+
+```text
+Workspace
+Collections
+Requests
+URL
+Method
+Params
+Authorization
+Headers
+Body
+Response
+```
+
+### 05. HTTP Status Codes
+
+Learn the important ones:
+
+```text
+200 OK
+201 Created
+204 No Content
+
+400 Bad Request
+401 Unauthorized
+403 Forbidden
+404 Not Found
+409 Conflict
+422 Unprocessable Entity
+
+500 Internal Server Error
+```
+
+---
+
+
+# Part 2 – Sending API Requests
+
+### 06. GET Requests
+
+Learn:
+
+```http
+GET /students
+```
+
+and:
+
+```http
+GET /students/1
+```
+
+Understand:
+
+```text
+URL
+Query Parameters
+Path Parameters
+Headers
+Response
+```
+
+---
+
+### 07. POST Requests
+
+Learn how to send JSON:
+
+```json
+{
+    "name": "Janusha",
+    "age": 28,
+    "email": "janusha@example.com",
+    "score": 88.5
+}
+```
+
+Understand:
+
+```text
+POST
+ ↓
+Headers
+ ↓
+Content-Type: application/json
+ ↓
+Request Body
+ ↓
+API
+```
+
+---
+
+### 08. PUT Requests
+
+Example:
+
+```http
+PUT /students/1
+```
+
+Body:
+
+```json
+{
+    "name": "Janusha",
+    "age": 28,
+    "email": "janusha@example.com",
+    "score": 95
+}
+```
+
+Understand:
+
+* Updating resources
+* Path parameters
+* JSON body
+* Response validation
+
+---
+
+### 09. PATCH Requests
+
+Understand the difference between:
+
+```text
+PUT
+```
+
+and:
+
+```text
+PATCH
+```
+
+Generally:
+
+```text
+PUT   → replace/update the resource representation
+PATCH → partially modify a resource
+```
+
+You don't need to go extremely deep here yet.
+
+---
+
+### 10. DELETE Requests
+
+Example:
+
+```http
+DELETE /students/1
+```
+
+Understand:
+
+```text
+Client
+ ↓
+DELETE request
+ ↓
+FastAPI
+ ↓
+Database
+ ↓
+Response
+```
+
+---
+
+### 11. Query Parameters
+
+Example:
+
+```http
+GET /students?limit=10
+```
+
+Multiple parameters:
+
+```http
+GET /students?min_score=80&limit=10
+```
+
+Understand the difference between:
+
+```text
+Path parameter
+/students/10
+```
+
+and:
+
+```text
+Query parameter
+/students?limit=10
+```
+
+---
+
+### 12. Headers
+
+Learn common headers:
+
+```text
+Content-Type
+Accept
+Authorization
+```
+
+For JSON:
+
+```text
+Content-Type: application/json
+```
+
+Later, for authentication:
+
+```text
+Authorization: Bearer <token>
+```
+
+---
+
+### 13. Request Body
+
+Learn how Postman sends:
+
+```text
+raw
+JSON
+form-data
+x-www-form-urlencoded
+```
+
+For your FastAPI projects, **raw → JSON** will be particularly important.
+
+---
+
+
+
+# Part 3 – Collections & API Organization
+
+### 14. Collections
+
+Understand:
+
+```text
+Collection
+   ↓
+Folder
+   ↓
+Requests
+```
+
+Example:
+
+```text
+Student API
+│
+├── Students
+│   ├── Get All Students
+│   ├── Get Student
+│   ├── Create Student
+│   ├── Update Student
+│   └── Delete Student
+│
+└── Authentication
+    ├── Login
+    └── Register
+```
+
+---
+
+### 15. Creating Collections
+
+Create:
+
+```text
+Student API
+```
+
+and organize all your API requests inside it.
+
+---
+
+### 16. Environments
+
+This is **very important** for professional development.
+
+Instead of writing:
+
+```text
+http://localhost:8000
+```
+
+everywhere, create a variable:
+
+```text
+base_url
+```
+
+with:
+
+```text
+http://localhost:8000
+```
+
+Then use:
+
+```text
+{{base_url}}/students
+```
+
+Later:
+
+```text
+Development
+    ↓
+http://localhost:8000
+
+Testing
+    ↓
+https://test-api.example.com
+
+Production
+    ↓
+https://api.example.com
+```
+
+This is a professional Postman workflow.
+
+---
+
+### 17. Variables
+
+Learn:
+
+```text
+Collection variables
+Environment variables
+Local variables
+Global variables
+```
+
+For your current level, focus primarily on:
+
+```text
+Environment variables
+Collection variables
+```
+
+---
+
+### 18. Authentication
+
+Learn the basic authentication types:
+
+```text
+No Auth
+API Key
+Bearer Token
+Basic Auth
+OAuth 2.0
+```
+
+For your FastAPI projects, particularly understand:
+
+```text
+Bearer Token
+```
+
+because you'll later work with JWT authentication.
+
+---
+
+### 19. Pre-request Scripts
+
+Understand the concept:
+
+```text
+Before request
+      ↓
+Pre-request Script
+      ↓
+Request
+```
+
+You don't need advanced scripting yet.
+
+---
+
+### 20. Tests
+
+Postman can automatically verify responses.
+
+For example:
+
+```text
+Status code = 200
+```
+
+or:
+
+```text
+Response contains student
+```
+
+Conceptually:
+
+```text
+Request
+   ↓
+API
+   ↓
+Response
+   ↓
+Postman Test
+   ↓
+PASS / FAIL
+```
+
+---
+
+# Part 4 – Professional API Testing
+
+### 21. Writing Postman Tests
+
+Learn basic assertions such as:
+
+```javascript
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+```
+
+And:
+
+```javascript
+pm.test("Response is JSON", function () {
+    pm.response.to.be.json;
+});
+```
+
+You don't need to become a JavaScript expert for Postman.
+
+---
+
+### 22. Response Validation
+
+Check:
+
+```text
+Status code
+Response body
+Headers
+Response time
+JSON structure
+```
+
+For example:
+
+```json
+{
+    "id": 1,
+    "name": "Janusha",
+    "score": 95
+}
+```
+
+You can verify that:
+
+```text
+id exists
+name exists
+score exists
+```
+
+---
+
+### 23. API Error Testing
+
+This is extremely important.
+
+Don't only test successful requests.
+
+Test:
+
+```text
+GET /students/999
+```
+
+Expected:
+
+```text
+404 Not Found
+```
+
+Invalid POST:
+
+```json
+{
+    "name": "",
+    "age": -5,
+    "score": 150
+}
+```
+
+Expected:
+
+```text
+422 Unprocessable Entity
+```
+
+You should learn to test:
+
+```text
+Valid input
+Invalid input
+Missing input
+Incorrect types
+Non-existent resources
+Unauthorized requests
+Forbidden requests
+```
+
+---
+
+### 24. CRUD API Testing
+
+Now connect Postman to your **Student FastAPI project**.
+
+Your collection should contain:
+
+```text
+Student API
+│
+├── GET All Students
+├── GET Student by ID
+├── POST Create Student
+├── PUT Update Student
+└── DELETE Student
+```
+
+Test the complete lifecycle:
+
+```text
+POST
+ ↓
+GET
+ ↓
+PUT
+ ↓
+GET
+ ↓
+DELETE
+ ↓
+GET
+```
+
+---
+
+### 25. API Test Scenarios
+
+For every endpoint, think:
+
+```text
+What happens when it works?
+What happens when it fails?
+What happens with invalid data?
+What happens when the resource doesn't exist?
+```
+
+This is how professional API testing starts.
+
+---
+
+# Part 5 – Postman + FastAPI Practical
+
+This is the most important part of this lesson.
+
+We'll use your **Student API** from Lesson 08.
+
+Architecture:
+
+```text
+                    Postman
+                       │
+                       │ HTTP
+                       ▼
+                   FastAPI
+                       │
+                       ▼
+                  SQLAlchemy
+                       │
+                       ▼
+                    psycopg
+                       │
+                       ▼
+                  PostgreSQL
+```
+
+---
+
+## Practical 1 — GET All Students
+
+Request:
+
+```http
+GET http://127.0.0.1:8000/students
+```
+
+Expected:
+
+```json
+[
+    {
+        "id": 1,
+        "name": "Janusha",
+        "age": 28,
+        "email": "janusha@example.com",
+        "score": 88.5
+    }
+]
+```
+
+---
+
+## Practical 2 — GET Student
+
+```http
+GET http://127.0.0.1:8000/students/1
+```
+
+---
+
+## Practical 3 — POST Student
+
+```http
+POST http://127.0.0.1:8000/students
+```
+
+Body:
+
+```json
+{
+    "name": "Kamal",
+    "age": 24,
+    "email": "kamal@example.com",
+    "score": 82.5
+}
+```
+
+Expected:
+
+```text
+201 Created
+```
+
+---
+
+## Practical 4 — PUT Student
+
+```http
+PUT http://127.0.0.1:8000/students/1
+```
+
+Body:
+
+```json
+{
+    "name": "Janusha",
+    "age": 28,
+    "email": "janusha@example.com",
+    "score": 95
+}
+```
+
+---
+
+## Practical 5 — DELETE Student
+
+```http
+DELETE http://127.0.0.1:8000/students/1
+```
+
+Expected:
+
+```text
+200 OK
+```
+
+or another appropriate success response depending on how your API is designed.
+
+---
+
+# Part 6 – Professional Postman
+
+### 26. API Documentation
+
+Use your collection to document:
+
+```text
+Endpoint
+Method
+Parameters
+Headers
+Request Body
+Response
+Status Codes
+```
+
+---
+
+### 27. GitHub Integration
+
+Your project can eventually contain:
+
+```text
+student-api/
+│
+├── app/
+├── tests/
+├── postman/
+│   └── student-api.postman_collection.json
+│
+├── .env
+├── .gitignore
+├── requirements.txt
+└── README.md
+```
+
+The Postman collection can be exported and included in your project.
+
+⚠️ Never export/share a collection containing real passwords, API keys, database credentials, or production secrets.
+
+---
+
+### 28. README Integration
+
+Your README can contain:
+
+```text
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | /students | Get all students |
+| GET | /students/{id} | Get one student |
+| POST | /students | Create student |
+| PUT | /students/{id} | Update student |
+| DELETE | /students/{id} | Delete student |
+```
+
+And:
+
+```text
+## API Testing
+
+The API can be tested using Postman.
+
+Postman collection:
+postman/student-api.postman_collection.json
+```
+
+---
+
+# 🧪 Part 7 – Assignment
+
+## Student API Testing with Postman
+
+Use your FastAPI Student API.
+
+Create a Postman collection:
+
+```text
+Student API Testing
+│
+├── Students
+│   ├── Get All Students
+│   ├── Get Student
+│   ├── Create Student
+│   ├── Update Student
+│   └── Delete Student
+│
+└── Error Testing
+    ├── Student Not Found
+    ├── Invalid Student
+    └── Invalid ID
+```
+
+For each request record:
+
+```text
+Request
+Response
+Status Code
+Expected Result
+Actual Result
+```
+
+---
+
+# 🏆 Mini Project
+
+## Student API Testing Collection
+
+Your final Postman project should contain:
+
+```text
+Student-API/
+│
+├── app/
+│
+├── postman/
+│   └── Student-API.postman_collection.json
+│
+├── README.md
+├── requirements.txt
+├── .gitignore
+└── .env
+```
+
+Your Postman collection should test:
+
+### Successful cases
+
+```text
+GET     → 200
+GET ID  → 200
+POST    → 201
+PUT     → 200
+DELETE  → 200
+```
+
+### Failure cases
+
+```text
+GET invalid ID     → 404
+POST invalid data  → 422
+PUT invalid ID     → 404
+DELETE invalid ID → 404
+```
+
+---
+
+# 🎯 What You Should Know After Lesson 09
+
+
+```text
+Postman
+   ↓
+HTTP Request
+   ↓
+FastAPI
+   ↓
+API Endpoint
+   ↓
+SQLAlchemy
+   ↓
+PostgreSQL
+   ↓
+HTTP Response
+   ↓
+Postman
+```
+
+And you should be comfortable with:
+
+* GET
+* POST
+* PUT
+* PATCH
+* DELETE
+* Headers
+* JSON body
+* Query parameters
+* Path parameters
+* Status codes
+* Collections
+* Environments
+* Variables
+* Bearer tokens
+* Basic Postman tests
+* API error testing
+* FastAPI + Postman integration
+
+### ⭐ Most importantly
+
+```text
+Lesson 08 — PostgreSQL
+       ↓
+Build database
+       ↓
+Python / SQLAlchemy
+       ↓
+FastAPI
+       ↓
+Lesson 09 — Postman
+       ↓
+Test FastAPI
+       ↓
+Document API
+       ↓
+GitHub
+       ↓
+Portfolio project
+```
+
+That's the professional workflow I want you to learn—not just "how to click buttons in Postman."
+
